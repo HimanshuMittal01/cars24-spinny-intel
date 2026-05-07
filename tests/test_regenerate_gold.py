@@ -1,7 +1,4 @@
 """Smoke tests for gold.jsonl regeneration."""
-import json
-from pathlib import Path
-
 import pytest
 
 from scripts.regenerate_gold import build_new_gold_rows
@@ -80,3 +77,14 @@ def test_build_new_gold_rows_set_relative_changes_with_new_set():
     by_id = {r["listing_id"]: r for r in rows}
     assert by_id["10006504768"]["score_common"] != 36.25
     assert by_id["10017390119"]["score_common"] != 35.62
+
+
+def test_build_new_gold_rows_raises_on_unknown_listing():
+    """If picked references a listing not in existing gold, surface the gap loudly."""
+    existing = _fake_existing_gold()
+    with pytest.raises(KeyError, match="not in existing gold"):
+        build_new_gold_rows(
+            [{"platform": "cars24", "listing_id": "DOES_NOT_EXIST"}],
+            existing,
+            today_year=2026,
+        )

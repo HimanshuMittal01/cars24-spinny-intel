@@ -23,6 +23,7 @@ from ci.score import score_listings
 
 
 def load_existing_gold() -> dict[tuple[str, str], dict]:
+    """Read eval/gold.jsonl and return rows keyed by (platform, listing_id)."""
     out: dict[tuple[str, str], dict] = {}
     for line in (EVAL_DIR / "gold.jsonl").read_text().splitlines():
         if not line.strip():
@@ -62,11 +63,16 @@ def build_new_gold_rows(
         )
         norms.append(normalize(raw, today_year=today_year))
 
-    scored = score_listings(norms)
+    scored_by_id = {s.listing_id: s for s in score_listings(norms)}
 
     rows: list[dict] = []
-    for s, n in zip(scored, norms):
-        old = existing[(n.platform, n.listing_id)]
+    for n in norms:
+        s = scored_by_id[n.listing_id]
+        old = existing.get((n.platform, n.listing_id))
+        if old is None:
+            raise KeyError(
+                f"picked listing {n.platform}/{n.listing_id} not in existing gold"
+            )
         rows.append({
             "listing_id": n.listing_id,
             "platform": n.platform,
