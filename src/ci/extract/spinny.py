@@ -1,67 +1,120 @@
+"""Spinny listing extractor.
+
+Strategy: parse `window.__INITIAL_STATE__` (a JS object literal embedded in
+the HTML) and navigate to `product.pageData.productDetail` for the per-listing
+fields. The literal uses JS-only syntax (`!0`/`!1` for booleans, `void 0` for
+null, unquoted numeric object keys); a small preprocessor converts to JSON5,
+which is then parsed with the `json5` package.
+"""
+
+import re
+from typing import Any
+
+import json5
+
 from ci.llm import LLMClient
 from ci.schemas import RawListing
 from ci.snapshot import Snapshot
 
-SPINNY_SYSTEM = """You extract structured data from Spinny used-car listing HTML.
-Return ONLY values present in the page; for any field you cannot find, return null.
-Do not infer, normalize, or invent. Numeric fields must be integers.
-Spinny tier values are typically "Assured" or "Assured Plus" (or null if no badge).
-Inspection points passed should be a string like "194/200" if present, else null.
-Accident detail is the verbatim summary if exposed, else null."""
+_INITIAL_STATE_RE = re.compile(
+    r"window\.__INITIAL_STATE__=(.+?)(?:,window\.__STATIC_CONFIG__|;window\.|</script>)",
+    re.DOTALL,
+)
 
-SPINNY_TOOL_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "price": {"type": ["integer", "null"]},
-        "km_driven": {"type": ["integer", "null"]},
-        "year": {"type": ["integer", "null"]},
-        "owners_count": {"type": ["integer", "null"]},
-        "registration_state": {"type": ["string", "null"]},
-        "fuel": {"type": ["string", "null"]},
-        "transmission": {"type": ["string", "null"]},
-        "body_color": {"type": ["string", "null"]},
-        "spinny_assured_tier": {"type": ["string", "null"]},
-        "inspection_points_passed": {"type": ["string", "null"]},
-        "inspection_issue_list": {"type": ["array", "null"], "items": {"type": "string"}},
-        "accident_history_detail": {"type": ["string", "null"]},
-        "service_history_records": {"type": ["string", "null"]},
-        "warranty_remaining_months": {"type": ["integer", "null"]},
-        "noc_status": {"type": ["string", "null"]},
-        "rc_type": {"type": ["string", "null"]},
-        "insurance_status": {"type": ["string", "null"]},
-        "previous_use_type": {"type": ["string", "null"]},
-        "tire_condition": {"type": ["string", "null"]},
-        "engine_remarks": {"type": ["string", "null"]},
-        "transmission_remarks": {"type": ["string", "null"]},
-        "battery_status": {"type": ["string", "null"]},
-        "ac_remarks": {"type": ["string", "null"]},
-        "electrical_remarks": {"type": ["string", "null"]},
-        "cosmetic_exterior_notes": {"type": ["string", "null"]},
-        "cosmetic_interior_notes": {"type": ["string", "null"]},
-        "challan_status": {"type": ["string", "null"]},
-        "hypothecation_status": {"type": ["string", "null"]},
-        "inspection_photo_count": {"type": ["integer", "null"]},
-    },
-    "required": ["price", "km_driven", "year"],
-}
+
+def _transform_js_to_json5(s: str) -> str:
+    """Convert JS-literal-only constructs into json5-parseable form.
+
+    Handles:
+      !0  -> true
+      !1  -> false
+      void 0  -> null
+      {12: -> {"12":   (and ,12: -> ,"12":)
+    String contents are preserved verbatim (uses a single-quote / double-quote
+    aware state machine).
+    """
+    out: list[str] = []
+    i, n = 0, len(s)
+    in_str = False
+    quote = ""
+    escape = False
+    while i < n:
+        ch = s[i]
+        if in_str:
+            out.append(ch)
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == quote:
+                in_str = False
+            i += 1
+            continue
+        if ch in ('"', "'"):
+            in_str = True
+            quote = ch
+            out.append(ch)
+            i += 1
+            continue
+        if ch == "!" and i + 1 < n and s[i + 1] in "01":
+            out.append("true" if s[i + 1] == "0" else "false")
+            i += 2
+            continue
+        if ch == "v" and s[i : i + 5] == "void ":
+            j = i + 5
+            while j < n and s[j].isdigit():
+                j += 1
+            out.append("null")
+            i = j
+            continue
+        if ch in ("{", ","):
+            out.append(ch)
+            j = i + 1
+            while j < n and s[j] in " \t\n\r":
+                j += 1
+            k_start = j
+            while j < n and s[j].isdigit():
+                j += 1
+            if j > k_start and j < n and s[j] == ":":
+                out.append('"' + s[k_start:j] + '"')
+                i = j
+                continue
+            i += 1
+            continue
+        out.append(ch)
+        i += 1
+    return "".join(out)
+
+
+def _parse_initial_state(html: str) -> dict[str, Any]:
+    m = _INITIAL_STATE_RE.search(html)
+    if not m:
+        raise ValueError("spinny extractor: window.__INITIAL_STATE__ not found")
+    transformed = _transform_js_to_json5(m.group(1))
+    return json5.loads(transformed)
+
+
+def _navigate_to_product_detail(state: dict[str, Any]) -> dict[str, Any]:
+    try:
+        return state["product"]["pageData"]["productDetail"]
+    except (KeyError, TypeError) as e:
+        raise ValueError(
+            f"spinny extractor: product.pageData.productDetail not found: {e}"
+        )
 
 
 def extract_spinny(snapshot: Snapshot, client: LLMClient) -> RawListing:
-    user = (
-        "Extract the structured fields from this Spinny listing HTML. "
-        "If a field is not visible, return null. Do not invent values.\n\n"
-        f"HTML:\n{snapshot.html}"
-    )
-    resp = client.extract_structured(
-        system=SPINNY_SYSTEM,
-        user=user,
-        tool_name="spinny_extract",
-        tool_schema=SPINNY_TOOL_SCHEMA,
-    )
+    """Extract structured fields from a Spinny listing snapshot.
+
+    `client` is currently unused; accepted for signature parity with the
+    pipeline orchestrator.
+    """
+    state = _parse_initial_state(snapshot.html)
+    fields = _navigate_to_product_detail(state)
     return RawListing(
         platform="spinny",
         listing_id=snapshot.listing_id,
         url=f"snapshot://{snapshot.listing_id}",
         captured_at=snapshot.captured_at,
-        fields=resp.parsed,
+        fields=fields,
     )
