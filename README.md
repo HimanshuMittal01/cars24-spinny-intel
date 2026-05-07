@@ -4,9 +4,7 @@ A multi-agent pipeline that extracts specs and condition signals from used-car l
 
 ## Why this scope
 
-Ranking only means something between comparable cars. Make, trim, fuel, and transmission each carry their own market premiums — a diesel automatic SX (O) is structurally more expensive than a petrol manual EX, and that gap has nothing to do with car *condition*. Mixing them in the same comparison silently bakes those premiums into the price-to-condition ratio.
-
-The right scope for a small-N comparison is therefore a tight filter: same model, same region, same trim band, same fuel, same transmission. We then score on the remaining quantitative dimensions (km, age, owners, accident).
+Ranking only makes sense between comparable cars. *Competitive intel* asks "which platform prices better?" — a BMW-vs-Mercedes comparison can't answer that. *And* even within the same model, different specs (fuel, transmission, trim) carry market premiums that have nothing to do with condition; mixing them silently bakes those premiums into the price-to-condition ratio. Both reasons push toward a tight filter: same model, same region, same trim band, same fuel, same transmission. We then score on the remaining quantitative dimensions (km, age, owners, accident).
 
 ## Ranking
 
@@ -52,7 +50,6 @@ Before producing the ranking we built a small evaluation harness and ran it agai
 - **Public data only.** With auth/API access we'd use Spinny's 200-point inspection report and Cars24's deeper in-app fields. The fair comparison given pre-auth data is on the fields both platforms expose.
 - **Trim line still spans SX / SX PLUS / SX (O).** These are different sub-trims of the SX family with their own MSRP differences. Tightening to a single sub-trim (e.g. just SX (O)) wouldn't give us enough listings on both platforms to fill the 6 ranked + 17 gold we needed; the SX-line filter is the closest workable compromise.
 - **Rank-based scoring is set-relative.** A score of 70 means roughly the second-best of 6 *in this set*, not "this car is in 70% condition" in any absolute sense.
-- **E3 calibration is a self-consistency check**, not an independent calibration. Independent calibration would need holistic gut-rated gold or third-party valuation.
 
 ## Further reading
 
