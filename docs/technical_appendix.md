@@ -8,11 +8,64 @@ _Companion to [`../README.md`](../README.md). All methodology, per-feature break
 
 **Pipeline.** Single explicit DAG, synchronous, deterministic at scoring/ranking. Source: `src/ci/pipeline.py`.
 
-```
-snapshots → extract.cars24 / extract.spinny → normalize → score(set) → rank → report
+### Component map
+
+```mermaid
+flowchart LR
+    subgraph Storage["Storage (on disk)"]
+        FIX[("fixtures/&lt;platform&gt;/&lt;id&gt;/<br/>page.html · url.txt · captured_at.txt")]
+        TRACE[("runs/&lt;run_id&gt;/<br/>trace.jsonl · ranking.json · *.json")]
+        GOLD[("eval/<br/>gold.jsonl · labels/*.json · ranking_listings.json")]
+    end
+
+    subgraph Pipeline["Pipeline (per run)"]
+        direction LR
+        SL["snapshot loader<br/>(disk-only)"]
+        EC["extractor: cars24<br/>(parses __next_f)"]
+        ES["extractor: spinny<br/>(parses INITIAL_STATE)"]
+        NORM["normalizer<br/>(common schema +<br/>disclosed_fields)"]
+        SCORE["scorer (set-based)<br/>rank-based composite"]
+        RANK["ranker<br/>price / score_common"]
+    end
+
+    subgraph Eval["Eval harness"]
+        direction TB
+        E2["E2 extraction recall<br/>(vs gold, N=17)"]
+        E3["E3 score calibration<br/>(vs gold, N=17)"]
+        E4["E4 weight sensitivity<br/>(±25% perturbation +<br/>leave-one-feature-out)"]
+        E5["E5 determinism<br/>(3 reps, byte-identical)"]
+    end
+
+    FIX --> SL
+    SL --> EC
+    SL --> ES
+    EC --> NORM
+    ES --> NORM
+    NORM --> SCORE
+    SCORE --> RANK
+    RANK --> TRACE
+
+    SL -.-> TRACE
+    EC -.-> TRACE
+    ES -.-> TRACE
+    NORM -.-> TRACE
+    SCORE -.-> TRACE
+
+    GOLD --> E2
+    GOLD --> E3
+    NORM --> E2
+    SCORE --> E3
+    NORM --> E4
+    SL --> E5
+    E2 --> TRACE
+    E3 --> TRACE
+    E4 --> TRACE
+    E5 --> TRACE
 ```
 
-**Extractors are JSON-parse-first.** Both platforms inject canonical listing data as inline JSON (Cars24 via Next.js streaming `__next_f` payloads; Spinny via `window.__INITIAL_STATE__` JS literal). The extractors parse that directly — no LLM in the scoring path. LLM client parameter retained for signature compatibility / future free-text fallback.
+Solid arrows = data flow; dotted arrows = trace records (every node logs input hash, output hash, latency to `trace.jsonl`).
+
+**Extractors are JSON-parse-first.** Both platforms inject canonical listing data as inline JSON (Cars24 via Next.js streaming `__next_f` payloads; Spinny via `window.__INITIAL_STATE__` JS literal). The extractors parse that directly — **no LLM in the runtime path.** The `LLMClient` Protocol and `AnthropicLLMClient` wrapper exist in `src/ci/llm.py` for API stability and as a placeholder for a free-text inspection-narrative fallback, but are unused at present; the pipeline runs with a `FakeLLMClient` whose canned response is never read.
 
 **Scoring is rank-based.** For each scoring dimension, listings are sorted (best→worst), assigned 1-indexed rank with tie averaging, and converted to a 0-100 score by linear interpolation: `100 × (n - rank) / (n - 1)`. The composite is a weight-sum across dimensions:
 
