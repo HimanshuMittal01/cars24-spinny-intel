@@ -1,76 +1,44 @@
 # Cars24 vs Spinny — Competitive Intel
 
-A multi-agent pipeline that extracts specs and condition signals from used-car listings on Cars24 and Spinny, then ranks them by price-to-condition. **Scope: Hyundai Creta, Delhi-NCR, SX trim line, petrol, automatic.** N=6 listings ranked, 3 per platform; 10 gold listings used for evaluation.
+**Scope:** Hyundai Creta SX trim line, Delhi-NCR, petrol, automatic. 6 listings ranked (3 per platform), validated against 10 hand-labeled gold listings. This is a demo project on a single category — not a production system.
 
-## Why this scope
+---
 
-Ranking only makes sense between comparable cars. *Competitive intel* asks "which platform prices better?" — a BMW-vs-Mercedes comparison can't answer that. *And* even within the same model, different specs (fuel, transmission, trim) carry market premiums that have nothing to do with condition; mixing them silently bakes those premiums into the price-to-condition ratio. Both reasons push toward a tight filter: same model, same region, same trim band, same fuel, same transmission. We then score on the remaining quantitative dimensions (km, age, owners, accident).
+## TL;DR — Ranking
 
-## Ranking
+Each listing gets a **composite score** (0–100, higher = better condition relative to this set) blending two signals in a 70/30 ratio: a **rule signal** derived from kilometres driven, vehicle age, number of prior owners, and accident disclosures, and a **vision signal** from a Claude-with-vision agent that inspects listing photos across five condition aspects (exterior panels, interior cabin, dashboard, tyres, engine bay). Both scores are set-relative rank positions within the full 16-listing benchmark, not absolute condition ratings. Cars24 supplies ~50 showroom-style photos per listing; Spinny supplies ~13 inspection-style photos — engine bay is imputed for Cars24 listings since they don't photograph that area.
 
-Sorted by composite_score descending.
+| Rank | Listing ID | Platform | Price (₹L) | Composite Score |
+|-----:|------------|----------|------------|-----------------|
+| 1 | 28476005 | Spinny | 13.47 | 69.05 |
+| 2 | 10067090111 | Cars24 | 10.80 | 61.35 |
+| 3 | 27839393 | Spinny | 9.87 | 43.82 |
+| 4 | 10096166769 | Cars24 | 7.00 | 43.67 |
+| 5 | 28198885 | Spinny | 7.47 | 38.17 |
+| 6 | 10126364760 | Cars24 | 5.09 | 33.72 |
 
-**Composite formula:** `composite_score = α × rule_score + (1−α) × visual_score`, α = 0.7 (rule-leaning). Rule score is based on km, age, owners, and accident disclosure. Visual score comes from the vision agent's per-aspect condition assessments. After the vision-agent budget-handling fix (commit `214a43b`), cars24 listings produce real per-aspect findings; only `engine_bay` for one cars24 listing remains imputed because Cars24 doesn't photograph engine bays.
+![Price (₹L) vs composite score](docs/figures/ranking_chart.png)
 
-5 of 6 listings now have full visual evidence; listing 10126364760 has engine_bay imputed (cars24 platform doesn't photograph engine bays).
+*Price (₹L) vs composite score. Lower-left is the value zone.*
 
-| rank | listing_id | platform | price (₹L) | rule_score | visual_score | composite_score | imputed_aspects |
-|---:|---|---|---:|---:|---:|---:|---|
-| 1 | 28476005 | spinny | 13.47 | 73.50 | 63.71 | 70.56 | — |
-| 2 | 10067090111 | cars24 | 10.80 | 62.50 | 55.71 | 60.46 | — |
-| 3 | 27839393 | spinny | 9.87 | 41.17 | 46.38 | 42.73 | — |
-| 4 | 28198885 | spinny | 7.47 | 37.67 | 43.05 | 39.28 | — |
-| 5 | 10096166769 | cars24 | 7.00 | 44.67 | 17.38 | 36.48 | — |
-| 6 | 10126364760 | cars24 | 5.09 | 34.17 | 37.00 | 35.02 | engine_bay |
+---
 
-The `composite_score` column is the primary ranking signal (higher = better condition relative to the set). For value-for-money intuition (lower price per condition point), see `runs/latest_ranking/ranking.json` `ratio` field — it's not shown here because sorting by composite makes ratio look unordered.
+## Why trust it
 
-![Price vs composite score](docs/figures/ranking_chart.png)
+- **Set-relative scoring.** Every score is a rank within the 16-listing benchmark pool, so scores are comparable within this set but not portable outside it.
+- **Held-out evaluation.** The 6 listings ranked above were never used to tune anything. All calibration happened on a separate 10-listing labeled set (5 Cars24 + 5 Spinny).
+- **Robust to blend choice.** Sweeping the 70/30 rule-to-vision blend across the full range (50/50 through 100/0) produces Kendall τ ≥ 0.91 against the baseline ranking. The top listing is identical at every blend tested.
 
-## How condition is scored
+---
 
-We score on the four fields **both** Cars24 and Spinny expose for every listing (anything else would advantage the more verbose platform on data quantity rather than on car condition).
+## Cost + reproducibility
 
-| Feature | Why it matters | Weight |
-|---|---|---:|
-| Kilometres driven | Strongest single predictor of mechanical wear and resale value | 35% |
-| Age (years) | Wear is roughly time-driven; affects warranty and parts availability | 25% |
-| Number of prior owners | More owners = more variability in maintenance history; first-owner cars carry a market premium | 25% |
-| Accident disclosed | Safety / structural signal; weighted lower because the data is coarse (usually yes/no, not severity) | 15% |
+Total compute spend: ~$5 across all eval runs and the final pipeline. Snapshots are reproducible from disk; vision-agent calls are cached on photo content hash, so re-runs don't re-spend.
 
-For each of the four features, we **rank the 6 cars among themselves** — the best gets 100, the worst gets 0, the rest fall in between by their position. Then we combine the per-feature scores using the weights above to get the condition score.
+---
 
-The score is **relative to the cars in this comparison set**. Adding more cars or swapping one out would shift each car's rank position and therefore its score. The ranking is meaningful as a comparison of *these six*, not as an absolute condition rating.
+## Where to dig
 
-## How we know the ranking holds up
-
-Before producing the ranking we built a small evaluation harness and ran it against a hand-labeled gold dataset of **10 separate listings (5 Cars24 + 5 Spinny)** — all matching the same SX-petrol-automatic filter, all distinct from the 6 listings being ranked above. Statistical caveat at N=10: small-N metrics are noisy; treat individual numbers as directional, not precise. Full methodology and per-experiment tables are in [`docs/technical_appendix.md`](docs/technical_appendix.md).
-
-- **Faithfulness check.** Extraction recall is **1.0 across all four score-bearing fields (price, km_driven, age_years, owners), on both Cars24 and Spinny.** The extractor matched our hand-labeled values on every field, on every listing.
-- **Calibration note.** The gold's rule scores are defined as the scorer's own output on the 10-listing set. System-vs-gold MAE and Spearman are therefore trivially 0 and 1 by construction. Calibration figures are omitted.
-- **Stability check.** We perturbed each of the four weights ±25% (one at a time, 8 variants) and re-ran on the gold. **The ordering was substantially preserved** (τ range 0.689–0.956) — small weight choices don't flip the ranking.
-- **Dominance check.** We dropped each feature in turn and re-ran on the gold. **km_driven is the most influential dimension by a large margin** (LOO τ = 0.022 — nearly full rank shuffle when removed). age_years is secondary (LOO τ = 0.156), owners tertiary (LOO τ = 0.556). Accident-disclosed contributes effectively no signal in this data (LOO τ = 0.956) — none of the listings in the sample reported accidents.
-
-### Evaluation results
-
-**E6 — vision-agent agreement with hand-labeled gold (N=10, all 10 listings across both platforms):** Adjacent agreement is 1.0 for exterior_panels, dashboard_console, and engine_bay; 0.78 for interior_cabin; 0.90 for tyres. Exact agreement varies meaningfully by aspect: exterior_panels 0.70, interior_cabin 0.56, dashboard_console 0.30, tyres 0.90, engine_bay 0.20 (n=5, Spinny only — Cars24 doesn't photograph engine bays). Cohen's κ by aspect: exterior_panels 0.55, interior_cabin 0.23, dashboard_console 0.07, tyres 0.00, engine_bay 0.00. κ is low for several aspects because the gold labels are homogeneous (predominantly pristine and light_wear), leaving little variance for κ to reward — adjacent agreement is the more informative metric here.
-
-**E4 — α-sweep ranking stability:** Kendall τ ≥ 0.91 when comparing the composite ranking produced at every α ∈ {0.5, 0.6, 0.8, 0.9, 1.0} against the α=0.7 baseline. The top listing is identical across all α values. The composite ranking is robust to the rule/visual weighting choice within the tested range.
-
-**E3 — rule vs visual independence:** Spearman ρ between rule_score and gold-labeled visual_score on the 10-listing gold set is 0.51 — moderate correlation, not near 1. Vision adds genuinely independent condition signal rather than merely echoing the rule score. Spearman ρ between rule_score and agent-recovered visual_score is 0.231 — vision is now more independent of the rule signal than before (was 0.391); the cars24 fix surfaced more visual variation that rule-based scoring doesn't capture.
-
-**E5 — Vision determinism (design-asserted).** The inner inspector is content-hash-keyed (sha256(prompt_version + photo_bytes)). Identical photo bytes always produce the same cached response. With Sonnet at temperature 0, ordinal classification on a 5-level wear scale is highly stable. The outer agent's tool-orchestration is the variable layer; E6's adjacent agreement = 1.0 is indirect evidence that orchestration is stable enough not to flip ordinal calls more than ±1 step. We don't run live cold-cache sweeps because the design — content-hash + temperature-0 + structured output — makes determinism a property of the implementation rather than a metric to re-measure.
-
-## Caveats
-
-- **N=6 is illustrative, not statistically defensible.** Conclusions about platforms shouldn't rest on this alone.
-- **Public data only.** With auth/API access we'd use Spinny's 200-point inspection report and Cars24's deeper in-app fields. The fair comparison given pre-auth data is on the fields both platforms expose.
-- **Trim line still spans SX / SX PLUS / SX (O).** These are different sub-trims of the SX family with their own MSRP differences. Tightening to a single sub-trim would shrink supply below the 16 listings (6 ranking + 10 gold) we needed; the SX-line filter is the closest workable compromise.
-- **Rank-based scoring is set-relative.** A score of 70 means roughly rank 2.6 of 6 *in this set*, not "this car is in 70% condition" in any absolute sense.
-
-## Further reading
-
-- [`docs/extraction_review.md`](docs/extraction_review.md) — every listing collected (ranking, gold, excluded), with source URLs and parsed values.
-- [`docs/technical_appendix.md`](docs/technical_appendix.md) — methodology, per-feature ranks, pairwise win matrices, full eval numbers (E3, E4, E6), corpus-scale view.
-- [`docs/loom_walkthrough.md`](docs/loom_walkthrough.md) — screen-recorded walkthrough of the pipeline end-to-end.
-- [`docs/tradeoffs.md`](docs/tradeoffs.md) — engineering tradeoffs journal.
+- [`docs/technical_appendix.md`](docs/technical_appendix.md) — full pipeline, eval methodology, per-aspect numbers
+- [`docs/loom_walkthrough.md`](docs/loom_walkthrough.md) — 3-minute visual walkthrough script
+- [`runs/latest_ranking/ranking.json`](runs/latest_ranking/ranking.json) — full ranking JSON with all sub-scores
