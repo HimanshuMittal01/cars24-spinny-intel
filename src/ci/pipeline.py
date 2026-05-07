@@ -9,8 +9,8 @@ from ci.extract.spinny import extract_spinny
 from ci.llm import LLMClient
 from ci.normalize import normalize
 from ci.rank import rank_listings
-from ci.schemas import RankRow, TraceEvent
-from ci.score import score_listing
+from ci.schemas import NormalizedListing, RankRow, TraceEvent
+from ci.score import score_listings
 from ci.snapshot import load_snapshot
 from ci.trace import TraceStore
 
@@ -43,9 +43,10 @@ def run_pipeline(
     run_dir: Path,
     today_year: int | None = None,
 ) -> list[RankRow]:
+    """Run the full pipeline. Scoring is set-based (rank-based per spec §14)."""
     run_id = run_dir.name
     store = TraceStore(run_dir=run_dir)
-    pairs = []
+    norms: list[NormalizedListing] = []
 
     for platform, lid in ranking_listings:
         t0 = time.time()
@@ -69,12 +70,16 @@ def run_pipeline(
         _trace(store, run_id, f"normalize.{platform}", t0,
                {"listing_id": lid}, norm.model_dump(exclude={"full_fields"}))
 
-        t0 = time.time()
-        sc = score_listing(norm)
-        _trace(store, run_id, "score", t0,
-               {"listing_id": lid}, sc.model_dump(exclude={"disclosed_fields", "per_dim"}))
+        norms.append(norm)
 
-        pairs.append((norm, sc))
+    # Set-based rank scoring runs once over the entire normalized set.
+    t0 = time.time()
+    score_records = score_listings(norms)
+    _trace(store, run_id, "score", t0,
+           [{"id": n.listing_id} for n in norms],
+           [{"id": s.listing_id, "score_common": s.score_common} for s in score_records])
+
+    pairs = list(zip(norms, score_records))
 
     t0 = time.time()
     rows = rank_listings(pairs)

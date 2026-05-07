@@ -509,3 +509,59 @@ Per-listing certification tier **is** exposed (`category` ∈ {max, assured-plus
 - **T17 (sensitivity):** ablation surface shrinks to 4 dims (km/age/owners/accident).
 
 T1, T3–T7, T12–T16, T18, T19 are unaffected.
+
+---
+
+## 14. Rank-based scoring (2026-05-07 amendment)
+
+After §13, the scorer was anchored-band based: each dimension had a hand-picked threshold table (`KM_BANDS`, `AGE_BANDS`, etc.) mapping raw values to 0-100 scores. These bands were a defensibility weak point — they were reasonable priors but couldn't be grounded against external data, only defended via sensitivity analysis.
+
+### Replacement
+
+Per-feature scoring becomes **rank-based across the listing set**:
+
+1. For each scoring dimension, sort the N listings best→worst on that feature.
+2. Assign 1-indexed rank with tie averaging.
+3. Convert rank to score: `score = 100 × (n − rank) / (n − 1)`. Best gets 100, worst gets 0, others linearly interpolated by rank position.
+4. Composite is the same weight-sum as before:
+
+   | dimension | weight | direction (better) |
+   |---|---:|---|
+   | km_driven | 35 | lower |
+   | age_years | 25 | lower |
+   | owners | 25 | lower |
+   | accident_disclosed | 15 | none > minor > major |
+
+### What this changes
+
+- **Anchored band tables (`KM_BANDS`, `AGE_BANDS`, `OWNERS_MAP`, `ACCIDENT_MAP` for scoring) are dropped.** A small `ACCIDENT_ORDER = {"none": 3, "minor": 2, "major": 1}` ordinal map remains, used only for comparison ordering.
+- **Imputation anchors are dropped.** Missing values get the median of the *valid* listings' rank-scores within that dimension. No opacity penalty.
+- **Scorer API becomes set-based**: `score_listings(listings: list) -> list[ScoreRecord]`. Per-listing scoring out of context is no longer meaningful — a listing's score depends on the set it's compared in.
+- **Sensitivity surface narrows.** Per-dim rank scores are weight-independent, so weight perturbation only re-aggregates fixed per-dim scores. Faster eval; same defense.
+
+### What this gains
+
+- **Defensibility by construction.** "Is listing A's km better than listing B's km?" — answerable directly from the data, no thresholds required.
+- **Per-feature rank exhibits become first-class** (technical appendix §2 — per-feature score table, §3 — pairwise win matrix).
+- **Eliminates the "where do these band cutoffs come from" question** that we couldn't fully answer in §10.
+
+### What this loses
+
+- **Magnitude.** A 50,000-km gap and a 2,000-km gap can map to the same rank delta. Magnitude is preserved in the raw fields (`NormalizedListing.full_fields`) and is available for any post-hoc analysis.
+- **Absolute interpretability.** A score of 75 no longer means "this is a 75% condition car"; it means "this is rank ~2.6 of 6 in this set". The composite is a *relative-position* score within the comparison set.
+- **Set-dependence.** The same listing in a different comparison set could rank differently. Acceptable since the brief asks for relative ranking of the 6, not absolute condition.
+
+### Implication for the report
+
+- The headline price-to-condition ranking is reported as a *relative* ordering, not an absolute valuation.
+- Per-feature rank breakdown + pairwise win matrix go in the technical appendix (`docs/technical_appendix.md`), so a CXO can read the headline in 1-2 minutes and an analyst can dig into the underlying data when needed.
+
+### Plan tasks affected (additional)
+
+- **T2-rev2 (config):** drop bands and per-dim imputation anchors; add `ACCIDENT_ORDER`. ✓
+- **T11-rev2 (scorer):** rewrite as set-based rank scoring (`score_listings`). Per-listing API removed. ✓
+- **T13-rev (pipeline):** scoring node moves outside the per-listing loop — runs once over all normalized listings. ✓
+- **T17-rev2 (sensitivity):** new scorer; per-dim scores computed once and reused across weight variants. ✓
+- **T19-rev (reporting):** split into a short executive `report.md` + a long `technical_appendix.md`. ✓
+
+T1, T3–T10 unchanged. T12 (ranker), T14–T16, T18 unchanged in interface.

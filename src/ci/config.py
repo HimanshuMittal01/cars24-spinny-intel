@@ -10,7 +10,7 @@ MODEL_EXTRACTOR = "claude-sonnet-4-6"
 EXTRACTOR_TEMPERATURE = 0.0
 EXTRACTOR_MAX_TOKENS = 4096
 
-# --- score_common weight table (§4, revised per §13) ---
+# --- score_common weight table (§4, revised per §13 / §14) ---
 WEIGHTS = {
     "km_driven": 35,
     "age_years": 25,
@@ -18,39 +18,14 @@ WEIGHTS = {
     "accident_disclosed": 15,
 }
 
-# --- anchored bands per dimension (§4) ---
-KM_BANDS = [
-    (20_000, 100),
-    (40_000, 85),
-    (70_000, 70),
-    (100_000, 55),
-    (150_000, 40),
-    (float("inf"), 25),
-]
+# Accident severity ordering for rank-based scoring (higher = better).
+# Used by ci.score._comparable_value to compare accident_disclosed across listings.
+ACCIDENT_ORDER = {"none": 3, "minor": 2, "major": 1}
 
-AGE_BANDS = [
-    (2, 100),
-    (4, 85),
-    (7, 65),
-    (10, 45),
-    (float("inf"), 25),
-]
-
-OWNERS_MAP = {1: 100, 2: 75, 3: 50}  # 4+ → 25 by lookup default
-
-ACCIDENT_MAP = {
-    "none": 100,
-    "minor": 70,      # cosmetic
-    "major": 30,      # structural
-}
-
-# --- imputation anchors (§4 null handling) ---
-IMPUTATION = {
-    "km_driven": 60,
-    "age_years": 60,
-    "owners": 60,
-    "accident_disclosed": 60,
-}
+# Anchored bands and per-dim imputation anchors were dropped in §14 in favour
+# of rank-based per-feature scoring. Magnitude lives in NormalizedListing's raw
+# fields and is available for any post-hoc analysis; the scorer no longer
+# encodes a "what is excellent" prior, only "best in this set is excellent".
 
 # --- disclosure-eligible field set (§4 Disclosure metric, revised per §13) ---
 DISCLOSURE_FIELDS = [

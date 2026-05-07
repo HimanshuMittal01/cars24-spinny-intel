@@ -1,11 +1,12 @@
 import pytest
-from ci.score import score_listing, _km_band, _age_band, _owners_band, _accident_band
+
+from ci.score import score_listings, _per_dim_scores, _rank_to_score
 from ci.schemas import NormalizedListing
 
 
-def _norm(**kw):
+def _norm(lid, plat="cars24", **kw):
     base = dict(
-        platform="cars24", listing_id="x", price=900_000,
+        platform=plat, listing_id=lid, price=900_000,
         km_driven=45_000, age_years=4, owners=1,
         certification_flag=None, accident_disclosed="none",
         disclosed_fields={f: False for f in []},
@@ -15,81 +16,121 @@ def _norm(**kw):
     return NormalizedListing(**base)
 
 
-def test_km_band_lookup():
-    assert _km_band(15_000) == 100
-    assert _km_band(45_000) == 70
-    assert _km_band(160_000) == 25
+def test_rank_to_score_best_worst_middle():
+    assert _rank_to_score(1, 5) == 100.0
+    assert _rank_to_score(5, 5) == 0.0
+    assert _rank_to_score(3, 5) == 50.0
 
 
-def test_age_band_lookup():
-    assert _age_band(1) == 100
-    assert _age_band(5) == 65
-    assert _age_band(11) == 25
+def test_per_dim_scores_km_driven_lower_better():
+    listings = [
+        _norm("a", km_driven=20_000),
+        _norm("b", km_driven=80_000),
+        _norm("c", km_driven=50_000),
+    ]
+    scores = _per_dim_scores(listings, "km_driven")
+    assert scores["a"] == 100.0
+    assert scores["c"] == 50.0
+    assert scores["b"] == 0.0
 
 
-def test_owners_band_lookup():
-    assert _owners_band(1) == 100
-    assert _owners_band(2) == 75
-    assert _owners_band(4) == 25
-    assert _owners_band(7) == 25
+def test_per_dim_scores_owners_lower_better():
+    listings = [
+        _norm("a", owners=1),
+        _norm("b", owners=3),
+        _norm("c", owners=2),
+    ]
+    scores = _per_dim_scores(listings, "owners")
+    assert scores["a"] == 100.0
+    assert scores["c"] == 50.0
+    assert scores["b"] == 0.0
 
 
-def test_accident_band_lookup():
-    assert _accident_band("none") == 100
-    assert _accident_band("minor") == 70
-    assert _accident_band("major") == 30
+def test_per_dim_scores_accident_none_better_than_minor():
+    listings = [
+        _norm("a", accident_disclosed="none"),
+        _norm("b", accident_disclosed="minor"),
+        _norm("c", accident_disclosed="major"),
+    ]
+    scores = _per_dim_scores(listings, "accident_disclosed")
+    assert scores["a"] == 100.0
+    assert scores["b"] == 50.0
+    assert scores["c"] == 0.0
 
 
-def test_score_listing_excellent_all_top():
-    n = _norm(km_driven=18_000, age_years=1, owners=1, accident_disclosed="none")
-    s = score_listing(n)
-    assert s.score_common == pytest.approx(100.0, abs=0.01)
-    assert s.imputed_dims == []
+def test_per_dim_scores_ties_averaged():
+    listings = [
+        _norm("a", km_driven=20_000),
+        _norm("b", km_driven=50_000),
+        _norm("c", km_driven=50_000),
+        _norm("d", km_driven=80_000),
+    ]
+    scores = _per_dim_scores(listings, "km_driven")
+    assert scores["a"] == 100.0
+    assert scores["b"] == scores["c"]
+    # Average rank of positions (2,3) is 2.5 → score = (4-2.5)/(4-1)*100 = 50
+    assert scores["b"] == pytest.approx(50.0, abs=0.01)
+    assert scores["d"] == 0.0
 
 
-def test_score_listing_average():
-    n = _norm(km_driven=60_000, age_years=5, owners=2, accident_disclosed="minor")
-    s = score_listing(n)
-    expected = 0.35 * 70 + 0.25 * 65 + 0.25 * 75 + 0.15 * 70
-    assert s.score_common == pytest.approx(expected, abs=0.01)
+def test_per_dim_scores_missing_gets_median_rank():
+    listings = [
+        _norm("a", km_driven=20_000),
+        _norm("b", km_driven=None),
+        _norm("c", km_driven=80_000),
+    ]
+    scores = _per_dim_scores(listings, "km_driven")
+    assert scores["a"] == 100.0
+    assert scores["c"] == 0.0
+    # n=3, median rank = 2 → score = (3-2)/(3-1)*100 = 50
+    assert scores["b"] == pytest.approx(50.0, abs=0.01)
 
 
-def test_score_listing_imputes_missing_km():
-    n = _norm(km_driven=None, age_years=4, owners=1, accident_disclosed="none")
-    s = score_listing(n)
-    assert "km_driven" in s.imputed_dims
-    expected = 0.35 * 60 + 0.25 * 85 + 0.25 * 100 + 0.15 * 100
-    assert s.score_common == pytest.approx(expected, abs=0.01)
+def test_score_listings_winner_and_loser_get_extremes():
+    listings = [
+        _norm("winner", km_driven=20_000, age_years=1, owners=1, accident_disclosed="none"),
+        _norm("middle", km_driven=50_000, age_years=4, owners=2, accident_disclosed="minor"),
+        _norm("loser",  km_driven=120_000, age_years=10, owners=3, accident_disclosed="major"),
+    ]
+    by_lid = {r.listing_id: r for r in score_listings(listings)}
+    assert by_lid["winner"].score_common == 100.0
+    assert by_lid["loser"].score_common == 0.0
 
 
-def test_score_listing_imputes_missing_accident():
-    n = _norm(km_driven=45_000, age_years=4, owners=1, accident_disclosed=None)
-    s = score_listing(n)
-    assert "accident_disclosed" in s.imputed_dims
-    expected = 0.35 * 70 + 0.25 * 85 + 0.25 * 100 + 0.15 * 60
-    assert s.score_common == pytest.approx(expected, abs=0.01)
+def test_score_listings_per_dim_has_only_scored_dims():
+    listings = [_norm("a"), _norm("b", km_driven=80_000)]
+    records = score_listings(listings)
+    assert set(records[0].per_dim.keys()) == {
+        "km_driven", "age_years", "owners", "accident_disclosed",
+    }
+    assert "certification_flag" not in records[0].per_dim
 
 
-def test_score_listing_per_dim_keys():
-    n = _norm()
-    s = score_listing(n)
-    assert set(s.per_dim.keys()) == {"km_driven", "age_years", "owners", "accident_disclosed"}
-    # certification_flag is intentionally NOT in per_dim
-    assert "certification_flag" not in s.per_dim
+def test_score_listings_marks_imputed_dims_when_value_missing():
+    listings = [
+        _norm("a", km_driven=None),
+        _norm("b", km_driven=50_000),
+    ]
+    by_lid = {r.listing_id: r for r in score_listings(listings)}
+    assert "km_driven" in by_lid["a"].imputed_dims
+    assert "km_driven" not in by_lid["b"].imputed_dims
 
 
-def test_score_listing_disclosure_count():
-    disclosed = {f: False for f in []}
-    disclosed.update({"accident_history_detail": True, "service_history_records": True, "insurance_type": True})
-    n = _norm(disclosed_fields=disclosed)
-    s = score_listing(n)
-    assert s.disclosure_count == 3
+def test_score_listings_disclosure_count_passthrough():
+    disclosed = {"accident_history_detail": True, "service_history_records": True, "insurance_type": True}
+    listings = [_norm("a", disclosed_fields=disclosed)]
+    assert score_listings(listings)[0].disclosure_count == 3
 
 
-def test_score_listing_does_not_modify_certification_flag():
-    n = _norm(certification_flag="top")  # Spinny-style with diagnostic cert
-    s = score_listing(n)
-    # cert is not part of score_common; score should equal 4-dim formula
-    expected = 0.35 * 70 + 0.25 * 85 + 0.25 * 100 + 0.15 * 100
-    assert s.score_common == pytest.approx(expected, abs=0.01)
-    assert "certification_flag" not in s.per_dim
+def test_score_listings_returns_in_input_order():
+    listings = [_norm("c"), _norm("a"), _norm("b")]
+    assert [r.listing_id for r in score_listings(listings)] == ["c", "a", "b"]
+
+
+def test_score_listings_certification_does_not_affect_score():
+    listings = [
+        _norm("a", certification_flag="top"),
+        _norm("b", certification_flag=None),
+    ]
+    records = score_listings(listings)
+    assert records[0].score_common == records[1].score_common

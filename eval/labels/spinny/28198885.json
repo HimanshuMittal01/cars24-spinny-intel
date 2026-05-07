@@ -15,11 +15,18 @@
       }
     }
   },
-  "score_common": 75.5,
+  "score_common": 32.0,
   "notes": {
     "km_driven": "88,785 km \u2192 band 55/100",
     "age_years": "2019 \u2192 age 7y \u2192 band 65/100",
     "owners": "owner #1 \u2192 band 100/100",
-    "accident_disclosed": "none \u2192 band 100/100"
+    "accident_disclosed": "none \u2192 band 100/100",
+    "scoring_note": "Rank-based scoring per spec \u00a714 (replaces anchored bands)."
+  },
+  "per_feature_rank_scores": {
+    "km_driven": 20.0,
+    "age_years": 10.0,
+    "owners": 60.0,
+    "accident_disclosed": 50.0
   }
 }

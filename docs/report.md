@@ -1,125 +1,46 @@
-# Cars24 vs Spinny — Competitive Intel Report
+# Cars24 vs Spinny — Competitive Intel
 
-## 1. Ranking (price-to-condition)
+**Hyundai Creta, used, Delhi-NCR, ₹7-13.5L, N=6 listings (3 each).**
 
-| # | listing | platform | price (₹) | score_common | ratio | disclosure_count | imputed dims |
-|---|---------|----------|-----------|--------------|-------|------------------|--------------|
-| 1 | `10096166769` | cars24 | 700,389 | 80.8 | 8,674 | 4 | — |
-| 2 | `10076268734` | cars24 | 764,000 | 80.8 | 9,461 | 4 | — |
-| 3 | `28198885` | spinny | 747,000 | 75.5 | 9,894 | 12 | — |
-| 4 | `10041693110` | cars24 | 950,000 | 74.5 | 12,752 | 4 | — |
-| 5 | `27839393` | spinny | 987,000 | 75.5 | 13,073 | 11 | — |
-| 6 | `28476005` | spinny | 1,347,000 | 91.0 | 14,802 | 12 | — |
+## Headline
+
+**The two platforms compete on different axes — and the data shows it before you log in.**
+
+- **Cars24 sells uniform process.** Every listing same 12-month warranty, same 140-point quality check, **no per-listing tier**. Buyer trusts the platform.
+- **Spinny sells per-listing transparency.** Tier per car (`assured-plus` / `assured` / `budget`), per-section inspection ratings, accident booleans, buy-back tables. Buyer reads the report.
+- **Disclosure asymmetry: Cars24 exposes 4 of 17 condition-relevant fields per listing. Spinny exposes 11-12.** ~3× ratio. Concrete and observable, not constructed.
+
+**Implication:** Cars24 likely wins price-conscious buyers in trust-the-brand mode. Spinny likely wins informed buyers who want a paper trail. Both rational.
+
+## The 6-listing ranking (price-to-condition)
+
+Lower ratio = more car per rupee.
+
+| # | listing | platform | price | rank-score | ratio (₹/pt) | disclosure |
+|---|---|---|---:|---:|---:|---:|
+| 1 | 10076268734 | cars24 | 7.64L | 70.5 | **10,837** | 4/17 |
+| 2 | 28476005 | spinny | 13.47L | **82.5** | 16,327 | 12/17 |
+| 3 | 10096166769 | cars24 | 7.00L | 39.0 | 17,959 | 4/17 |
+| 4 | 10041693110 | cars24 | 9.50L | 41.0 | 23,171 | 4/17 |
+| 5 | 28198885 | spinny | 7.47L | 32.0 | 23,344 | 12/17 |
+| 6 | 27839393 | spinny | 9.87L | 35.0 | 28,200 | 11/17 |
+
+Score is rank-based across the 6 within each feature (km / age / owners / accident-disclosed) and weight-summed. **Top spot is Cars24, top condition is Spinny.**
 
 ![ranking chart](figures/ranking.png)
 
-## 2. Agent topology
+## What this measures vs what it doesn't
 
-Single explicit DAG, synchronous. Per-platform extractor agents (cars24, spinny) parse the platform's structured JSON payload (Cars24: `__next_f` streaming SSR; Spinny: `window.__INITIAL_STATE__`) and emit a common `RawListing`. The normalizer maps platform-specific raw fields to a common schema. Scoring and ranking are deterministic so the audit trail is auditable end-to-end. The trace store records every node call (input hash, output hash, latency, model, prompt version).
+**Measures:** *relative* price-to-condition rank within these 6 listings, on common pre-auth fields. Robust to ±25% weight perturbation (Kendall τ ≥ 0.87).
 
-```
-snapshots → extract.cars24 / extract.spinny → normalize → score → rank → report
-```
+**Doesn't measure:** absolute condition. The rubric is a reasonable prior, not grounded against external valuation. With auth/API access we'd use the 200-point inspection report; pre-auth only fair to compare on shared fields.
 
-Choosing deterministic scoring (rather than an LLM-as-judge second method) preserves auditability and lets the eval harness §3 rely on byte-identical re-runs. Per spec §13, certification is excluded from the common-set ranking score because Cars24 has no per-listing tier; the per-listing tier asymmetry is captured by `disclosure_count` instead.
+**Caveat that surfaced in eval:** km_driven dominates the ranking. Removing km drops Kendall τ to 0.33 (i.e. a different ranking). If the buyer cares more about another dimension, the ranking changes — see [technical appendix](technical_appendix.md).
 
-## 3. Eval harness
+## One-line takeaway
 
-### E2 Extraction quality
-- field_recall: `{'price': 1.0, 'km_driven': 1.0, 'age_years': 1.0, 'owners': 1.0}`
-
-### E3 Calibration vs gold
-- MAE: `0.00`
-- Spearman ρ: `1.000`
-- Reported as directional, not significant — gold N is small (≈15).
-
-### E4 Weight sensitivity
-- τ under ±25% perturbations: `{'km_driven+': 0.9999999999999999, 'km_driven-': 0.9999999999999999, 'age_years+': 0.9999999999999999, 'age_years-': 0.9999999999999999, 'owners+': 0.9999999999999999, 'owners-': 0.9999999999999999, 'accident_disclosed+': 0.9999999999999999, 'accident_disclosed-': 0.9999999999999999}`
-- τ under leave-one-dim-out: `{'km_driven': 0.7333333333333333, 'age_years': 0.9999999999999999, 'owners': 0.9999999999999999, 'accident_disclosed': 0.9999999999999999}`
-- Claim: the ranking is stable under reasonable weight perturbations. Does *not* claim the weights are correct — the priors are not data-derived (see Limitations).
-
-### E5 Determinism spot-check
-- identical across reps: `True` (distinct outputs: 1)
-
-## 4. The tradeoff that bit
-
-# Tradeoffs Journal
-
-Append entries during build. Each entry: situation → decision → alternative
-considered → what hurt. The "tradeoff that bit" answer in the report is
-selected from here at report time.
+If Cars24 is competing on transparency, it's losing 3 to 1 on the count of condition-relevant fields exposed pre-auth. If Cars24 is competing on curated trust, the ranking suggests it's working — they take the top deal slot in our N=6.
 
 ---
 
-## 2026-05-07 — speculative schema vs real data
-
-**Situation.** Drafted Cars24 / Spinny extractor schemas based on prior assumptions
-about what each platform exposes (Cars24 "Imperial / Royal Blue" tiers, per-listing
-accident disclosure, generic 200-pt inspection on Spinny).
-
-**Decision.** Pulled one real listing from each platform mid-build, discovered the
-schemas were largely fictional, and pivoted: dropped certification from the
-common-set, single 4-dim weights table, JSON-parse-first extraction (Next.js
-streaming for Cars24, `window.__INITIAL_STATE__` for Spinny), revised disclosure
-field list to 17 fields based on observed pre-auth data.
-
-**Alternative considered.** Stay with LLM-as-extractor on raw HTML and let
-hallucination rates surface in E2. Rejected: structured JSON is right there in
-both pages; using an LLM to pull structured data out of structured data is the
-wrong tool, costs more, and adds noise into a pipeline whose value is auditability.
-
-**What hurt.** ~3 tasks of work (T2/T8/T9) were fully rewritten. The plan and
-spec gained a "Reality Check (§13)" amendment. But the rework forced an honest
-reckoning with the real Cars24 vs Spinny disclosure asymmetry — Cars24 has no
-per-listing tier, only a uniform platform promise — which became *the* headline
-finding rather than a plausible hypothesis.
-
----
-
-## 2026-05-07 — gold labeling on a deterministic JSON pipeline (E3 caveat)
-
-**Situation.** Acted as honest annotator for all 6 ranking listings: read the
-fixture HTML directly via independent regex extraction (separate from the
-extractor's parser), hand-applied the rubric anchored bands, computed
-score_common per listing, wrote per-dim notes citing what was visible.
-
-**Result.** Gold values match system extractor values exactly. E2 field recall
-is 1.0 across all dims, both platforms. E3 calibration MAE = 0.0, Spearman ρ
-= 1.0.
-
-**Why this is unsurprising and what it means.** Both platforms inject their
-canonical listing data as inline JSON (`__next_f` payloads on Cars24,
-`window.__INITIAL_STATE__` on Spinny). The deterministic extractor parses that
-JSON; an honest annotator reading the same page sees the same JSON-derived
-values. The rubric is then mechanical (anchored bands + weighted sum) — gold
-score by construction equals system score. **E3 is acting as a self-consistency
-check, not an independent calibration.**
-
-**What this evidences.** Extraction faithfulness is structurally guaranteed for
-the fields we care about (price/km/year/owners), modulo the JSON's truthfulness.
-There is no extraction noise to measure here — the only failure mode would be
-the JSON parser itself, which E5 (determinism) catches.
-
-**What we'd actually need for an independent E3.** Either (a) a *holistic*
-human gold score per listing (gut-rated 0-100 without using the formula) — would
-test whether the rubric tracks what a thoughtful buyer feels, or (b) gold from
-a third-party valuation source (OBV, CarWale) — would test whether the rubric
-tracks revealed market judgments. Out of scope for this run; documented as a
-limitation.
-
-**Why we still ran E2/E3.** They confirm the pipeline doesn't drift over time
-or across runs, and the per-platform breakdown surfaces if one extractor
-silently degrades while the other stays correct. Their *current* values are
-unsurprising; their *future* values would matter if either platform changes the
-shape of its inline JSON.
-
-
-## 5. Limitations
-
-- N=6 ranking; conclusions are illustrative.
-- Gold N≈15; calibration confidence intervals are wide. Read directional, not significant.
-- Rubric weights are reasonable priors, not grounded in external data. E4 only proves robustness, not groundedness.
-- `disclosure_count` measures presence, not depth-of-disclosure (a single boolean disclosure counts the same as detailed exposure).
-- Snapshots are point-in-time; results apply to the captured state of each listing.
-- Single annotator on gold (no inter-rater data).
-- Cars24 'no_accident_history' platform-level promise is mapped to per-listing `accident_disclosed = none`. This is documented in spec §13 and should be read as a *modelling choice* rather than a per-listing extraction.
+*Methodology, per-feature ranks, pairwise win matrix, eval harness numbers, tradeoffs, and limitations: see [technical_appendix.md](technical_appendix.md).*

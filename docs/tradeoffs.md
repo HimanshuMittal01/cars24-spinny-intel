@@ -67,3 +67,44 @@ or across runs, and the per-platform breakdown surfaces if one extractor
 silently degrades while the other stays correct. Their *current* values are
 unsurprising; their *future* values would matter if either platform changes the
 shape of its inline JSON.
+
+---
+
+## 2026-05-07 — anchored bands → rank-based scoring (spec §14)
+
+**Situation.** Original scorer used hand-picked anchored-band tables
+(`<20k km = 100`, `20-40k = 85`, …). Defensible only via sensitivity analysis
+("ranking is robust to ±25% weight perturbations"). Bands themselves
+ungroundable. Reviewer challenge from a brainstorm: pairwise comparison or
+rank-based scoring would eliminate the band-cutoff prior entirely.
+
+**Decision.** Replaced bands with rank-based per-feature scoring. For each
+dimension, listings ranked among themselves; rank position → 0-100 score by
+linear interpolation. Composite is the same weight-sum. Set-based scorer API
+(`score_listings(listings)` instead of `score_listing(n)`).
+
+**Alternative considered.** Pure pairwise binary (1/0 per pair per feature,
+sum to feature-rank, weight-sum). Rejected as too lossy — landslide and narrow
+wins counted equally. Rank-based is mathematically a smoothed pairwise
+(average of pairwise wins × 2 / (n-1) × 100) but preserves some magnitude
+through linear interpolation.
+
+**What hurt.** Real rework: scorer/pipeline/sensitivity all changed APIs.
+~half a day of focused work. Tests rewritten. Spec gained §14.
+
+**What it bought.** The "where do these bands come from?" question is gone.
+The score is now defensible by construction — no priors to defend on the
+band side; only weights remain a prior, and E4 perturbation handles them.
+Per-feature ranks become first-class exhibits (technical appendix), which is
+real interpretability. **The ranking itself shifted** — rank-based amplifies
+relative differences within the set, so the 2022 Spinny (best condition by a
+clear margin within the 6) jumped from rank 6 to rank 2, and a 2019 Cars24
+(low absolute condition but cheap) dropped from rank 1 to rank 3. The new
+ranking is more defensible but the magnitudes shifted noticeably — flagged in
+the limitations.
+
+**Eval-side observation that fell out.** With magnitude removed from the
+scorer, E4 leave-one-out τ became more sensitive. **km_driven removal drops
+τ to 0.33** (from 0.73 under bands). km is the load-bearing feature in this
+ranking — a real finding that band-based smoothing was hiding. Now surfaced
+in the report and appendix.
