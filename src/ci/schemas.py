@@ -1,4 +1,6 @@
-from typing import Any, Literal
+from __future__ import annotations
+
+from typing import Any, Literal, Optional
 from pydantic import BaseModel, Field
 
 Platform = Literal["cars24", "spinny"]
@@ -18,11 +20,11 @@ class NormalizedListing(BaseModel):
 
     # common fields used in score_common
     price: int
-    km_driven: int | None
-    age_years: int | None
-    owners: int | None
-    certification_flag: Literal["top", "mid", "base", "none"] | None
-    accident_disclosed: Literal["none", "minor", "major"] | None
+    km_driven: Optional[int]
+    age_years: Optional[int]
+    owners: Optional[int]
+    certification_flag: Optional[Literal["top", "mid", "base", "none"]]
+    accident_disclosed: Optional[Literal["none", "minor", "major"]]
 
     # disclosure measurement (§4)
     disclosed_fields: dict[str, bool]

@@ -3,9 +3,11 @@
 Implements spec §13 mapping rules for Cars24 and Spinny.
 """
 
+from __future__ import annotations
+
 import re
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Optional
 
 from ci.config import DISCLOSURE_FIELDS
 from ci.schemas import NormalizedListing, RawListing
@@ -19,7 +21,7 @@ SPINNY_CERT_MAP: dict[str, str] = {
 }
 
 
-def _parse_owners_spinny(value: Any) -> int | None:
+def _parse_owners_spinny(value: Any) -> Optional[int]:
     """Parse Spinny's ordinal owner string ("1st", "2nd", …) to int.
 
     - int/float → passthrough (coerced to int)
@@ -128,7 +130,7 @@ def _normalize_spinny(raw: RawListing, today_year: int) -> NormalizedListing:
 
     # km_driven: prefer productMileage, fall back to "mileage" string with commas
     if "productMileage" in fields and fields["productMileage"] is not None:
-        km_driven: int | None = int(fields["productMileage"])
+        km_driven: Optional[int] = int(fields["productMileage"])
     elif "mileage" in fields and fields["mileage"] is not None:
         km_driven = int(str(fields["mileage"]).replace(",", ""))
     else:
@@ -138,7 +140,7 @@ def _normalize_spinny(raw: RawListing, today_year: int) -> NormalizedListing:
     make_year = fields.get("make_year")
     reg_year = fields.get("registration_year")
     if make_year is not None:
-        age_years: int | None = today_year - int(make_year)
+        age_years: Optional[int] = today_year - int(make_year)
     elif reg_year is not None:
         age_years = today_year - int(reg_year)
     else:
@@ -151,7 +153,7 @@ def _normalize_spinny(raw: RawListing, today_year: int) -> NormalizedListing:
     cert_flag = SPINNY_CERT_MAP.get(proc_cat) if proc_cat else None  # type: ignore[arg-type]
 
     # accident_disclosed from inspection_report summary
-    accident: str | None = None
+    accident: Optional[str] = None
     inspection = fields.get("inspection_report")
     if inspection:
         try:
@@ -178,7 +180,7 @@ def _normalize_spinny(raw: RawListing, today_year: int) -> NormalizedListing:
 # Public API
 # ---------------------------------------------------------------------------
 
-def normalize(raw: RawListing, today_year: int | None = None) -> NormalizedListing:
+def normalize(raw: RawListing, today_year: Optional[int] = None) -> NormalizedListing:
     """Normalize a RawListing to a NormalizedListing.
 
     Dispatches on raw.platform. today_year defaults to the current UTC year.
