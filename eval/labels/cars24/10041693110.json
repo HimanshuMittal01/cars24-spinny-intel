@@ -1,0 +1,17 @@
+{
+  "listing_id": "10041693110",
+  "platform": "cars24",
+  "full_fields": {
+    "listingPrice": 950000,
+    "odometerReading": 50673,
+    "year": 2020,
+    "ownerNumber": 2
+  },
+  "score_common": 74.5,
+  "notes": {
+    "km_driven": "50,673 km \u2192 band 70/100",
+    "age_years": "2020 \u2192 age 6y \u2192 band 65/100",
+    "owners": "owner #2 \u2192 band 75/100",
+    "accident_disclosed": "none \u2192 band 100/100"
+  }
+}

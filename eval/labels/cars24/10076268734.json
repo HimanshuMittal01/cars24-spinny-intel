@@ -1,0 +1,17 @@
+{
+  "listing_id": "10076268734",
+  "platform": "cars24",
+  "full_fields": {
+    "listingPrice": 764000,
+    "odometerReading": 50208,
+    "year": 2021,
+    "ownerNumber": 1
+  },
+  "score_common": 80.75,
+  "notes": {
+    "km_driven": "50,208 km \u2192 band 70/100",
+    "age_years": "2021 \u2192 age 5y \u2192 band 65/100",
+    "owners": "owner #1 \u2192 band 100/100",
+    "accident_disclosed": "none \u2192 band 100/100"
+  }
+}

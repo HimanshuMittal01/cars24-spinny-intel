@@ -4,7 +4,7 @@ One-time snapshot collection.
 Usage:
     uv run python scripts/collect_snapshots.py <platform> <listing_id> <url>
 
-Saves to fixtures/<platform>/<listing_id>/{page.html, captured_at.txt}.
+Saves to fixtures/<platform>/<listing_id>/{page.html, captured_at.txt, url.txt}.
 The operator is expected to provide URLs from the public listing pages
 of Cars24 / Spinny for Hyundai Creta in Delhi-NCR within ₹8-14L.
 
@@ -36,6 +36,7 @@ def collect(platform: str, listing_id: str, url: str) -> Path:
     (out_dir / "captured_at.txt").write_text(
         datetime.now(timezone.utc).isoformat(timespec="seconds")
     )
+    (out_dir / "url.txt").write_text(url)
     print(f"saved {out_dir}")
     return out_dir
 

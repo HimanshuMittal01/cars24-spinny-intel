@@ -1,0 +1,25 @@
+{
+  "listing_id": "28198885",
+  "platform": "spinny",
+  "full_fields": {
+    "productPrice": 747000.0,
+    "productMileage": 88785,
+    "make_year": 2019,
+    "no_of_owners": "1st",
+    "procurement_category": "assured",
+    "inspection_report": {
+      "report": {
+        "summary": {
+          "is_accidental": false
+        }
+      }
+    }
+  },
+  "score_common": 75.5,
+  "notes": {
+    "km_driven": "88,785 km \u2192 band 55/100",
+    "age_years": "2019 \u2192 age 7y \u2192 band 65/100",
+    "owners": "owner #1 \u2192 band 100/100",
+    "accident_disclosed": "none \u2192 band 100/100"
+  }
+}
