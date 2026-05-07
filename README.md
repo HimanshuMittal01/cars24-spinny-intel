@@ -4,7 +4,15 @@ A multi-agent pipeline that extracts specs and condition signals from used-car l
 
 ## Ranking
 
-Sorted by composite score descending. **Composite = α × rule + (1−α) × visual**, α=0.7 (rule-leaning). Rule signal: km, age, owners, accident disclosure. Visual signal: a Claude-with-vision agent that inspects each listing's photos for 5 condition aspects (exterior panels, interior cabin, dashboard, tyres, engine bay).
+Sorted by composite score descending.
+
+```
+composite = α × rule + (1 − α) × visual,    α = 0.7
+```
+
+α = 0.7 leans rule-heavy because the rule inputs are platform-disclosed hard facts; the visual signal is interpretive and earns a larger share only as eval coverage grows.
+
+Rule signal: km, age, owners, accident disclosure. Visual signal: a Claude-with-vision agent that inspects each listing's photos for 5 condition aspects (exterior panels, interior cabin, dashboard, tyres, engine bay).
 
 | rank | listing_id | platform | price (₹L) | rule | visual | composite |
 |---:|---|---|---:|---:|---:|---:|
@@ -21,7 +29,7 @@ The two Cars24 listings at rank 4 and 6 have `engine_bay` imputed because Cars24
 
 ## How condition is scored
 
-We score on the four fields **both** platforms expose for every listing — anything else would advantage the more verbose platform on data quantity rather than car condition.
+We score on the four fields **both** platforms expose for every listing — anything else would advantage the more verbose platform on data quantity rather than car condition. They also map directly onto the canonical drivers of used-car depreciation: mechanical wear (km), time-based aging (age), maintenance variability (owners), and structural risk (accident disclosure).
 
 | Feature | Why it matters | Weight |
 |---|---|---:|
@@ -42,12 +50,10 @@ Before producing this ranking we tested the system against a **separate 10-listi
 
 **3. The vision agent's photo judgment matches a human's.** On the 10 benchmark listings, when the AI rated a photo "light wear" the human reviewer either agreed or was one step away. Across all five aspects (panels, interior, dashboard, tyres, engine bay), AI and human agreement within one severity step ran from 78% to 100%, depending on aspect. The AI isn't always exact — it isn't trying to be — but it doesn't disagree wildly either.
 
-Full per-experiment numbers and methodology in [`docs/technical_appendix.md`](docs/technical_appendix.md).
-
 ## Caveats
 
 - **N=6 is illustrative, not statistically defensible.** Platform-level conclusions shouldn't rest on this alone.
-- **Public data only.** With auth/API access, Spinny's 200-point inspection report and Cars24's deeper in-app fields would be available; the fair comparison given pre-auth data is on the fields both platforms expose.
+- **Public data only.** Without auth/API access, the fair comparison is on the common fields both platforms expose.
 - **Trim line still spans SX / SX PLUS / SX (O).** Tightening to a single sub-trim shrinks supply below the 16 listings we needed; SX-line is the closest workable filter.
 - **Rank-based scoring is set-relative.** A score of 70 means rank ~2.6 of 6 in this set, not 70% condition in absolute terms.
 
@@ -55,5 +61,3 @@ Full per-experiment numbers and methodology in [`docs/technical_appendix.md`](do
 
 - [`docs/extraction_review.md`](docs/extraction_review.md) — every listing collected (ranking, gold, excluded), with source URLs and parsed values
 - [`docs/technical_appendix.md`](docs/technical_appendix.md) — methodology, per-feature ranks, full eval numbers (E3, E4, E6), corpus-scale view
-- [`docs/loom_walkthrough.md`](docs/loom_walkthrough.md) — 3-minute walkthrough script
-- [`docs/tradeoffs.md`](docs/tradeoffs.md) — engineering tradeoffs journal
