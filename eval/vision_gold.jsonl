@@ -1,0 +1,18 @@
+# severity ∈ {pristine, light_wear, moderate, heavy, defect, not_visible}
+# notes: optional per-aspect comment, e.g. {"tyres": "rear-left tread visibly low"}
+{"listing_id": "10017390119", "platform": "cars24", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "10041693110", "platform": "cars24", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "10142868769", "platform": "cars24", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "10182490193", "platform": "cars24", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "44546195190", "platform": "cars24", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "27723929", "platform": "spinny", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "27741490", "platform": "spinny", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "28240497", "platform": "spinny", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "28260532", "platform": "spinny", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "28564392", "platform": "spinny", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "10126364760", "platform": "cars24", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "10096166769", "platform": "cars24", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "10067090111", "platform": "cars24", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "28198885", "platform": "spinny", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "27839393", "platform": "spinny", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
+{"listing_id": "28476005", "platform": "spinny", "vision_gold": {"exterior_panels": null, "interior_cabin": null, "dashboard_console": null, "tyres": null, "engine_bay": null}, "notes": {}}
