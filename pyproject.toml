@@ -17,6 +17,7 @@ dependencies = [
 dev = [
     "pytest>=9.0.3",
     "pytest-cov>=7.1.0",
+    "pytest-asyncio>=1.2.0",
 ]
 
 [build-system]
@@ -30,3 +31,4 @@ packages = ["src/ci"]
 pythonpath = [".", "src"]
 testpaths = ["tests"]
 addopts = "-q"
+asyncio_mode = "auto"
