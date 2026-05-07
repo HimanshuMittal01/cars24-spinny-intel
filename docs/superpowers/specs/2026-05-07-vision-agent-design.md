@@ -249,10 +249,15 @@ Both sub-scores are 0-100, set-based, same units → clean blend.
 more visual weight. Defended by audit story: rule score is the deterministic
 core; visual is the new supplementary signal that has not yet been validated
 by E6 at run time. After E6 reports per-aspect Cohen's κ against the vision
-gold:
+gold (on the 17-listing gold subset only):
 
 - κ ≥ 0.6: **lower** α toward 0.5 (visual earned its weight; give it more share).
 - κ < 0.4: **hold or raise** α toward 0.85; flag in report as low-trust visual signal.
+
+**α calibration set:** the 17-listing gold subset only. α is locked before
+applying to the 6 ranking listings. The 6 ranking listings receive
+`composite_score` under the fixed-on-gold α, and that scored output is the
+deliverable. See §12.0 for the held-out discipline applied across all evals.
 
 **α as new E4 sensitivity dim.** Sweep over α ∈ {0.5, 0.6, 0.7, 0.8, 0.9, 1.0}
 plus the existing weight-perturbation sweep. Joint analysis: rank stability
@@ -399,13 +404,42 @@ grows; not in scope for v1).
 
 ## 12. Eval additions
 
-| Eval               | Scope                                                            | What it measures                                                                                       |
-|--------------------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| **vision gold**    | all 23 listings × 5 aspects, hand-labeled by user                | ground truth for E6 + α calibration                                                                    |
-| **E6** (new)       | full 23, exact + adjacent + Cohen's κ per aspect per platform    | agent quality vs gold                                                                                  |
-| **E3** (extended)  | 23 listings, three-way Spearman: rule / gold-visual / agent-visual | how the rubric, the photos, and the agent agree on ranking                                            |
-| **E4** (extended)  | weights × α joint sensitivity sweep                              | rank stability under combined perturbation                                                             |
-| **E5** (extended)  | 5 listings × 3 cold-cache runs                                   | vision determinism: exact agreement, adjacent (±1), score range; targets ≥ 0.7, ≥ 0.85, < 5pt range  |
+### 12.0 Held-out discipline
+
+All hyperparameter selection — α, severity-to-numeric mapping, prompt-version
+bumps, agent budget caps — is performed on the **17-listing gold subset
+only**. The **6-listing ranking subset is held out**: it receives
+`composite_score` under the fixed-on-gold α, and that scored output is the
+deliverable. Held-out spot-checks against gold for the 6 are reported (since
+the 6 are also hand-labeled, see §12.1) but **never trigger retuning**.
+
+Per-eval scope is summarized below and detailed in §12.3-§12.6.
+
+| Eval               | Scope                                                              | What it measures                                                                                                                                  |
+|--------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **vision gold**    | all 23 listings × 5 aspects, hand-labeled by user                  | ground truth (split: 17 calibration / 6 held-out)                                                                                                 |
+| **E6** (new)       | primary on 17 gold; held-out spot-check on 6 ranking               | agent vs gold: exact, adjacent, Cohen's κ — per aspect, per platform; 6-set values reported but never used to retune                              |
+| **E3** (extended)  | primary on 17 gold (three-way Spearman); held-out Spearman on 6    | rule / gold-visual / agent-visual rank agreement                                                                                                  |
+| **E4** (extended)  | weights × α joint sweep, computed on 17 gold                       | calibration stability; a separate "applied stability" readout shows the 6 ranking's rank-stability under the fixed-on-gold α                       |
+| **E5** (extended)  | 5 listings sampled from the 17 gold (never from the 6) × 3 cold runs | vision determinism: exact, adjacent, score range; targets ≥ 0.7, ≥ 0.85, < 5pt                                                                  |
+
+**Calibration vs held-out lookup table** (for reference at impl time):
+
+```
+17-listing gold subset (calibration):
+  cars24:  10182490193, 10041693110, 10142868769, 10006504768, 10526397177,
+           10017390119, 44546195190
+  spinny:  27723929, 28260532, 28564392, 28240497, 28011937, 28000255,
+           27741490, 28436012, 26195999, 27649805
+
+6-listing ranking subset (held-out):
+  cars24:  10126364760, 10096166769, 10067090111
+  spinny:  28198885, 27839393, 28476005
+```
+
+These are pulled from `eval/labels/<platform>/*.json` (gold) and
+`eval/ranking_listings.json` (ranking) respectively — single source of truth
+in code.
 
 ### 12.1 Vision gold format
 
@@ -446,10 +480,16 @@ Per aspect, per platform, computed in `src/ci/eval/vision_agreement.py`:
   separate "missing" category for the kappa or restrict to mutually-visible
   rows; both computed and reported).
 
+**Reported in two splits**: primary on the 17 gold (calibration) and a
+held-out spot-check on the 6 ranking. Held-out values are surfaced for
+honesty; they never feed back into prompt-version bumps, severity-mapping
+changes, α, or any other tunable.
+
 ### 12.4 E5 — vision determinism (cold-cache)
 
-`src/ci/eval/vision_determinism.py`. 5 listings × 3 runs with
-`--vision-no-cache`. Per aspect and per listing:
+`src/ci/eval/vision_determinism.py`. 5 listings sampled from the 17-listing
+gold subset (never from the 6 ranking, to preserve the held-out boundary) × 3
+runs with `--vision-no-cache`. Per aspect and per listing:
 
 - Exact agreement across all 3 runs.
 - Adjacent agreement across all 3 runs.
@@ -459,20 +499,32 @@ Acceptance thresholds: exact ≥ 0.7, adjacent ≥ 0.85, range < 5 points.
 
 ### 12.5 E3 — three-way cross-method
 
-Extends existing cross-method eval. For all 23 listings, compute:
+Extends existing cross-method eval. Compute three rank vectors:
 
 - `rule_rank` (existing, from `score_common`).
 - `gold_visual_rank` (NEW, from gold-derived `visual_score`).
 - `agent_visual_rank` (NEW, from agent-derived `visual_score`).
 
-Pairwise Spearman ρ, scatterplot triptych, top-divergence-listings table in
-the appendix.
+**Primary analysis on 17 gold:** pairwise Spearman ρ, scatterplot triptych,
+top-divergence-listings table in the appendix.
+
+**Held-out report on 6 ranking:** same three vectors restricted to the 6
+listings; pairwise Spearman ρ reported as a held-out check. Small-N (n=6),
+so ρ has wide CIs — reported with that caveat.
 
 ### 12.6 E4 — weights × α joint sweep
 
-α ∈ {0.5, 0.6, 0.7, 0.8, 0.9, 1.0}. Existing weight perturbations applied
-within `rule_score`. Report rank-stability of the top-5 listings under joint
-perturbation.
+**Calibration sweep (on 17 gold):** α ∈ {0.5, 0.6, 0.7, 0.8, 0.9, 1.0} ×
+existing weight perturbations applied within `rule_score`. Report
+rank-stability of the top-K under joint perturbation. The α that maximizes
+rank-correlation between agent-composite and gold-composite (where
+gold-composite uses `gold_visual_score` in place of `agent_visual_score`)
+becomes the recommended α; default 0.7 stands unless the sweep clearly
+indicates otherwise.
+
+**Applied stability (on 6 ranking):** the 6 listings re-ranked under the
+fixed-on-gold α plus the same weight perturbations. Reports whether the 6's
+final ranking is stable. Does not retune α.
 
 ---
 
@@ -510,6 +562,11 @@ rule_score` (today's behavior).
    eliminate.
 10. **Divergence transparency table**: top-5 listings where `rule_score` and
     `visual_score` diverge most. Annotation only — not a primary deliverable.
+11. **Calibration vs held-out separation**: every eval section reports
+    primary metrics on the 17 gold and held-out values on the 6 ranking, in
+    that order, with the held-out tag explicit. The reader sees what was
+    used to set the knob and what the knob's behavior looks like on
+    untouched data.
 
 ---
 
