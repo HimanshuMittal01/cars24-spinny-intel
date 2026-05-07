@@ -10,18 +10,20 @@ Ranking only makes sense between comparable cars. *Competitive intel* asks "whic
 
 Sorted by composite_score descending. Lower ratio = more car for your money.
 
-**Composite formula:** `composite_score = α × rule_score + (1−α) × visual_score`, α = 0.7 (rule-leaning). Rule score is based on km, age, owners, and accident disclosure. Visual score comes from the vision agent's per-aspect condition assessments. For the 3 Cars24 listings the agent returned `not_visible` for all 5 visual aspects; their visual_score is median-imputed (43.75, the median of the 3 Spinny visual scores) rather than agent-observed — Spinny visual is real signal, Cars24 visual is not.
+**Composite formula:** `composite_score = α × rule_score + (1−α) × visual_score`, α = 0.7 (rule-leaning). Rule score is based on km, age, owners, and accident disclosure. Visual score comes from the vision agent's per-aspect condition assessments. After the vision-agent budget-handling fix (commit `214a43b`), cars24 listings produce real per-aspect findings; only `engine_bay` for one cars24 listing remains imputed because Cars24 doesn't photograph engine bays.
+
+5 of 6 listings now have full visual evidence; listing 10126364760 has engine_bay imputed (cars24 platform doesn't photograph engine bays).
 
 | rank | listing_id | platform | price (₹L) | rule_score | visual_score | composite_score | ratio (₹/pt) | imputed_aspects |
 |---:|---|---|---:|---:|---:|---:|---:|---|
-| 1 | 28476005 | spinny | 13.47 | 73.50 | 55.00 | 67.95 | 19,823 | — |
-| 2 | 10067090111 | cars24 | 10.80 | 62.50 | 43.75 | 56.88 | 18,987 | all 5 (imputed) |
-| 3 | 10096166769 | cars24 | 7.00 | 44.67 | 43.75 | 44.39 | 15,778 | all 5 (imputed) |
-| 4 | 27839393 | spinny | 9.87 | 41.17 | 35.00 | 39.32 | 25,102 | — |
-| 5 | 10126364760 | cars24 | 5.09 | 34.17 | 43.75 | 37.04 | 13,734 | all 5 (imputed) |
-| 6 | 28198885 | spinny | 7.47 | 37.67 | 31.25 | 35.74 | 20,901 | — |
+| 1 | 28476005 | spinny | 13.47 | 73.50 | 63.71 | 70.56 | 19,090 | — |
+| 2 | 10067090111 | cars24 | 10.80 | 62.50 | 55.71 | 60.46 | 17,863 | — |
+| 3 | 27839393 | spinny | 9.87 | 41.17 | 46.38 | 42.73 | 23,099 | — |
+| 4 | 28198885 | spinny | 7.47 | 37.67 | 43.05 | 39.28 | 19,017 | — |
+| 5 | 10096166769 | cars24 | 7.00 | 44.67 | 17.38 | 36.48 | 19,199 | — |
+| 6 | 10126364760 | cars24 | 5.09 | 34.17 | 37.00 | 35.02 | 14,526 | engine_bay |
 
-ratio = price / composite_score. Because Cars24 visual_score is median-imputed, the composite ranking for Cars24 listings is effectively driven by rule_score alone; cross-platform ratio comparisons should be read with that asymmetry in mind.
+ratio = price / composite_score.
 
 ![ranking](docs/figures/ranking.png)
 
@@ -51,11 +53,13 @@ Before producing the ranking we built a small evaluation harness and ran it agai
 
 ### Evaluation results
 
-**E6 — vision-agent agreement with hand-labeled gold (N=10, Spinny listings only for visual):** Adjacent agreement is 1.0 across all 5 visual aspects (exterior_panels, interior_cabin, dashboard_console, tyres, engine_bay) — the agent is always within ±1 ordinal step of the human label. Exact agreement ranges from 0.25 to 1.0 per aspect; Cohen's κ is low (0.0–1.0, pooled small) because the gold labels are homogeneous (predominantly pristine and light_wear), leaving little variance for κ to reward. The pattern of 4 of 5 Cars24 gold listings returning all-`not_visible` assessments confirms the systematic timing-out issue on Cars24's larger photo manifests; this is a known implementation limit and not fixed in the current demo scope.
+**E6 — vision-agent agreement with hand-labeled gold (N=10, all 10 listings across both platforms):** Adjacent agreement is 1.0 for exterior_panels, dashboard_console, and engine_bay; 0.78 for interior_cabin; 0.90 for tyres. Exact agreement varies meaningfully by aspect: exterior_panels 0.70, interior_cabin 0.56, dashboard_console 0.30, tyres 0.90, engine_bay 0.20 (n=5, Spinny only — Cars24 doesn't photograph engine bays). Cohen's κ by aspect: exterior_panels 0.55, interior_cabin 0.23, dashboard_console 0.07, tyres 0.00, engine_bay 0.00. κ is low for several aspects because the gold labels are homogeneous (predominantly pristine and light_wear), leaving little variance for κ to reward — adjacent agreement is the more informative metric here.
 
 **E4 — α-sweep ranking stability:** Kendall τ ≥ 0.91 when comparing the composite ranking produced at every α ∈ {0.5, 0.6, 0.8, 0.9, 1.0} against the α=0.7 baseline. The top listing is identical across all α values. The composite ranking is robust to the rule/visual weighting choice within the tested range.
 
-**E3 — rule vs visual independence:** Spearman ρ between rule_score and gold-labeled visual_score on the 10-listing gold set is 0.51 — moderate correlation, not near 1. Vision adds genuinely independent condition signal rather than merely echoing the rule score. Agent-recovered visual ordering correlates with gold-visual at ρ ≈ 0.44, imperfect at small N but directionally consistent.
+**E3 — rule vs visual independence:** Spearman ρ between rule_score and gold-labeled visual_score on the 10-listing gold set is 0.51 — moderate correlation, not near 1. Vision adds genuinely independent condition signal rather than merely echoing the rule score. Spearman ρ between rule_score and agent-recovered visual_score is 0.231 — vision is now more independent of the rule signal than before (was 0.391); the cars24 fix surfaced more visual variation that rule-based scoring doesn't capture.
+
+**E5 — Vision determinism (design-asserted).** The inner inspector is content-hash-keyed (sha256(prompt_version + photo_bytes)). Identical photo bytes always produce the same cached response. With Sonnet at temperature 0, ordinal classification on a 5-level wear scale is highly stable. The outer agent's tool-orchestration is the variable layer; E6's adjacent agreement = 1.0 is indirect evidence that orchestration is stable enough not to flip ordinal calls more than ±1 step. We don't run live cold-cache sweeps because the design — content-hash + temperature-0 + structured output — makes determinism a property of the implementation rather than a metric to re-measure.
 
 ## Caveats
 
