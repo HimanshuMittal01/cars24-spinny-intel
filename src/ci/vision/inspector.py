@@ -100,12 +100,37 @@ async def inspect_photo(
     if not text_blocks:
         raise ValueError("inspector: no text block in response")
     raw = text_blocks[0].text
-    # Tolerate code fences
-    raw = raw.strip()
-    if raw.startswith("```"):
-        raw = raw.strip("`")
-        if raw.startswith("json"):
-            raw = raw[4:].strip()
-    parsed = json.loads(raw)
+
+    # Robustly find the first balanced JSON object {...} in the text. Tolerates code
+    # fences, leading/trailing prose, and stray text after the JSON.
+    start = raw.find("{")
+    if start < 0:
+        raise ValueError(f"inspector: no JSON object in response: {raw[:200]!r}")
+    depth = 0
+    in_str = False
+    escape = False
+    end = -1
+    for i in range(start, len(raw)):
+        ch = raw[i]
+        if in_str:
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+        elif ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                end = i + 1
+                break
+    if end < 0:
+        raise ValueError(f"inspector: unbalanced JSON in response: {raw[:200]!r}")
+    parsed = json.loads(raw[start:end])
     cache.set(photo_sha=photo_sha, value=parsed)
     return parsed
