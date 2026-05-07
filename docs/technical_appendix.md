@@ -177,6 +177,23 @@ Readings:
 - Ranking is **stable to ±25% weight perturbation** (τ ≥ 0.87).
 - **km_driven has the strongest single influence** — removing it drops τ to 0.60. The other features stay 0.73–0.87. No single feature alone determines the ranking, but km matters most.
 
+#### Same checks on the 17 gold listings (more feature variation)
+
+The 6 ranking listings all have `owners=1` and `accident=none`, so per-feature scores for those two dims are tied at 50.0 — they contribute zero variance to the ranking. The LOO values above for owners/accident are partly rescaling artefacts. Re-running on the 17 gold (which has 1- and 2-owner mix, wider km/age spread) gives a cleaner read:
+
+| LOO τ — drop this feature | ranking 6 | gold 17 |
+|---|---:|---:|
+| km_driven | 0.600 | **0.382** |
+| age_years | 0.867 | 0.794 |
+| owners | 0.733 | **0.544** |
+| accident_disclosed | 0.733 | 0.735 |
+
+- **km is even more dominant on gold** — wider km range (13k–124k vs 33k–90k) makes the feature drive ranking harder.
+- **owners is the second-most-influential feature when it varies.** The 6 ranking masked this with an all-owner=1 sample.
+- **accident is flat on both sets** — all gold listings happen to have `is_accidental=false`; all Cars24 listings map to `none` via the platform promise. Its 15% weight contributes effectively zero signal *in this data*. The weight is still defensible for a more accident-diverse dataset; not flagged as an issue with the rubric, just an artefact of what the platforms list.
+
+Gold ±25% perturbation τ range: 0.838–0.985 (vs ranking's 0.867–1.000). Slightly less rigid but still robust.
+
 ## 5. Disclosure asymmetry — side observation, not a ranking input
 
 `disclosure_count` is **not** a scoring dimension. It does not affect the ranking in `README.md`. It is reported as a descriptive metric because the gap between the two platforms is large and structural — but it speaks to platform *positioning*, not to *which-listing-is-the-better-deal*. Anyone acting on the ranking should set it aside.
