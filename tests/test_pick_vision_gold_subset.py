@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.pick_vision_gold_subset import pick_subset, percentile_quintile
+from scripts.pick_vision_gold_subset import count_photos, pick_subset, percentile_quintile
 
 
 def _fake_gold_row(platform: str, lid: str, score: float) -> dict:
@@ -66,3 +66,47 @@ def test_pick_subset_spans_multiple_quintiles_per_platform(tmp_path: Path, monke
     # Each platform's picks span at least 3 distinct quintiles
     assert len(cars_q) >= 3
     assert len(spin_q) >= 3
+
+
+def test_count_photos_counts_distinct_listing_urls_per_platform(
+    tmp_path: Path, monkeypatch
+):
+    monkeypatch.setattr("scripts.pick_vision_gold_subset.FIXTURES_DIR", tmp_path)
+
+    # --- Spinny fixture ---
+    spinny_dir = tmp_path / "spinny" / "spinny-001"
+    spinny_dir.mkdir(parents=True)
+    spinny_html = """
+    <html>
+    <body>
+      <img src="https://spn-mda.spinny.com/img/ABC123/raw/front.jpg">
+      <img src="https://spn-mda.spinny.com/img/ABC123/raw/front.jpg">
+      <img src="https://spn-mda.spinny.com/img/DEF456/raw/side.jpg">
+      <img src="https://spn-mda.spinny.com/img/GHI789/raw/rear.jpg">
+      <img src="https://spinny.com/static/some-banner.jpg">
+      <img src="https://spinny.com/static/logo.png">
+    </body>
+    </html>
+    """
+    (spinny_dir / "page.html").write_text(spinny_html)
+
+    # --- Cars24 fixture ---
+    cars24_dir = tmp_path / "cars24" / "cars24-001"
+    cars24_dir.mkdir(parents=True)
+    cars24_html = """
+    <html>
+    <body>
+      <img src="https://fastly-production.24c.in/india/used-cars/model-x/img1/photo.jpg">
+      <img src="https://fastly-production.24c.in/india/used-cars/model-x/img1/photo.jpg">
+      <img src="https://fastly-production.24c.in/india/used-cars/model-x/img2/photo.jpg">
+      <img src="https://assets.cars24.com/banner.jpg">
+      <img src="https://assets.cars24.com/promo/header.jpg">
+    </body>
+    </html>
+    """
+    (cars24_dir / "page.html").write_text(cars24_html)
+
+    # 3 distinct listing URLs (one duplicated) — banner from spinny.com excluded
+    assert count_photos("spinny", "spinny-001") == 3
+    # 2 distinct listing URLs (one duplicated) — assets.cars24.com URLs excluded
+    assert count_photos("cars24", "cars24-001") == 2

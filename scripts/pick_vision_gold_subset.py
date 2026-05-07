@@ -52,6 +52,7 @@ def disclosure_count(platform: str, listing_id: str) -> int:
 
 
 def load_gold() -> list[dict]:
+    """Read eval/gold.jsonl and return the parsed rows."""
     return [
         json.loads(line)
         for line in (EVAL_DIR / "gold.jsonl").read_text().splitlines()
@@ -60,7 +61,12 @@ def load_gold() -> list[dict]:
 
 
 def pick_subset(gold: list[dict]) -> tuple[list[dict], list[dict]]:
-    """Pick 5 cars24 + 5 spinny preserving diversity. Returns (picked, dropped)."""
+    """Pick 5 cars24 + 5 spinny preserving diversity. Returns (picked, dropped).
+
+    Note: when all score_common values within a platform are equal, every row
+    lands in quintile 4 — the algorithm still picks 5 valid rows but the
+    "quintile spread" claim is degenerate. Acceptable for the real gold data we expect.
+    """
     target_per_platform = 5
     picked: list[dict] = []
     dropped: list[dict] = []
@@ -95,7 +101,7 @@ def pick_subset(gold: list[dict]) -> tuple[list[dict], list[dict]]:
             chosen.append(extra)
             seen_ids.add(extra["listing_id"])
 
-        chosen = chosen[:target_per_platform]
+        chosen = chosen[:target_per_platform]  # guard: pass-1 fills at most 5 (one per quintile), but slice for safety
         chosen_ids = {c["listing_id"] for c in chosen}
 
         for r in annotated:
