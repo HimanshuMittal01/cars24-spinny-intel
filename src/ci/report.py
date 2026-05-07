@@ -22,9 +22,9 @@ def render_chart(rows: list[RankRow], out_path: Path) -> None:
         for r in sub:
             ax.annotate(r.listing_id, (r.score_common, r.price / 1e5),
                         textcoords="offset points", xytext=(5, 5), fontsize=8)
-    ax.set_xlabel("score_common (0-100)")
+    ax.set_xlabel("condition score (rank-based, 0–100, relative to this set)")
     ax.set_ylabel("price (₹ lakh)")
-    ax.set_title("Cars24 vs Spinny — price vs constructed condition score")
+    ax.set_title("Cars24 vs Spinny — price vs condition score")
     ax.legend()
     ax.grid(True, alpha=0.3)
     fig.tight_layout()

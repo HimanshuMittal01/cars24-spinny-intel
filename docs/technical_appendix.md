@@ -53,7 +53,7 @@ flowchart LR
 
 Every pipeline node logs an event (input hash, output hash, latency) to `runs/<run_id>/trace.jsonl`; eval results write JSON files alongside it (`extraction.json`, `calibration.json`, `sensitivity.json`). Both are omitted from the diagram for clarity.
 
-**Extractors are JSON-parse-first.** Both platforms inject canonical listing data as inline JSON (Cars24 via Next.js streaming `__next_f` payloads; Spinny via `window.__INITIAL_STATE__` JS literal). The extractors parse that directly. There is **no LLM in the pipeline** — an earlier draft kept a placeholder `LLMClient` for a possible free-text inspection-narrative fallback, but since both platforms expose enough structured data on their listing pages, the placeholder was removed as dead code.
+**Extractors are JSON-parse-first.** Both platforms inject canonical listing data as inline JSON (Cars24 via Next.js streaming `__next_f` payloads; Spinny via `window.__INITIAL_STATE__` JS literal). The extractors parse that directly into JSON.
 
 **Scoring is rank-based.** For each scoring dimension, listings are sorted (best→worst), assigned 1-indexed rank with tie averaging, and converted to a 0-100 score by linear interpolation: `100 × (n - rank) / (n - 1)`. The composite is a weight-sum across dimensions:
 
