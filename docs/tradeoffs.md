@@ -70,7 +70,7 @@ shape of its inline JSON.
 
 ---
 
-## 2026-05-07 — anchored bands → rank-based scoring (spec §14)
+## 2026-05-07 — anchored bands → rank-based scoring
 
 **Situation.** Original scorer used hand-picked anchored-band tables
 (`<20k km = 100`, `20-40k = 85`, …). Defensible only via sensitivity analysis

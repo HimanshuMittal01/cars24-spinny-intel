@@ -14,7 +14,7 @@ snapshots → extract.cars24 / extract.spinny → normalize → score(set) → r
 
 **Extractors are JSON-parse-first.** Both platforms inject canonical listing data as inline JSON (Cars24 via Next.js streaming `__next_f` payloads; Spinny via `window.__INITIAL_STATE__` JS literal). The extractors parse that directly — no LLM in the scoring path. LLM client parameter retained for signature compatibility / future free-text fallback.
 
-**Scoring is rank-based per spec §14.** For each scoring dimension, listings are sorted (best→worst), assigned 1-indexed rank with tie averaging, and converted to a 0-100 score by linear interpolation: `100 × (n - rank) / (n - 1)`. The composite is a weight-sum across dimensions:
+**Scoring is rank-based.** For each scoring dimension, listings are sorted (best→worst), assigned 1-indexed rank with tie averaging, and converted to a 0-100 score by linear interpolation: `100 × (n - rank) / (n - 1)`. The composite is a weight-sum across dimensions:
 
 | dimension | weight | direction |
 |---|---:|---|
@@ -25,7 +25,7 @@ snapshots → extract.cars24 / extract.spinny → normalize → score(set) → r
 
 **Why rank-based, not anchored bands?** Anchored bands baked an unjustifiable prior ("<20k km is excellent") into every score. Rank-based asks only "is A's km better than B's km?" — trivially answerable from the data without inventing thresholds. Trade-off: loses absolute magnitude (a 50k-km gap and a 2k-km gap can map to the same rank delta). Magnitude lives in the raw fields and is available for any post-hoc analysis.
 
-**Common-set scoring is the *fair* comparison given pre-auth data asymmetry.** Cars24 has no per-listing certification tier and no per-listing accident-detail field; Spinny has both. Mixing platform-specific fields into the score would advantage Spinny on data-disclosure rather than condition. Cars24's platform-level no-accident promise is mapped to per-listing `accident_disclosed = none`. Spec §13 / §14 documents the rationale.
+**Common-set scoring is the *fair* comparison given pre-auth data asymmetry.** Cars24 has no per-listing certification tier and no per-listing accident-detail field; Spinny has both. Mixing platform-specific fields into the score would advantage Spinny on data-disclosure rather than condition. Cars24's platform-level no-accident promise is mapped to per-listing `accident_disclosed = none`. The reasoning behind these choices is in [`tradeoffs.md`](tradeoffs.md).
 
 ## 2. Per-feature rank breakdown
 
@@ -231,7 +231,7 @@ See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 
 1. **Speculative schema vs real data.** Mid-build, fetched real listings and discovered the schemas were largely fictional. Pivoted to JSON-parse-first extraction. Rewrote 3 tasks.
 2. **Gold-labeling on a deterministic pipeline.** E2/E3 against hand-labeled gold come out perfect by construction. Honest framing in the limitations section.
-3. **Anchored bands → rank-based scoring (spec §14).** Bands were defensible only via sensitivity analysis. Rank-based is defensible by construction ("is A's km better than B's km — yes"). Tradeoff: lost magnitude, gained groundedness.
+3. **Anchored bands → rank-based scoring.** Bands were defensible only via sensitivity analysis. Rank-based is defensible by construction ("is A's km better than B's km — yes"). Tradeoff: lost magnitude, gained groundedness.
 4. **Tight scope filter (variant + fuel + transmission).** First ranking mixed petrol/diesel, manual/auto, and EX/SX/SX(O) — spec heterogeneity contaminated the price-to-condition ratio. Re-collected the dataset under a tight filter (SX-petrol-auto). Top-3 cleared up: all Cars24, by a consistent ratio margin. E4 km LOO τ moved from 0.33 to 0.60 (less overwhelming once trim/fuel/transmission heterogeneity removed).
 
 ## 8. Limitations

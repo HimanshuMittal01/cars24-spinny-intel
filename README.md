@@ -42,7 +42,7 @@ Why ranks rather than absolute thresholds (e.g. "<20k km is excellent")? Thresho
 
 ## How we know the ranking holds up
 
-Before producing the ranking we built a small evaluation harness and ran it against a hand-labeled gold dataset of **17 separate listings** (all matching the same SX-petrol-automatic filter, all distinct from the 6 listings being ranked above).
+Before producing the ranking we built a small evaluation harness and ran it against a hand-labeled gold dataset of **17 separate listings (7 Cars24 + 10 Spinny)** — all matching the same SX-petrol-automatic filter, all distinct from the 6 listings being ranked above.
 
 - **Faithfulness check** *(on the 17 gold listings).* We hand-labeled each one by reading the source page directly, then ran the extractor and compared. **The extractor matched our values on every field, on both platforms.**
 - **Stability check** *(on the 6 ranked listings).* We bumped each of the four weights up and down by 25% (one at a time, 8 variants) and re-ran the ranking. **Kendall's τ stayed between 0.87 and 1.0** — the ranking is not sensitive to small weight choices.
@@ -54,8 +54,8 @@ Before producing the ranking we built a small evaluation harness and ran it agai
 ## Caveats
 
 - **N=6 is illustrative, not statistically defensible.** Conclusions about platforms shouldn't rest on this alone.
-- **Public data only.** With auth/API access we'd use Spinny's 200-point inspection report and Cars24's deeper in-app fields. The fair comparison given pre-auth data is on the fields both platforms expose. Spec §13 documents this choice.
-- **Trim line still spans SX / SX PLUS / SX (O).** These are different sub-trims of the SX family with their own MSRP differences. Tightening to a single sub-trim would shrink supply below N=6+gold; the SX-line filter is the closest workable compromise.
+- **Public data only.** With auth/API access we'd use Spinny's 200-point inspection report and Cars24's deeper in-app fields. The fair comparison given pre-auth data is on the fields both platforms expose.
+- **Trim line still spans SX / SX PLUS / SX (O).** These are different sub-trims of the SX family with their own MSRP differences. Tightening to a single sub-trim (e.g. just SX (O)) wouldn't give us enough listings on both platforms to fill the 6 ranked + 17 gold we needed; the SX-line filter is the closest workable compromise.
 - **Rank-based scoring is set-relative.** A score of 70 means roughly the second-best of 6 *in this set*, not "this car is in 70% condition" in any absolute sense.
 - **E3 calibration is a self-consistency check**, not an independent calibration. Independent calibration would need holistic gut-rated gold or third-party valuation.
 
@@ -63,5 +63,4 @@ Before producing the ranking we built a small evaluation harness and ran it agai
 
 - [`docs/extraction_review.md`](docs/extraction_review.md) — every listing collected (R = ranking, G = gold, X = excluded by the tight filter), with link to source URL and the four scoring fields read off it. Per-fixture raw + normalized extractions live alongside the snapshot at `fixtures/<platform>/<id>/{page.html, url.txt, captured_at.txt, extracted.json, normalized.json}`.
 - [`docs/technical_appendix.md`](docs/technical_appendix.md) — methodology, per-feature rank breakdown, pairwise win matrices, full eval numbers, the platform-positioning side observation, the corpus-scale (hedonic regression) view.
-- [`docs/superpowers/specs/2026-05-06-cars24-spinny-comp-intel-design.md`](docs/superpowers/specs/2026-05-06-cars24-spinny-comp-intel-design.md) — design spec (§13 reality-check, §14 rank-based-scoring amendments).
-- [`docs/tradeoffs.md`](docs/tradeoffs.md) — engineering tradeoffs journal.
+- [`docs/tradeoffs.md`](docs/tradeoffs.md) — engineering tradeoffs journal (schema reality-check, anchored bands → rank-based scoring, tight scope filter).
