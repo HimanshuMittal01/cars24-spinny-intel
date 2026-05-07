@@ -6,13 +6,15 @@ A multi-agent pipeline that extracts specs and condition signals from used-car l
 
 Sorted by composite score descending.
 
+Rule signal: km, age, owners, accident disclosure.
+
+Visual signal: a Claude-with-vision agent that inspects each listing's photos for 5 condition aspects (exterior panels, interior cabin, dashboard, tyres, engine bay).
+
 ```
 composite = α × rule + (1 − α) × visual,    α = 0.7
 ```
 
-α = 0.7 leans rule-heavy because the rule inputs are platform-disclosed hard facts; the visual signal is interpretive and earns a larger share only as eval coverage grows.
-
-Rule signal: km, age, owners, accident disclosure. Visual signal: a Claude-with-vision agent that inspects each listing's photos for 5 condition aspects (exterior panels, interior cabin, dashboard, tyres, engine bay).
+*Note: α = 0.7 leans rule-heavy because the rule inputs are platform-disclosed hard facts; the visual signal is interpretive and earns a larger share only as eval coverage grows.*
 
 | rank | listing_id | platform | price (₹L) | rule | visual | composite |
 |---:|---|---|---:|---:|---:|---:|
@@ -23,7 +25,6 @@ Rule signal: km, age, owners, accident disclosure. Visual signal: a Claude-with-
 | 5 | 28198885 | spinny | 7.47 | 37.67 | 39.33 | 38.17 |
 | 6 | 10126364760 | cars24 | 5.09 | 34.17 | 32.67 | 33.72 |
 
-The two Cars24 listings at rank 4 and 6 have `engine_bay` imputed because Cars24's listing photos don't include the engine bay; the median is filled in for that aspect. The other three aspects (panels, interior, dashboard, tyres) come from real photo evidence on every listing.
 
 ![ranking](docs/figures/ranking_chart.png)
 

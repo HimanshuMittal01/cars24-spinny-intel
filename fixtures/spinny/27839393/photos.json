@@ -1,0 +1,83 @@
+{
+  "captured_at": "2026-05-07T15:13:34+00:00",
+  "photos": [
+    {
+      "idx": 0,
+      "sha256": "2f4b095a179bedd84de166f671c96d25fd026d83102573f7477f5ad006717df3",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/72fb9c45faf34abdbf858d2937029959/raw/file.JPG",
+      "hint": "hero_image"
+    },
+    {
+      "idx": 1,
+      "sha256": "d0751bc7d1c4d80eddc7545be84783909a770bbf3fd01de42617826a4473c437",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/abdfd09336924dcb8a3dfaa548fd2265/raw/file.JPG",
+      "hint": "overview"
+    },
+    {
+      "idx": 2,
+      "sha256": "85ebf8bc5457a9e78285bf0e086e88dbc52b407d480747ede77745ab4e3ac0d8",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/bd6c9692316f44988986d651d8e74a77/raw/file.JPG",
+      "hint": "overview"
+    },
+    {
+      "idx": 3,
+      "sha256": "b137d9ef4bb449d9213b08fc7a2af49fa59f64123ed06ba8a3dafeecec284797",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/393aad7f4d674fa1bf4172c1cdae119f/raw/file.JPG",
+      "hint": "overview"
+    },
+    {
+      "idx": 4,
+      "sha256": "6f00481a9f641ca6b8df2eb6440c3e9300b720eec7559bb6c74a763e43477800",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/62ef3f443cb24892b89140454c61fcef/raw/file.JPG",
+      "hint": "overview"
+    },
+    {
+      "idx": 5,
+      "sha256": "957f364bf0dd1d5352d688cf6363ecaa3841b321654baf381f3cb7409cb6278c",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/a3f914ba2a9a4e85b05f6fef5af1ac75/raw/file.JPG",
+      "hint": "overview"
+    },
+    {
+      "idx": 6,
+      "sha256": "9c770c922d275ffbc21d7d497493785593c03042f90f957c221b5c13cbf83041",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/7f039ef55a9d468799d5d00eb2c95680/raw/file.JPG",
+      "hint": "exterior"
+    },
+    {
+      "idx": 7,
+      "sha256": "7a32d9893ffa93632ee605a7fe8711c64c847ae5559d8779411873f46340dd56",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/7795b21f2f514435bf91e7799e09d4b6/raw/file.JPG",
+      "hint": "exterior"
+    },
+    {
+      "idx": 8,
+      "sha256": "a8f335a4ea14527abb76285335b23965ec32e38a8d99a7fcc2f8a8842677c38e",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/09d97a8a1d8e4e2d9f9f653312e6a149/raw/file.JPG",
+      "hint": "exterior"
+    },
+    {
+      "idx": 9,
+      "sha256": "176f205e1c82733452272f3520a74f5ca0e3d7c1a70c4d6f56c7d66e301c47f7",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/69a1595b6105461db071f156ff38cc01/raw/file.JPG",
+      "hint": "exterior"
+    },
+    {
+      "idx": 10,
+      "sha256": "1a958fab317d1728d22b57cecfc65e5248e0dc722205ee6dc5df939bd2a13a85",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/b38f5d4c67c143218ae1b08b99ebc539/raw/file.JPG",
+      "hint": "interior"
+    },
+    {
+      "idx": 11,
+      "sha256": "8c508352f3efa8b47fe96a9dfc9c53693880e8fc6eb37b36e740c5148382a8e9",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/4ba6858f7ade401694eb7f4e9c9c21be/raw/file.JPG",
+      "hint": "interior"
+    },
+    {
+      "idx": 12,
+      "sha256": "3070b44e44b52c72512efe11365bcb4739939318b8f7a913580f1fc91c7b6c06",
+      "source_url": "https://mda.spinny.com/sp-file-system/public/2026-04-03/fd5aabc9e7e24f25b49b21a9628ae834/raw/file.JPG",
+      "hint": "engine"
+    }
+  ]
+}

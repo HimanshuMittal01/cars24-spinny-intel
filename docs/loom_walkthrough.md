@@ -99,14 +99,14 @@ Each aspect is mapped to a 0–100 score (pristine=100, defect=0). Five aspects 
 **Worked example — composite:**
 
 ```
-rule_score    = 62.5   (from structured data)
-visual_score  = 55.71  (from photo inspection)
+rule_score    = 62.50  (from structured data)
+visual_score  = 58.67  (from photo inspection)
 
-composite     = 0.7 × 62.5 + 0.3 × 55.71
-              = 43.75  + 16.71
-              = 60.46
+composite     = 0.7 × 62.50 + 0.3 × 58.67
+              = 43.75  + 17.60
+              = 61.35
 
-₹/point       = 10,80,000 / 60.46 = ₹17,863 per condition-point
+₹/point       = 10,80,000 / 61.35 = ₹17,604 per condition-point
 ```
 
 (This is listing 10067090111, ranked #2 in the final output — see README ranking table.)
@@ -207,14 +207,14 @@ The 6 ranking listings were **never labeled, never tuned to.** Hyperparameters (
 
 | # | Listing      | Platform | Price    | Composite score | ₹/point    |
 |---|--------------|----------|----------:|----------------:|-----------:|
-| 1 | 28476005     | Spinny   | 13.47 L  |           70.56 | **19,090** |
-| 2 | 10067090111  | Cars24   | 10.80 L  |           60.46 |     17,863 |
-| 3 | 27839393     | Spinny   | 9.87 L   |           42.73 |     23,099 |
-| 4 | 28198885     | Spinny   | 7.47 L   |           39.28 |     19,017 |
-| 5 | 10096166769  | Cars24   | 7.00 L   |           36.48 |     19,199 |
-| 6 | 10126364760  | Cars24   | 5.09 L   |           35.02 |     14,526 |
+| 1 | 28476005     | Spinny   | 13.47 L  |           69.05 | **19,508** |
+| 2 | 10067090111  | Cars24   | 10.80 L  |           61.35 |     17,604 |
+| 3 | 27839393     | Spinny   | 9.87 L   |           43.82 |     22,524 |
+| 4 | 10096166769  | Cars24   | 7.00 L   |           43.67 |     16,029 |
+| 5 | 28198885     | Spinny   | 7.47 L   |           38.17 |     19,572 |
+| 6 | 10126364760  | Cars24   | 5.09 L   |           33.72 |     15,094 |
 
-Composite scores now reflect real visual signal from cars24 listings (not median-imputed). The top slot is spinny `28476005`, with the highest composite driven by best-in-set rule_score (73.5) and strong visual_score (63.71). Caveat: N=6 is illustrative — platform-level conclusions need more listings.
+Composite scores reflect real visual signal from cars24 listings (panels, interior, dashboard, tyres are evidenced from real photos; only `engine_bay` is imputed for two cars24 listings, since Cars24 doesn't photograph the engine bay). The top slot is spinny `28476005`, with the highest composite driven by best-in-set `rule_score` (73.5) and a strong `visual_score` (58.67). Caveat: N=6 is illustrative — platform-level conclusions need more listings.
 
 ---
 

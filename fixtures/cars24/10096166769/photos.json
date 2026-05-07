@@ -1,0 +1,299 @@
+{
+  "captured_at": "2026-05-07T15:13:23+00:00",
+  "photos": [
+    {
+      "idx": 0,
+      "sha256": "0ee512a8c71e5ac9006d133ca760b3846883dd1c1496cc7731bc5b809f70cecb",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/2e44c56b-62e7-4606-9c90-dbc36b47ccba/aa173b88-ed62-4e7b-b340-b8e17f192f00/f8f60eb1-632e-48d9-b092-4395cec74f5b/slot/2.jpg",
+      "hint": "Highlights"
+    },
+    {
+      "idx": 1,
+      "sha256": "f34c365307795131af3ddf4560cf60085eb42c044c934c3640783e75dcf78a8d",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/72f050cc-64ad-41e9-829a-94e4d40b907a/aa173b88-ed62-4e7b-b340-b8e17f192f00/18445dab-b7ca-42ab-8222-1aaf49d6f5fe/slot/5.jpg",
+      "hint": "Tyres"
+    },
+    {
+      "idx": 2,
+      "sha256": "1f576d4728677b162addfc66ed804c6cc2d0ebe2e99626feccb2b7bccbb34d31",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/ab49f9bd-6877-429a-ba61-c0bf4cce686d/aa173b88-ed62-4e7b-b340-b8e17f192f00/ab2159b1-5fb5-4271-8d9b-f5399e6c0aa4/slot/7.jpg",
+      "hint": "Tyres"
+    },
+    {
+      "idx": 3,
+      "sha256": "762f86ccf6b41cee791922729204b848e8b788ba1f3d7ee94fd7441fdfce758d",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/4173bf96-1aa4-4995-b014-9266687344d3/aa173b88-ed62-4e7b-b340-b8e17f192f00/e45f69e5-e8d1-4b30-a02f-c19b23ec0cb6/slot/11.jpg",
+      "hint": "Tyres"
+    },
+    {
+      "idx": 4,
+      "sha256": "1b714930fec47c9613493af2ee424efd2623146fa30532e7c4e7b5468e91d337",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/e1d13c2f-d021-4427-823d-43821a176058/aa173b88-ed62-4e7b-b340-b8e17f192f00/949414dc-7a2d-455a-bdcd-5e18c6a8c353/slot/9.jpg",
+      "hint": "Tyres"
+    },
+    {
+      "idx": 5,
+      "sha256": "a95d7607c9df99d8a41757b913374789ca39c9d17d871a93e525e10e225f6c80",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/7fbb3241-a259-4875-9db2-9346bebbecdd/slot/1.jpg",
+      "hint": "Tyres"
+    },
+    {
+      "idx": 6,
+      "sha256": "8b5a8d1a99ec01ddbd4fcaad6406d969a022650dd29917cc2b74cfb5a1eeb812",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/8855df3c-efa8-4474-95e1-4d9227c7d3ac/slot/6.jpg",
+      "hint": "Tyres"
+    },
+    {
+      "idx": 7,
+      "sha256": "c554c00409463f76fc66cc6ae16487e19dc83d565f0a495503658eec705bcd77",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/1cd6b542-3650-42fe-a137-b38a46aa5985/slot/8.jpg",
+      "hint": "Tyres"
+    },
+    {
+      "idx": 8,
+      "sha256": "0f55f3760af6a982b560bca1408315dc09b1ee5b0db471ba707c11cad0b98358",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/c3662a8f-956f-47d0-b40f-e6f82c76ec1d/slot/12.jpg",
+      "hint": "Tyres"
+    },
+    {
+      "idx": 9,
+      "sha256": "deead082a0dc535546c9dacc51654873f46f4161cb86844adeb3eb79ee8cbe93",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/1439f8dd-7450-4d1d-b01d-54badb15b4db/slot/10.jpg",
+      "hint": "Tyres"
+    },
+    {
+      "idx": 10,
+      "sha256": "9a2a6a1521ab7edaa2b918a3ac2ef20010133b518675f14a09a1171f9e48d656",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/750ce573-04b6-46b2-87da-cc451cc5d813/slot/21.jpg",
+      "hint": "Features"
+    },
+    {
+      "idx": 11,
+      "sha256": "f557f668ac8e0e951c2bda6023893ab2259ac45997c836813efc11fc14355947",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/2fba3f09-4835-42af-88db-7d409650654f/slot/18.jpg",
+      "hint": "Features"
+    },
+    {
+      "idx": 12,
+      "sha256": "a7446a30bf108430f0e4f8aba74a4da9199e4ea09a714f02345f31d58f1bcfb6",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/2bb68a05-f99e-449b-a5f6-0706512e6622/aa173b88-ed62-4e7b-b340-b8e17f192f00/9805161e-ad02-49a3-b055-2f230a5515e0/slot/13.jpg",
+      "hint": "Features"
+    },
+    {
+      "idx": 13,
+      "sha256": "9c95f164fb1e0667b559c80efa58c23ca3e472117e37183e46f21f25e2eea5e2",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/69d0aa9e65450c00d344178d/c7de9c82-ddc1-4ef3-9e26-935087d55b43/slot/Roof.png",
+      "hint": "Features"
+    },
+    {
+      "idx": 14,
+      "sha256": "c26c4cf602075f66e0df9915f98ce8c328ade6079f11856c36033d24a977d462",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/afe916f6-b7b9-46f1-93d4-71661fd5fdff/slot/20.jpg",
+      "hint": "Features"
+    },
+    {
+      "idx": 15,
+      "sha256": "ed7698ae8fb68a4d585a58db385981fa62490578b7484b1b78ad9a9f0d123de1",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/df3f6b0c-e0e5-4932-8b0f-ab32e6ee6225/aa173b88-ed62-4e7b-b340-b8e17f192f00/ebfce9a9-ee82-4dce-b072-4bca7ddca729/slot/12.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 16,
+      "sha256": "e7cc6a2d4cae9ee160444b656a53df4b0de3b0285350e307c88bd8b332ad6a2d",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/0a14adab-dcf6-4617-b0a9-34c9452607a5/slot/11.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 17,
+      "sha256": "9a4761d2f0aaba029939ed3db5cdeabdbc75c2da718db7ce4f784c560043d5f8",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/78babeb7-5bdb-44c8-a7e2-ea02d2843d87/aa173b88-ed62-4e7b-b340-b8e17f192f00/907b6e80-b403-4600-83da-01f895427d8f/slot/14.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 18,
+      "sha256": "d38ea3e3ec78d0f0ab143e8fbcbf5b3e3f78e838fa5d1d2436a550d86c00a13a",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/ac59a736-c052-40d8-9997-976b24253f7f/slot/2.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 19,
+      "sha256": "727f2e94e2f16217f3f70ddab8d3fb5f01c19daf4c1296e2eb3c9a5669f1b16e",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/403c17fc-e3bd-4a7a-93ae-0798fba04733/slot/1.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 20,
+      "sha256": "6ac748c7acada37a9873ed82dd6c1ac54a187e15d4b9629e2a043110e53f7b89",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/8587c7bb-68b3-4883-89d9-8f850a6ea3dd/aa173b88-ed62-4e7b-b340-b8e17f192f00/666ebe8f-9c48-4ff6-bfcb-21567b60c03d/slot/3.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 21,
+      "sha256": "e4420ea831ad842ce1ea3e75ea88c57950733281c754099f0f255d5881c8ba35",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/b147bb68-4998-47d7-9c81-a79fa87bdf20/aa173b88-ed62-4e7b-b340-b8e17f192f00/81597b35-e0f6-4c19-bd59-ab093efed32a/slot/4.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 22,
+      "sha256": "f7640d595a6009746609936a4f045b1c1ebf4c86e5418126aa8218a02dd60433",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/40e8786b-9b69-42f3-b9f0-90eb4df2182b/slot/5.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 23,
+      "sha256": "1b08e34cf91f16169d9ee666012cebf57d6a8a41477771f7ee830c11c417be78",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/ccd6434b-bf9e-4df3-8015-7d219edc4dae/slot/6.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 24,
+      "sha256": "734c7c8a38160931c601cab948f69e4cb320ac078917b10fe34513eb22da77ea",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/fcc0ed8f-d25c-4ff3-9259-3c263827d58c/slot/15.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 25,
+      "sha256": "464a5e65db5da48db838d75d37507cf8e78992002279af3d494dc30dff495ea4",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/49074adc-02e5-4435-a679-437683809fda/aa173b88-ed62-4e7b-b340-b8e17f192f00/775e4976-76c2-4fd3-bedd-0ae046837144/slot/17.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 26,
+      "sha256": "9b720277b6c52cb9a4ae7405cbca5cfe450ef4bf26d133770a48482234275dc9",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/e4240674-02fd-429a-a633-d788bd01abcb/slot/22.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 27,
+      "sha256": "bd4cf957ee4bb46da1a1639cc53b0bae0e8d6acf6b31b960d58c6ee1bfd09821",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/d0f98e60-5f35-4c72-94aa-c9113d581888/aa173b88-ed62-4e7b-b340-b8e17f192f00/0d85862d-9ac2-447c-a9f0-e36f52242de4/slot/8.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 28,
+      "sha256": "21457b059a689b0f923f8a6759c93ead7476a77d8e152946932a6f95c5ebaf47",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/176cfdc2-8e2e-4e56-8da7-6c9530a3ba71/aa173b88-ed62-4e7b-b340-b8e17f192f00/63be8bf3-0740-4616-886a-047434d7d7b0/slot/9.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 29,
+      "sha256": "6fedaf35594f43e49a605b71e5249f18a73f6cffa44741f8aec6a94ec9c5981c",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/3d250fb3-5371-42c3-9b02-45351bf2bef5/aa173b88-ed62-4e7b-b340-b8e17f192f00/3d823722-bee1-4554-b4bb-0f3413fa8197/slot/10.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 30,
+      "sha256": "ce8db01cb1134f4f34725131613a21fb485e27804dbe2d75cf00fdf9d4c1f644",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/8ee6575a-8aa8-48f1-bb65-b7821e6b3f5a/aa173b88-ed62-4e7b-b340-b8e17f192f00/d6f6ac75-7434-4eed-b422-8ca7082c9e72/slot/16.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 31,
+      "sha256": "a64e26701d9a5854b4b0443aeb549923f3b6fc378a89f9be39d4dbd371dafccb",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/883ca411-fbdb-4878-a739-02ce0852ef55/aa173b88-ed62-4e7b-b340-b8e17f192f00/8553f794-77c2-4f31-bffe-4948a480d39c/slot/7.jpg",
+      "hint": "Interior"
+    },
+    {
+      "idx": 32,
+      "sha256": "275250310962db72b28ad5bd17edbe02bee8a19ce62f83cd4195c8ed98e3e9a8",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/2752f4e2-16ea-4047-9b13-b89034a73c50/aa173b88-ed62-4e7b-b340-b8e17f192f00/10b8530a-f398-4346-866b-f5d97bedc1e8/slot/1.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 33,
+      "sha256": "60327def3502adefe0b3f2c2714128942375ec3b96466cb1678e63ca9d0c9839",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/25b7531c-4273-4454-9200-0274895c635a/aa173b88-ed62-4e7b-b340-b8e17f192f00/eeaf7879-8137-4aad-bfa1-e9620e9e9136/slot/3.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 34,
+      "sha256": "77b450b97f834a4770a2766c6d1c9921c7d4d931a975ed4734ef4ecc4e1129fd",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/a93e241d-fcd9-48c3-8156-5851a82f21bf/aa173b88-ed62-4e7b-b340-b8e17f192f00/4a9caf3c-26bf-4dbd-a256-d76dec95f357/slot/4.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 35,
+      "sha256": "7e79c34f76911ed416d77d0d1caa25fb1634fd0d3d7b0fbd72534dd9af4d425a",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/9ef0a890-8bea-4669-8f49-9fe61143fe46/aa173b88-ed62-4e7b-b340-b8e17f192f00/7e6568f4-e5f6-4525-8185-2eb00e403170/slot/5.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 36,
+      "sha256": "77bf1faaac4c71991b17e4965a5debebc445e50a167d73e7658e3fba52921a1a",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/72b30610-1611-48eb-8945-1be27dd40d62/aa173b88-ed62-4e7b-b340-b8e17f192f00/befd4082-bab3-4ec5-874b-ffe5fedd0095/slot/6.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 37,
+      "sha256": "bb3d13c5b81aa064faefe01377e3cc5d2ab38ae25e95cdbfb4d943e1e2e62133",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/a31c085d-6efb-42c9-bb68-5a4856c38b8d/aa173b88-ed62-4e7b-b340-b8e17f192f00/74ff094a-f584-494a-baeb-c04d2dad93ba/slot/7.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 38,
+      "sha256": "c7f5f0c02345a8f8b8d666c5462a9eb16bac00df31a6635374d5c0067bb77d70",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/6d13d135-0dae-44a8-ae02-476397a60810/aa173b88-ed62-4e7b-b340-b8e17f192f00/e4ffaed0-633f-4708-b532-452f02802809/slot/8.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 39,
+      "sha256": "0dbb7b9d7d5cce515ba58f98cc19c947e5bcd4eb3b31433222103478737b76a8",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/f7498467-1e8f-4f5f-92c6-bde6300998cf/aa173b88-ed62-4e7b-b340-b8e17f192f00/f0a6a7e6-0fff-4078-9d01-7e711d13e086/slot/13.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 40,
+      "sha256": "0e3a04b495b299a1017a9d9a213f23acc14a46977b58de4706b88a127518242f",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/42eb32fe-8147-402e-a931-44b27b0a5e21/aa173b88-ed62-4e7b-b340-b8e17f192f00/34169070-81f3-46d5-874d-6b5deb7fed05/slot/4.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 41,
+      "sha256": "e48a63f8eeb26df0cc819d1ff8a72429f47ed541fac17bdd9e7fa85a1e6fbbe0",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/30f8202c-11eb-48b5-9b70-522e2bb5a071/aa173b88-ed62-4e7b-b340-b8e17f192f00/ddca4cba-17b7-4542-bd86-78d3b1e67a29/slot/15.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 42,
+      "sha256": "0ee512a8c71e5ac9006d133ca760b3846883dd1c1496cc7731bc5b809f70cecb",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/a105e3e4-9946-4c66-afeb-e42bf9e2738f/aa173b88-ed62-4e7b-b340-b8e17f192f00/65c3988c-734e-4cf2-9255-311d272e77c7/slot/1.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 43,
+      "sha256": "4e3f8e17739c1fac1f2ce5ec6da65d4c7d49791f2655589ef05387f112c39a4b",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/26afe6cb-2403-4fdf-b55c-42eaa8b89d38/slot/16.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 44,
+      "sha256": "83984ee220f0104a0f15602cae508e08b2a26c4cd4383234996c8563157981a5",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/2a2fe549-8a90-4a85-be6d-7b6453fb9064/slot/2.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 45,
+      "sha256": "5984e5cde8d4a642041e3cd24a368d7303ad9316013801c7b1d29a9f543c9a40",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/55d3c026-ee21-4512-828d-c5d5fc4fc51e/slot/3.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 46,
+      "sha256": "f5632da606de2fc144d8eb2a553b7c9dd2bc182d028f2f4c7104d562041c9cb5",
+      "source_url": "https://media.cars24.com/hello-ar/dev/transformed/uploads/114dceab-01bc-40b3-8a5c-54f6885c78c1/aa173b88-ed62-4e7b-b340-b8e17f192f00/073e0ded-4e7f-4a3a-b626-a44c2b6159b5/slot/14.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 47,
+      "sha256": "170191ed31306dcc9a40b2d7e26b65b9a565129970786a88fca3fee37c430de0",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/89929aef-fc4a-426f-bbb6-056a19794493/slot/1.jpg",
+      "hint": "Exterior"
+    },
+    {
+      "idx": 48,
+      "sha256": "445d59dd23ded444a4a1c32f14be52b7c90bd378a114ce806b2706f01ec166d5",
+      "source_url": "https://media.cars24.com/hello-ar/dev/uploads/aa173b88-ed62-4e7b-b340-b8e17f192f00/93950234-a938-42c6-867b-896945911d6f/slot/camera-6caa2b3a-4d86-40b0-b47f-2ee0cfafa1d0.jpg",
+      "hint": "Defects"
+    }
+  ]
+}
