@@ -293,3 +293,136 @@ uv run python scripts/run_pipeline.py      # produces runs/<id>/ranking.json
 ```
 Latest run: `runs/20260507T101410-3c6ec3/`
 Per-fixture metadata: `fixtures/<platform>/<id>/{page.html, captured_at.txt, url.txt, extracted.json, normalized.json}`
+
+---
+
+## 10. Vision agent topology (Plan B + C)
+
+### Components
+
+```mermaid
+flowchart LR
+  Pipeline[run_pipeline] -->|asyncio.run| Outer[Outer agent loop<br/>claude-sonnet-4-6 + tools]
+  Outer -->|inspect_photo| Inner[Inner inspector<br/>one-shot VLM]
+  Inner -->|cache lookup| Cache[(InnerCache<br/>sha256-keyed)]
+  Outer -->|final_assessment| Aggregator[compute_vision_scores<br/>set-relative rank]
+  Aggregator -->|VisionScore| Composite[compute_composite<br/>α·rule + 1-α·visual]
+```
+
+### Tools exposed to outer agent
+
+| Tool | Semantics |
+|---|---|
+| `list_photos()` | Returns photo manifest entries (idx, sha256, hint) |
+| `inspect_photo(idx)` | Fires inner VLM call on one photo; returns multi-aspect findings |
+| `note_evidence_gap(aspect, reason)` | Records inspect-but-no-evidence |
+| `final_assessment(per_aspect)` | Terminator; agent submits final per-aspect ratings |
+
+Caps: 12 outer turns max, 10 `inspect_photo` calls max per listing. On budget hit, agent force-finalizes with `not_visible` for un-evidenced aspects.
+
+### Composite scoring
+
+```
+rule_score   (set-relative rank, 0–100, existing)
+visual_score (set-relative rank-based mean over 5 aspects, 0–100, NEW)
+composite_score = α × rule_score + (1 − α) × visual_score    (α = 0.7 default)
+```
+
+### Eval results (Plan C)
+
+#### E6 — agent vs gold (10 calibration listings)
+
+| aspect | exact | adjacent | κ (linear) | n |
+|---|---:|---:|---:|---:|
+| exterior_panels | 0.80 | 1.00 | 0.62 | 5 |
+| interior_cabin | 1.00 | 1.00 | 1.00 | 5 |
+| dashboard_console | 0.40 | 1.00 | 0.21 | 5 |
+| tyres | 1.00 | 1.00 | 0.00 | 5 |
+| engine_bay | 0.25 | 1.00 | 0.00 | 4 |
+
+Adjacent agreement = 1.0 on every aspect — agent calls are always within ±1 of gold. Exact varies and κ is low on some aspects because gold labels are homogeneous (mostly pristine and light_wear), which inflates by-chance agreement and flattens κ. At this N and label distribution, adjacent is the load-bearing metric. engine_bay n=4 because cars24 marks engine_bay as not_visible across the board (no engine photos); only spinny provides comparable findings. n_compared per aspect = 5 listings — the agent returned not_visible for some listings on some aspects, which excludes those pairs from comparison.
+
+Source: `runs/e6_20260507T164231-80432e/agreement_summary.json`
+
+#### E5 — vision determinism (5 listings × 3 cold runs)
+
+TBD — E5 vision determinism (5 listings × 3 cold-cache runs) is currently running. Results will be filled here when the run completes; expected adjacency ≥ 0.85 and per-listing visual_score range < 5 points per spec §12.4.
+
+#### E3 — three-way Spearman on 10 gold
+
+| pair | ρ |
+|---|---:|
+| rule vs gold-visual | 0.506 |
+| rule vs agent-visual | 0.391 |
+| gold-visual vs agent-visual | 0.437 |
+
+Rule and visual signals are moderately (not perfectly) correlated — vision adds genuinely independent information, not just a rule echo. Agent-visual recovers gold-visual ordering imperfectly (ρ ≈ 0.44) at small N.
+
+Source: `runs/e6_20260507T164231-80432e/cross_method_e3.json`
+
+#### E4 — α-sweep stability vs α=0.7 baseline
+
+| α | Kendall τ vs α=0.7 |
+|---:|---:|
+| 0.5 | 0.911 |
+| 0.6 | 0.956 |
+| 0.7 | 1.000 |
+| 0.8 | 0.956 |
+| 0.9 | 0.956 |
+| 1.0 | 0.956 |
+
+τ ≥ 0.91 across the whole α range — composite ranking is robust to α choice within [0.5, 1.0].
+
+Source: `runs/e4_20260507T164312/alpha_sweep.json`
+
+### Symmetry caveat
+
+`visual_score` measures *platform-mediated visual evidence*, not vehicle ground truth. Cars24 photos are showroom-style (~50 stock-angle shots, no engine bay). Spinny photos are inspection-style (~13 shots including engine bay). Set-relative rank-norm mitigates the platform asymmetry but does not eliminate it; engine_bay aspect is `not_visible` for all cars24 listings and gets median-imputed per the existing null policy.
+
+### Worked example trace
+
+Listing `28260532` (spinny, 13 photos total). The agent inspected 10 photos and produced the following per-aspect findings:
+
+```json
+[
+  {
+    "aspect": "exterior_panels",
+    "severity": "pristine",
+    "confidence": "high",
+    "photo_refs": [0, 6, 7, 8, 9],
+    "evidence_note": "White paintwork uniform and glossy across all panels — doors, fenders, hood, bumper — in all exterior shots. No dents, scratches, chips, or blemishes visible. Body lines crisp and panel gaps consistent."
+  },
+  {
+    "aspect": "interior_cabin",
+    "severity": "pristine",
+    "confidence": "high",
+    "photo_refs": [3, 4],
+    "evidence_note": "Rear leather seats with diamond-stitch quilting fully intact, no soiling or wear. Dashboard top, door panels, plastics, and centre console surfaces all clean with no scratches or fading."
+  },
+  {
+    "aspect": "dashboard_console",
+    "severity": "pristine",
+    "confidence": "high",
+    "photo_refs": [3, 10, 11],
+    "evidence_note": "Digital cluster crisp and fully illuminated (62,734 km), touchscreen clear and active, steering wheel unmarked, gear selector/shift boot, climate controls, and all trim panels show zero scratches or wear."
+  },
+  {
+    "aspect": "tyres",
+    "severity": "light_wear",
+    "confidence": "high",
+    "photo_refs": [0, 6, 7, 8, 9],
+    "evidence_note": "All visible tyres show adequate tread depth and clean sidewalls with no bulges or damage. Multi-spoke alloy wheels undamaged with no kerb marks. Minor normal-use wear consistent with 62k km vehicle."
+  },
+  {
+    "aspect": "engine_bay",
+    "severity": "light_wear",
+    "confidence": "med",
+    "photo_refs": [12],
+    "evidence_note": "Engine bay generally clean; no oil leaks or corrosion visible. Battery, fluid caps, and engine covers intact. Mild dust and surface grime typical of a used vehicle but nothing concerning."
+  }
+]
+```
+
+The agent completed in 6 turns without hitting the inspect_photo budget. Photos inspected: 0, 6, 10, 12, 7, 9, 11, 3, 8, 4. Four aspects rated pristine or light_wear with high confidence from photographic evidence; engine_bay rated light_wear at medium confidence from the single available engine photo.
+
+Source: `runs/e6_20260507T164231-80432e/agent_assessments.json`
