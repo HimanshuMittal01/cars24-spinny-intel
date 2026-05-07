@@ -15,12 +15,12 @@ def render_chart(rows: list[RankRow], out_path: Path) -> None:
         if not sub:
             continue
         ax.scatter(
-            [r.score_common for r in sub],
+            [r.rule_score for r in sub],
             [r.price / 1e5 for r in sub],
             marker=marker, color=color, label=plat, s=80,
         )
         for r in sub:
-            ax.annotate(r.listing_id, (r.score_common, r.price / 1e5),
+            ax.annotate(r.listing_id, (r.rule_score, r.price / 1e5),
                         textcoords="offset points", xytext=(5, 5), fontsize=8)
     ax.set_xlabel("condition score (rank-based, 0–100, relative to this set)")
     ax.set_ylabel("price (₹ lakh)")

@@ -5,7 +5,7 @@ from ci.schemas import RankRow
 def _row(lid, plat, price, score, ratio, disclosure, imputed=None):
     return RankRow(
         listing_id=lid, platform=plat, price=price,
-        score_common=score, ratio=ratio, disclosure_count=disclosure,
+        rule_score=score, ratio=ratio, disclosure_count=disclosure,
         imputed_dims=imputed or [],
     )
 

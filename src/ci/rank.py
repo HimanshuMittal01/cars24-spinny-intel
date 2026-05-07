@@ -11,7 +11,7 @@ def rank_listings(
             listing_id=n.listing_id,
             platform=n.platform,
             price=n.price,
-            score_common=s.score_common,
+            rule_score=s.score_common,
             ratio=round(ratio, 2),
             disclosure_count=s.disclosure_count,
             imputed_dims=list(s.imputed_dims),

@@ -17,7 +17,7 @@ def test_pipeline_runs_end_to_end_against_real_fixtures(tmp_path):
         today_year=2026,
     )
     assert len(rows) == 2
-    assert all(r.score_common > 0 for r in rows)
+    assert all(r.rule_score > 0 for r in rows)
     # Sorted ascending by ratio
     assert rows[0].ratio <= rows[1].ratio
 
