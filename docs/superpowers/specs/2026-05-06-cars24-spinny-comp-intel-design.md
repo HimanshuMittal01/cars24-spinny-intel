@@ -397,3 +397,115 @@ We expect the report to surface that **`disclosure_count` is systematically high
 - **25% report** — writing, charts, topology diagram, tradeoff selection.
 
 Brief-literal framing → build slightly more than original 30% allocation. Eval slightly less. Report slightly more (the topology + tradeoff sections need real care, not a paragraph each).
+
+---
+
+## 13. Reality check (2026-05-07 amendment)
+
+After implementing T1–T9 in the plan, we fetched a real Cars24 and Spinny detail page and discovered the design above had several speculative assumptions that don't match the real data shape. This section records what we learned and the design changes triggered. **Sections 1–12 above describe v1; the v1.1 design is v1 + this section.**
+
+### What the real pages expose
+
+**Cars24 (Next.js streaming SSR):** the per-listing detail JSON lives inside `self.__next_f.push([...])` payload fragments. The relevant `content` object has structured fields:
+
+```
+make, model, variant, variantId, year, transmission, bodyType, fuelType,
+ownerNumber (int), ownerNumberDisplay, odometerReading (int),
+cityRto, registrationNumber (masked), listingPrice (int),
+insuranceType, insuranceExpiry, lastServicedAt, fitnessUpto, city
+```
+
+There is **no per-listing certification tier**. Cars24 markets a uniform 12-month warranty and 140-point quality check on *all* listed cars. The "Imperial / Royal Blue" tier vocabulary used in v1 §4 was invented; it doesn't appear in the data.
+
+There is **no per-listing accident disclosure** as a structured field. There is a platform-level `promiseId: "no_accident_history"` marketing promise that applies to the platform, not to individual listings.
+
+**Spinny (`window.__INITIAL_STATE__`, JS object literal):** per-listing structured fields:
+
+```
+mileage (string "33,191"), no_of_owners (ordinal string "1st"),
+make_month, registration_month, registration_year (int),
+fuel_type, transmission, color, body_type, rto, locality,
+insurance_type, has_applicable_insurance,
+price (string "13,47,000"), listing_price.price, market_price.price,
+is_assured (bool), category (one of "max" / "assured-plus" / "assured" / "budget"),
+inspection_report.report.summary.is_accidental (bool),
+inspection_report.report.sections[*] (per-section ratings + statements + images),
+buy_back_pricing, tyre images per wheel with km_driven snapshots
+```
+
+Per-listing certification tier **is** exposed (`category` ∈ {max, assured-plus, assured, budget}). Per-listing accident disclosure **is** exposed (`is_accidental` boolean). Inspection report has rich structured per-section data.
+
+### How this changes the design
+
+1. **`certification_flag` is dropped from the common-set entirely.** Reason: Cars24 doesn't expose a per-listing tier, so any value we'd use would either be a constant (zero ranking signal) or an invented placeholder. Spinny's per-listing tier is real but feeds the disclosure metric and the qualitative report observation, not the ranking score.
+
+2. **`accident_disclosed` stays in the common-set.** Treatment:
+   - Spinny: `inspection_report.summary.is_accidental` → `none` if false, `minor` if true (Spinny doesn't expose severity beyond a boolean — the band is coarsened accordingly).
+   - Cars24: the platform-level "no_accident_history" promise is treated as a per-listing `accident_disclosed = "none"`. Rationale: Cars24 *is* making the disclosure, just at platform level. This is a defensible mapping, documented as such in the report.
+   - Net: both platforms get a per-listing accident value with no nulls expected. The mapping is explicit, not hidden.
+
+3. **Updated common-set & weights:**
+
+   | Dimension | Weight |
+   |---|---|
+   | km_driven | 35 |
+   | age_years | 25 |
+   | owners | 25 |
+   | accident_disclosed | 15 |
+   | **Total** | **100** |
+
+   Cert is no longer a dimension. The `WEIGHTS_WITH_ACCIDENT` / `WEIGHTS_WITHOUT_ACCIDENT` split in v1 §4 becomes a single weight table.
+
+4. **Disclosure-eligible field set is reworked** based on what is actually exposed pre-auth:
+
+   ```
+   accident_history_detail        # Spinny inspection_report sections give detail; Cars24 has no per-listing detail
+   inspection_per_section_ratings # Spinny only (Excellent/Good/etc. per section)
+   inspection_repair_statements   # Spinny only ("3 Components are repaired & repainted")
+   tyre_condition_per_wheel       # Spinny only (per-tyre images + km snapshot)
+   service_history_records        # Spinny: explicit, Cars24: lastServicedAt only
+   warranty_remaining_months      # Cars24: 12mo platform warranty; Spinny: extended pricing
+   noc_status                     # neither exposes pre-auth in our samples
+   rc_type                        # neither exposes
+   insurance_type                 # both expose
+   insurance_validity             # both expose
+   previous_use_type              # neither
+   challan_status                 # neither
+   hypothecation_status           # neither
+   inspection_photo_count         # both expose (gallery counts)
+   per_listing_certification_tier # Spinny only (max/assured-plus/assured/budget)
+   buy_back_pricing               # Spinny only (explicit table)
+   market_price_delta             # Spinny only (listing_price vs market_price)
+   ```
+
+   17 fields, locked. Disclosure_count now meaningfully captures the asymmetry: Spinny will systematically score higher.
+
+5. **Extraction strategy pivots from LLM-from-raw-HTML to JSON-parse-first.** Rationale: both platforms inject structured JSON. Parsing it deterministically is cheaper, faster, no hallucination risk, and reproducible. LLM is retained as an *optional* fallback for free-text inspection narrative if needed (currently unneeded — Spinny's structured per-section data is sufficient).
+   - Cars24 extractor: regex out all `self.__next_f.push([1,"<payload>"])` strings, decode escapes, find the largest payload containing the `content` object, locate via key-search, parse the JSON object.
+   - Spinny extractor: regex out `window.__INITIAL_STATE__=...;window.__STATIC_CONFIG__`. The body is a JS object literal (unquoted keys, `!0`/`!1` for booleans, `27e3` for numbers). Use a JS5 parser (`json5` package) or a small custom transformer to convert to JSON.
+   - Both platforms still emit a `RawListing` with the normalized field names; the field mapping is the only thing that differs.
+
+6. **Implications acknowledged in the report:**
+   - The score_common rubric now has 4 dimensions (km/age/owners/accident). Cert is intentionally absent.
+   - The Cars24-vs-Spinny asymmetry shows up in `disclosure_count` (cleanly) and in *whether the platform exposes the data needed for the rubric at all* (Spinny does, Cars24 mostly does after we map the platform promise to per-listing accident=none).
+   - The headline observation strengthens: Spinny's per-listing transparency vs Cars24's platform-level uniform-promise positioning is now grounded in observed data, not speculated.
+
+### What does NOT change
+
+- Architecture / DAG (extractor → normalizer → scorer → ranker → reporter).
+- Eval harness (E1–E5).
+- Reporting structure.
+- Limitations framing (priors not grounded; sensitivity analysis shows robustness).
+- Snapshot replay-only design.
+- Sync, single-process, no async.
+
+### Plan tasks affected
+
+- **T2 (config):** redo with new weights table, dropped cert from common-set, revised disclosure-eligible field list.
+- **T8 (cars24 extractor):** rewrite as JSON-parse-first against `__next_f` payloads.
+- **T9 (spinny extractor):** rewrite as JSON-parse-first against `window.__INITIAL_STATE__`.
+- **T10 (normalizer):** map cars24 platform promise → `accident_disclosed = "none"`; parse Spinny's string-formatted price/mileage; coerce ordinal owners string ("1st") → int.
+- **T11 (scorer):** drop cert dim; single weights table.
+- **T17 (sensitivity):** ablation surface shrinks to 4 dims (km/age/owners/accident).
+
+T1, T3–T7, T12–T16, T18, T19 are unaffected.

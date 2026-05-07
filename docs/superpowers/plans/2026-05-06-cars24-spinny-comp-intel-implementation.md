@@ -3120,3 +3120,136 @@ Plan complete and saved to [`docs/superpowers/plans/2026-05-06-cars24-spinny-com
 **2. Inline Execution** — Execute tasks in this session using executing-plans, batch execution with checkpoints
 
 Which approach?
+
+---
+
+## Revisions (2026-05-07)
+
+After completing T1–T9 we fetched real Cars24 and Spinny detail pages and discovered the v1 schemas were speculative. Spec §13 ("Reality check") in the design doc captures the design changes; this section captures the plan-task revisions that follow from it.
+
+T1, T3–T7, T12–T16, T18, T19 are **unchanged** from the original plan.
+
+T2, T8, T9 are **rewritten below** as T2-rev, T8-rev, T9-rev. T10 and T11 are **modified** as T10-rev, T11-rev (their plan text in the original section still applies, with the small adjustments listed inline below).
+
+The fixtures `fixtures/cars24/10041693110/` and `fixtures/spinny/28476005/` exist (saved during the reality check). Tests that need real-shape data should use these.
+
+### T2-rev: Configuration module (revised)
+
+**Files:**
+- Modify: `src/ci/config.py`
+
+**Changes from v1 T2:**
+- Drop `WEIGHTS_WITHOUT_ACCIDENT` (we no longer have the conditional).
+- Replace `WEIGHTS_WITH_ACCIDENT` with a single `WEIGHTS` table (cert removed):
+
+  ```python
+  WEIGHTS = {
+      "km_driven": 35,
+      "age_years": 25,
+      "owners": 25,
+      "accident_disclosed": 15,
+  }
+  ```
+
+- Drop `CERT_MAP` and `IMPUTATION["certification_flag"]`.
+- Replace `DISCLOSURE_FIELDS` with the 17-field list from spec §13:
+
+  ```python
+  DISCLOSURE_FIELDS = [
+      "accident_history_detail",
+      "inspection_per_section_ratings",
+      "inspection_repair_statements",
+      "tyre_condition_per_wheel",
+      "service_history_records",
+      "warranty_remaining_months",
+      "noc_status",
+      "rc_type",
+      "insurance_type",
+      "insurance_validity",
+      "previous_use_type",
+      "challan_status",
+      "hypothecation_status",
+      "inspection_photo_count",
+      "per_listing_certification_tier",
+      "buy_back_pricing",
+      "market_price_delta",
+  ]
+  ```
+
+- Steps: open `src/ci/config.py`, make the edits above, run `uv run pytest -q` to confirm nothing else broke (T2 has no dedicated test file; downstream tests will catch issues), commit with `chore(config): drop cert from common-set; revise disclosure-eligible list (per spec §13)`.
+
+### T8-rev: Cars24 extractor (JSON-parse-first)
+
+**Files:**
+- Rewrite: `src/ci/extract/cars24.py`
+- Update: `tests/test_extract_cars24.py` — replace canned-LLM tests with a real fixture-based parsing test against `fixtures/cars24/10041693110/page.html`.
+
+**Approach:**
+1. Read the snapshot HTML.
+2. Find all `self.__next_f.push([1,"<escaped-string>"])` matches via regex.
+3. Decode each captured string with `bytes.decode('unicode_escape')`.
+4. Concatenate (or scan all) and locate the substring containing `"odometerReading":` — this anchors the listing-detail JSON.
+5. Walk back to find the start of the enclosing `{` (the `content` object), then scan forward with a brace counter to find the matching `}`.
+6. `json.loads()` the resulting object. Required keys must be present (`listingPrice`, `odometerReading`, `year`, `ownerNumber`).
+7. Map into the existing `RawListing(platform="cars24", listing_id=…, fields=…)` shape. Field names from Cars24 are kept verbatim; the normalizer (T10) handles the rename.
+8. LLM client parameter is still accepted in the signature but is unused unless a free-text fallback is added later (kept for API stability with T13 pipeline orchestrator).
+
+**Test (`tests/test_extract_cars24.py`):**
+- Use `fixtures/cars24/10041693110/page.html` via `load_snapshot("cars24", "10041693110")` (with monkeypatched `FIXTURES_DIR` pointing to the project's actual `fixtures/`).
+- Call `extract_cars24(snap, FakeLLMClient(canned_tool_input={}))`.
+- Assert: `raw.platform == "cars24"`, `raw.fields["listingPrice"] == 950000`, `raw.fields["odometerReading"] == 50673`, `raw.fields["year"] == 2020`, `raw.fields["ownerNumber"] == 2`.
+
+**Commit:** `feat(extract): cars24 JSON-parse-first extractor (re #spec-§13)`
+
+### T9-rev: Spinny extractor (JSON-parse-first)
+
+**Files:**
+- Rewrite: `src/ci/extract/spinny.py`
+- Update: `tests/test_extract_spinny.py` — replace canned-LLM tests with fixture-based parsing test against `fixtures/spinny/28476005/page.html`.
+
+**Approach:**
+1. Read snapshot HTML.
+2. Locate `window.__INITIAL_STATE__=` and capture until `;window.__STATIC_CONFIG__` (or `</script>` if not followed by STATIC_CONFIG).
+3. The captured body is a **JS object literal**, not JSON. Use the `json5` package to parse it (already a small Python dep — add via `uv add json5`). `json5` handles unquoted keys, `!0`/`!1` for booleans, scientific notation like `27e3`.
+4. Walk the parsed structure to find the listing-detail object. Heuristic: a path containing `mileage`, `no_of_owners`, `inspection_report`. Likely under `pageData.car_detail` or similar — confirm against the fixture.
+5. Map into `RawListing(platform="spinny", listing_id=…, fields=…)`. Field names kept verbatim; normalizer (T10) handles renames.
+
+**Test:**
+- Same fixture-based test pattern as T8-rev.
+- Assert: `raw.platform == "spinny"`, `raw.fields["mileage"] == "33,191"` (or numeric after preliminary parse — be explicit), `raw.fields["no_of_owners"] == "1st"`, `raw.fields["registration_year"] == 2022`, `raw.fields["category"] == "assured-plus"`, `raw.fields["inspection_report"]["report"]["summary"]["is_accidental"] is False`.
+
+**Commit:** `feat(extract): spinny JSON-parse-first extractor (re #spec-§13)`
+
+### T10-rev: Normalizer (modified inline)
+
+The original T10 plan text still applies (raw → common schema). Modify only:
+
+- Rename `_map_cert_cars24` and `_map_cert_spinny` to be unused / deleted; the normalizer no longer produces `certification_flag` on `NormalizedListing`.
+- `NormalizedListing.certification_flag` → drop the field, OR keep the field as `Literal["max","assured-plus","assured","budget","none"] | None` for diagnostic-only purposes (decided: keep, but only Spinny populates it; Cars24 sets `None`). The scorer ignores it.
+- Cars24 mapping for `accident_disclosed`: hardcoded to `"none"` (rationale documented in spec §13 / §4 of revised rubric).
+- Spinny mapping for `accident_disclosed`: derive from `inspection_report.report.summary.is_accidental` — `False` → `"none"`, `True` → `"minor"` (Spinny doesn't expose severity beyond the boolean).
+- Spinny `mileage` — strip commas, parse to int.
+- Spinny `no_of_owners` — parse leading-digit (`"1st"` → `1`, `"2nd"` → `2`, etc.).
+- Spinny `price` — strip commas, parse to int. (Or read `listing_price.price` if more reliable.)
+- Spinny `registration_year` for `age_years` (manufacture year ≈ registration year minus a couple months; use `make_year` if exposed, else `registration_year`).
+- Cars24 `age_years` from `year` field.
+
+Disclosure mapping moves to the new field list:
+- Spinny: most disclosure fields are populated from `inspection_report.*`, `is_assured`, `category`, `buy_back_pricing`, `pricing.market_price`, etc.
+- Cars24: `lastServicedAt` → `service_history_records: True`. `insuranceType` → `insurance_type: True`. Most other disclosure fields → `False` for Cars24.
+
+### T11-rev: Scorer (modified inline)
+
+- Drop `accident_in_common` parameter from `score_listing`. Always use the single `WEIGHTS` table from T2-rev.
+- Drop the `cert` dimension entirely from `_value_for_dim`.
+- Tests in `tests/test_score.py` — drop the parameterization on `accident_in_common`. Keep all the band-lookup tests. Update the integrated `score_listing` tests to use the new 4-dim weights.
+
+### T17-rev: Sensitivity eval (modified inline)
+
+- Ablation surface shrinks from 4-or-5 dims (depending on accident_in_common) to a single 4-dim case (km/age/owners/accident).
+- Drop the conditional logic; always use `WEIGHTS`.
+- Test updated accordingly.
+
+### Operator note
+
+The 6 ranking listings + ~15 gold listings still need to be collected manually (T6 + T14 operator steps). The 2 fixtures saved during the reality check satisfy the *reality-check* tests for T8-rev and T9-rev but are not the final ranking dataset.
