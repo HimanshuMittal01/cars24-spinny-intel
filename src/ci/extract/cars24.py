@@ -1,71 +1,96 @@
+"""Cars24 listing extractor.
+
+Strategy: parse Next.js streaming-SSR payloads (`self.__next_f.push([1,"..."])`)
+to find the per-listing `content` object that contains all structured fields.
+LLM is not used; the SDK client is accepted for API stability with the pipeline
+orchestrator but is unused here.
+"""
+
+import json
+import re
+from typing import Any
+
 from ci.llm import LLMClient
 from ci.schemas import RawListing
 from ci.snapshot import Snapshot
 
-CARS24_SYSTEM = """You extract structured data from Cars24 used-car listing HTML.
-Return ONLY values you can find in the page; for any field you cannot find, return null.
-Do not infer, normalize, or invent. Numeric fields must be integers (no commas).
-Year is the manufacturing year. Owners count is the integer number of prior owners.
-Certification tier is the platform's named tier (e.g. "Imperial", "Royal Blue") or
-null if no tier badge is visible. Accident disclosed is "none" / "minor" / "major" or null."""
+_PUSH_RE = re.compile(r'self\.__next_f\.push\(\[1,"(.+?)"\]\)', re.DOTALL)
+_ANCHOR = '"odometerReading"'
 
-CARS24_TOOL_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "price": {"type": ["integer", "null"]},
-        "km_driven": {"type": ["integer", "null"]},
-        "year": {"type": ["integer", "null"]},
-        "owners_count": {"type": ["integer", "null"]},
-        "registration_state": {"type": ["string", "null"]},
-        "fuel": {"type": ["string", "null"]},
-        "transmission": {"type": ["string", "null"]},
-        "body_color": {"type": ["string", "null"]},
-        "certification_tier": {"type": ["string", "null"]},
-        "accident_disclosed": {
-            "type": ["string", "null"],
-            "enum": ["none", "minor", "major", None],
-        },
-        "inspection_issue_list": {"type": ["array", "null"], "items": {"type": "string"}},
-        "service_history_records": {"type": ["string", "null"]},
-        "warranty_remaining_months": {"type": ["integer", "null"]},
-        "noc_status": {"type": ["string", "null"]},
-        "rc_type": {"type": ["string", "null"]},
-        "insurance_status": {"type": ["string", "null"]},
-        "previous_use_type": {"type": ["string", "null"]},
-        "tire_condition": {"type": ["string", "null"]},
-        "engine_remarks": {"type": ["string", "null"]},
-        "transmission_remarks": {"type": ["string", "null"]},
-        "battery_status": {"type": ["string", "null"]},
-        "ac_remarks": {"type": ["string", "null"]},
-        "electrical_remarks": {"type": ["string", "null"]},
-        "cosmetic_exterior_notes": {"type": ["string", "null"]},
-        "cosmetic_interior_notes": {"type": ["string", "null"]},
-        "challan_status": {"type": ["string", "null"]},
-        "hypothecation_status": {"type": ["string", "null"]},
-        "inspection_photo_count": {"type": ["integer", "null"]},
-        "inspection_points_passed": {"type": ["string", "null"]},
-        "accident_history_detail": {"type": ["string", "null"]},
-    },
-    "required": ["price", "km_driven", "year"],
-}
+
+def _decode_pushes(html: str) -> str:
+    """Concatenate decoded payloads from all __next_f.push calls."""
+    pushes = _PUSH_RE.findall(html)
+    return "".join(p.encode().decode("unicode_escape") for p in pushes)
+
+
+def _find_listing_object(decoded: str) -> dict[str, Any]:
+    """Locate the listing-detail JSON object anchored on `_ANCHOR`."""
+    idx = decoded.find(_ANCHOR)
+    if idx < 0:
+        raise ValueError(
+            f"cars24 extractor: anchor {_ANCHOR!r} not found in __next_f payloads"
+        )
+
+    # Walk backward from anchor to find the enclosing object's open brace.
+    depth = 0
+    start = -1
+    for i in range(idx, -1, -1):
+        ch = decoded[i]
+        if ch == "}":
+            depth += 1
+        elif ch == "{":
+            if depth == 0:
+                start = i
+                break
+            depth -= 1
+    if start < 0:
+        raise ValueError("cars24 extractor: no enclosing { for content object")
+
+    # Walk forward to find the matching close brace, respecting strings.
+    depth = 0
+    in_string = False
+    escape = False
+    end = -1
+    for j in range(start, len(decoded)):
+        ch = decoded[j]
+        if escape:
+            escape = False
+            continue
+        if ch == "\\":
+            escape = True
+            continue
+        if ch == '"':
+            in_string = not in_string
+            continue
+        if in_string:
+            continue
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                end = j + 1
+                break
+    if end < 0:
+        raise ValueError("cars24 extractor: no matching } for content object")
+
+    blob = decoded[start:end]
+    return json.loads(blob)
 
 
 def extract_cars24(snapshot: Snapshot, client: LLMClient) -> RawListing:
-    user = (
-        "Extract the structured fields from this Cars24 listing HTML. "
-        "If a field is not visible, return null. Do not invent values.\n\n"
-        f"HTML:\n{snapshot.html}"
-    )
-    resp = client.extract_structured(
-        system=CARS24_SYSTEM,
-        user=user,
-        tool_name="cars24_extract",
-        tool_schema=CARS24_TOOL_SCHEMA,
-    )
+    """Extract structured fields from a Cars24 listing snapshot.
+
+    `client` is currently unused; it is accepted for signature parity with the
+    pipeline orchestrator (T13) and as a placeholder for future free-text
+    fallback.
+    """
+    fields = _find_listing_object(_decode_pushes(snapshot.html))
     return RawListing(
         platform="cars24",
         listing_id=snapshot.listing_id,
         url=f"snapshot://{snapshot.listing_id}",
         captured_at=snapshot.captured_at,
-        fields=resp.parsed,
+        fields=fields,
     )

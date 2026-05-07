@@ -1,42 +1,34 @@
-from ci.extract.cars24 import extract_cars24, CARS24_TOOL_SCHEMA
+from ci.extract.cars24 import extract_cars24
 from ci.llm import FakeLLMClient
-from ci.snapshot import Snapshot
+from ci.snapshot import load_snapshot
 
 
-def test_cars24_extractor_returns_raw_listing():
-    snap = Snapshot(
-        platform="cars24", listing_id="abc",
-        html="<html>...listing detail...</html>",
-        captured_at="2026-05-06T10:00:00Z",
-    )
-    fake = FakeLLMClient(canned_tool_input={
-        "price": 920_000,
-        "km_driven": 42_000,
-        "year": 2020,
-        "owners_count": 1,
-        "registration_state": "DL",
-        "fuel": "Petrol",
-        "transmission": "Manual",
-        "body_color": "White",
-        "certification_tier": "Imperial",
-        "accident_disclosed": None,
-        "inspection_issue_list": None,
-        "service_history_records": None,
-        "warranty_remaining_months": 6,
-    })
-
+def test_cars24_extractor_parses_real_fixture():
+    snap = load_snapshot("cars24", "10041693110")
+    fake = FakeLLMClient(canned_tool_input={})  # unused; signature compatibility
     raw = extract_cars24(snap, fake)
     assert raw.platform == "cars24"
-    assert raw.listing_id == "abc"
-    assert raw.fields["price"] == 920_000
-    assert raw.fields["certification_tier"] == "Imperial"
-    assert len(fake.calls) == 1
+    assert raw.listing_id == "10041693110"
+    # Anchored values verified by direct inspection of fixture:
+    assert raw.fields["listingPrice"] == 950000
+    assert raw.fields["odometerReading"] == 50673
+    assert raw.fields["year"] == 2020
+    assert raw.fields["ownerNumber"] == 2
+    assert raw.fields["fuelType"] == "Petrol"
+    assert raw.fields["transmission"] == "Automatic"
+    # the LLM client should NOT have been called
+    assert len(fake.calls) == 0
 
 
-def test_cars24_tool_schema_has_required_keys():
-    assert CARS24_TOOL_SCHEMA["type"] == "object"
-    for key in [
-        "price", "km_driven", "year", "owners_count", "fuel", "transmission",
-        "certification_tier",
-    ]:
-        assert key in CARS24_TOOL_SCHEMA["properties"]
+def test_cars24_extractor_raises_on_missing_anchor(tmp_path, monkeypatch):
+    fix = tmp_path / "fixtures" / "cars24" / "broken"
+    fix.mkdir(parents=True)
+    (fix / "page.html").write_text("<html>no listing data</html>")
+    (fix / "captured_at.txt").write_text("2026-05-07T10:00:00Z")
+    monkeypatch.setattr("ci.snapshot.FIXTURES_DIR", tmp_path / "fixtures")
+
+    snap = load_snapshot("cars24", "broken")
+    fake = FakeLLMClient(canned_tool_input={})
+    import pytest
+    with pytest.raises(ValueError, match="cars24"):
+        extract_cars24(snap, fake)
