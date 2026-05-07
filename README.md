@@ -40,9 +40,9 @@ The score is **relative to the cars in this comparison set**. Adding more cars o
 
 Before producing the ranking we built a small evaluation harness and ran it against a hand-labeled gold dataset of **17 separate listings (7 Cars24 + 10 Spinny)** — all matching the same SX-petrol-automatic filter, all distinct from the 6 listings being ranked above.
 
-- **Faithfulness check** *(on the 17 gold listings).* We hand-labeled each one by reading the source page directly, then ran the extractor and compared. **The extractor matched our values on every field, on both platforms.**
-- **Stability check** *(on the 6 ranked listings).* We bumped each of the four weights up and down by 25% (one at a time, 8 variants) and re-ran the ranking. **The ordering was substantially preserved across all 8 variants** — the ranking is not sensitive to small weight choices.
-- **Dominance check** *(on the 6 ranked listings).* We dropped each feature in turn and re-ran. **Removing km changes the ranking noticeably; removing any of the others barely moves it.** Kilometres has the strongest single influence, but no feature alone determines the ranking.
+- **Faithfulness check.** We hand-labeled each gold listing by reading the source page directly, then ran the extractor and compared. **The extractor matched our values on every field, on both platforms.**
+- **Stability check.** We perturbed each of the four weights ±25% (one at a time, 8 variants) and re-ran. **The ordering was substantially preserved** — small weight choices don't flip the ranking.
+- **Dominance check.** We dropped each feature in turn and re-ran. **Kilometres is the most influential, owners second, age third.** Accident-disclosed contributes effectively no signal in this data — every listing in the sample is `accident=none` (Spinny gold listings all report no accident; Cars24 maps all listings to "none" via its platform-level promise). The 15% weight on accident is still defensible for a more diverse sample, just unused here.
 
 ## Caveats
 
