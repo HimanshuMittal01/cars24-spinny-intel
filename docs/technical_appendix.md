@@ -6,33 +6,33 @@ _Companion to [`../README.md`](../README.md). All methodology, per-feature break
 
 ## 1. Methodology
 
-**Pipeline.** Single explicit DAG, synchronous, deterministic at scoring/ranking. Source: `src/ci/pipeline.py`.
+**Pipeline.** Single explicit DAG, synchronous, deterministic at scoring/ranking. Orchestration in `src/ci/pipeline.py`; per-platform extraction at `src/ci/extract/cars24.py` and `src/ci/extract/spinny.py`. The runnable entry point is `scripts/run_pipeline.py` (no standalone extraction CLI — extraction is a step inside the pipeline).
 
 ### Component map
 
 ```mermaid
 flowchart LR
     subgraph Storage["Storage (on disk)"]
-        FIX[("fixtures/&lt;platform&gt;/&lt;id&gt;/<br/>page.html · url.txt · captured_at.txt")]
-        TRACE[("runs/&lt;run_id&gt;/<br/>trace.jsonl · ranking.json · *.json")]
-        GOLD[("eval/<br/>gold.jsonl · labels/*.json · ranking_listings.json")]
+        FIX[("fixtures/&lt;platform&gt;/&lt;id&gt;/")]
+        GOLD[("eval/<br/>gold.jsonl")]
+        OUT[("runs/&lt;run_id&gt;/")]
     end
 
-    subgraph Pipeline["Pipeline (per run)"]
+    subgraph Pipeline["Pipeline"]
         direction LR
-        SL["snapshot loader<br/>(disk-only)"]
-        EC["extractor: cars24<br/>(parses __next_f)"]
-        ES["extractor: spinny<br/>(parses INITIAL_STATE)"]
-        NORM["normalizer<br/>(common schema +<br/>disclosed_fields)"]
-        SCORE["scorer (set-based)<br/>rank-based composite"]
-        RANK["ranker<br/>price / score_common"]
+        SL["snapshot loader"]
+        EC["extract.cars24"]
+        ES["extract.spinny"]
+        NORM["normalize"]
+        SCORE["score (rank-based)"]
+        RANK["rank"]
     end
 
-    subgraph Eval["Eval harness"]
+    subgraph Eval["Eval"]
         direction TB
-        E2["E2 extraction recall<br/>(vs gold, N=17)"]
-        E3["E3 score calibration<br/>(vs gold, N=17)"]
-        E4["E4 weight sensitivity<br/>(±25% perturbation +<br/>leave-one-feature-out)"]
+        EX["extraction recall<br/>(vs gold)"]
+        CAL["score calibration<br/>(vs gold)"]
+        SENS["weight sensitivity"]
     end
 
     FIX --> SL
@@ -42,25 +42,16 @@ flowchart LR
     ES --> NORM
     NORM --> SCORE
     SCORE --> RANK
-    RANK --> TRACE
+    RANK --> OUT
 
-    SL -.-> TRACE
-    EC -.-> TRACE
-    ES -.-> TRACE
-    NORM -.-> TRACE
-    SCORE -.-> TRACE
-
-    GOLD --> E2
-    GOLD --> E3
-    NORM --> E2
-    SCORE --> E3
-    NORM --> E4
-    E2 --> TRACE
-    E3 --> TRACE
-    E4 --> TRACE
+    NORM --> EX
+    SCORE --> CAL
+    NORM --> SENS
+    GOLD --> EX
+    GOLD --> CAL
 ```
 
-Solid arrows = data flow; dotted arrows = trace records (every node logs input hash, output hash, latency to `trace.jsonl`).
+Every pipeline node logs an event (input hash, output hash, latency) to `runs/<run_id>/trace.jsonl`; eval results write JSON files alongside it (`extraction.json`, `calibration.json`, `sensitivity.json`). Both are omitted from the diagram for clarity.
 
 **Extractors are JSON-parse-first.** Both platforms inject canonical listing data as inline JSON (Cars24 via Next.js streaming `__next_f` payloads; Spinny via `window.__INITIAL_STATE__` JS literal). The extractors parse that directly. There is **no LLM in the pipeline** — an earlier draft kept a placeholder `LLMClient` for a possible free-text inspection-narrative fallback, but since both platforms expose enough structured data on their listing pages, the placeholder was removed as dead code.
 
@@ -140,7 +131,7 @@ Pairwise comparison per feature. `1` = row beats column on this feature, `0` = l
 
 ## 4. Eval harness results
 
-### E2 — Extraction quality (vs hand-labeled gold, N=17, independent of the ranking 6)
+### Extraction recall (vs hand-labeled gold, N=17, independent of the ranking 6)
 
 Gold dataset: 17 listings hand-labeled, all matching the same SX-petrol-automatic filter, all distinct from the 6 listings being ranked.
 
@@ -149,7 +140,7 @@ Gold dataset: 17 listings hand-labeled, all matching the same SX-petrol-automati
 
 100% recall on the 4 score-bearing fields across all gold listings, both platforms. Self-consistency check (gold uses same rubric on same source JSON), not independent calibration. See limitations.
 
-### E3 — Score calibration (vs gold, N=17)
+### Score calibration (vs gold, N=17)
 
 - MAE (overall): `0.0`
 - Spearman ρ (overall): `1.0`
@@ -158,7 +149,7 @@ Gold dataset: 17 listings hand-labeled, all matching the same SX-petrol-automati
 
 MAE = 0 by construction (gold uses same rubric on same source data). Useful as a regression guard for future runs.
 
-### E4 — Weight sensitivity (Kendall's τ vs unperturbed ranking)
+### Weight sensitivity (Kendall's τ vs unperturbed ranking)
 
 **±25% perturbation per dim:**
 
@@ -279,9 +270,9 @@ That's a different scope. This project is the small-N illustrative version that 
 See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 
 1. **Speculative schema vs real data.** Mid-build, fetched real listings and discovered the schemas were largely fictional. Pivoted to JSON-parse-first extraction. Rewrote 3 tasks.
-2. **Gold-labeling on a deterministic pipeline.** E2/E3 against hand-labeled gold come out perfect by construction. Honest framing in the limitations section.
+2. **Gold-labeling on a deterministic pipeline.** Extraction-recall and score-calibration evals come out perfect by construction. Honest framing in the limitations section.
 3. **Anchored bands → rank-based scoring.** Bands were defensible only via sensitivity analysis. Rank-based is defensible by construction ("is A's km better than B's km — yes"). Tradeoff: lost magnitude, gained groundedness.
-4. **Tight scope filter (variant + fuel + transmission).** First ranking mixed petrol/diesel, manual/auto, and EX/SX/SX(O) — spec heterogeneity contaminated the price-to-condition ratio. Re-collected the dataset under a tight filter (SX-petrol-auto). Top-3 cleared up: all Cars24, by a consistent ratio margin. E4 km LOO τ moved from 0.33 to 0.60 (less overwhelming once trim/fuel/transmission heterogeneity removed).
+4. **Tight scope filter (variant + fuel + transmission).** First ranking mixed petrol/diesel, manual/auto, and EX/SX/SX(O) — spec heterogeneity contaminated the price-to-condition ratio. Re-collected under a tight filter (SX-petrol-auto). Top-3 cleared up: all Cars24, by a consistent ratio margin. km LOO τ moved from 0.33 to 0.60 (less overwhelming once trim/fuel/transmission heterogeneity removed).
 
 ## 8. Limitations
 
@@ -289,8 +280,8 @@ See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 
 - **N=6 ranking.** Strategic conclusions are illustrative. Listings span 2016-2022 to demonstrate the method across the SX-petrol-auto sub-segment.
 - **Rank-based scoring depends on the set composition.** Same listing in a different 6-set could rank differently. The composite is a relative-position score, not an absolute condition score.
-- **km_driven has the strongest single influence on the ranking** (E4 LOO τ = 0.60; other features 0.73–0.87). Defensible given km is the strongest single predictor in used-car valuation, but worth surfacing.
-- **E3 calibration is a self-consistency check**, not an independent eval. Gold uses the same rubric on the same JSON the extractor parses. True calibration would require holistic gut-rated scores or third-party valuation.
+- **km_driven has the strongest single influence on the ranking** (LOO τ = 0.60; other features 0.73–0.87). Defensible given km is the strongest single predictor in used-car valuation, but worth surfacing.
+- **Score calibration is a self-consistency check**, not an independent eval. Gold uses the same rubric on the same JSON the extractor parses. True calibration would require holistic gut-rated scores or third-party valuation.
 - **Cars24 platform-level no-accident promise is *modelled* as per-listing `accident_disclosed = none`.** Defensible mapping, not a per-listing extraction. Documented and acknowledged.
 - **disclosure_count is binary per field.** A single boolean (Spinny `is_accidental: false`) counts the same as detailed exposure (per-section inspection sub-ratings). Measures *presence*, not *depth*.
 - **Gold annotated by one annotator** (the author). No inter-rater data.
@@ -299,7 +290,7 @@ See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 ## 9. Reproducibility
 
 ```
-uv run pytest                              # 55 tests
+uv run pytest                              # 51 tests
 uv run python scripts/run_pipeline.py      # produces runs/<id>/ranking.json
 ```
 Latest run: `runs/20260507T101410-3c6ec3/`
