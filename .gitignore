@@ -6,3 +6,4 @@ __pycache__/
 runs/
 fixtures/*/page.html
 .DS_Store
+.coverage
