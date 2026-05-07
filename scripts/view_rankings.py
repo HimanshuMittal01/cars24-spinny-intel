@@ -59,10 +59,13 @@ def get_descriptive(platform: str, listing_id: str) -> dict:
             "fuel": f.get("fuelType"),
             "transmission": f.get("transmissionType"),
         }
+    variant = f.get("variant")
+    if isinstance(variant, dict):
+        variant = variant.get("full_name") or variant.get("display_name")
     return {
         "make": f.get("make"),
         "model": f.get("model"),
-        "variant": f.get("variant"),
+        "variant": variant,
         "year": f.get("make_year"),
         "fuel": f.get("fuel_type"),
         "transmission": f.get("transmission"),

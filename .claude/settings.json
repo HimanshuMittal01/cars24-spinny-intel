@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git tag *)",
+      "Bash(uv sync *)",
+      "Bash(.venv/bin/pytest -q)",
+      "Bash(.venv/bin/pytest)",
+      "Bash(.venv/bin/pytest tests/test_vision_cache.py -v)",
+      "Bash(.venv/bin/pytest tests/test_vision_inspector.py -v)",
+      "Bash(.venv/bin/pytest tests/test_vision_agent.py -v)",
+      "Bash(.venv/bin/pytest tests/test_vision_agent.py::test_agent_force_finalizes_on_inspect_budget_exceeded -v)",
+      "Bash(.venv/bin/pytest -v)",
+      "Bash(.venv/bin/pytest tests/test_vision_score.py -v)",
+      "Bash(.venv/bin/pytest tests/test_vision_composite.py -v)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(f'{len\\(d\\)} items'\\); [print\\(r['platform'],r['listing_id']\\) for r in d]\")",
+      "Bash(python3 -c \"import json; d=json.loads\\(open\\('/Users/himan/Documents/projects/cars24-comp-intel/fixtures/cars24/10017390119/photos.json'\\).read\\(\\)\\); print\\(len\\(d.get\\('photos',[]\\)\\)\\); print\\(list\\(d['photos'][0].keys\\(\\)\\)\\)\")",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}
