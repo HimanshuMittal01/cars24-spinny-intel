@@ -18,9 +18,9 @@ def render_chart(rows: list[RankRow], out_path: Path) -> None:
     fig, ax = plt.subplots(figsize=(7, 5))
     has_visual = any(r.composite_score is not None for r in rows)
     x_label = (
-        "composite score (α·rule + (1-α)·visual, set-relative)"
+        "composite score 0–100"
         if has_visual else
-        "condition score (rank-based, 0–100, relative to this set)"
+        "rule score 0–100"
     )
     for plat, marker, color in [("cars24", "o", "#1f77b4"), ("spinny", "s", "#d62728")]:
         sub = [r for r in rows if r.platform == plat]
