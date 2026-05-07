@@ -140,9 +140,33 @@ Readings:
 - 3 reps on `cars24/10041693110`: identical = `True`, distinct outputs = `1`
 - Pipeline is byte-deterministic given fixed snapshots. Any non-determinism would surface here.
 
-## 5. Disclosure-eligible field set
+## 5. Disclosure asymmetry — side observation, not a ranking input
 
-17 fields counted for `disclosure_count`. A listing scores 1 per field if any non-null value is exposed pre-auth.
+`disclosure_count` is **not** a scoring dimension. It does not affect the ranking in §1 of `report.md`. It is reported as a descriptive metric because the gap between the two platforms is large and structural — but a CXO acting on the ranking should set this aside; it speaks to *positioning*, not to *which-listing-is-the-better-deal*.
+
+### The numbers
+
+- Cars24: **4 of 17** condition-relevant fields exposed per listing (uniform across all 3 Cars24 listings in this sample).
+- Spinny: **11-12 of 17** per listing.
+- ~3× ratio. Concrete and observable, not constructed.
+
+### What the gap means (positioning interpretation)
+
+The ~13-field gap isn't evenly spread. Spinny exposes the *judgment-bearing* fields — inspection sub-ratings, repair statements, tier, accident boolean, market-price-delta. Cars24 exposes only metadata (price, km, year, insurance type) plus a platform-level promise.
+
+So:
+- **Cars24's product is "trust the platform — same warranty, same 140-pt promise on every car."** The buyer doesn't read condition specifics; the platform vouches.
+- **Spinny's product is "read the report — here's exactly what was inspected, what was found, what tier this car is in."** The buyer self-serves.
+
+Both are coherent strategies. They likely target different buyer segments (price-sensitive trust-the-brand vs informed read-the-paper-trail). **This is a signal about how each platform competes, not a signal about which listing is a better deal.**
+
+### Why it's deliberately not in the ranking
+
+Mixing disclosure breadth into the score would conflate "exposes more data" with "is in better condition". A Cars24 listing in objectively excellent mechanical shape with sparse disclosure should not be penalised for being on a platform that markets opacity-as-uniformity.
+
+### 17 disclosure-eligible fields
+
+A listing scores 1 per field if any non-null value is exposed pre-auth.
 
 - `accident_history_detail`
 - `inspection_per_section_ratings`
