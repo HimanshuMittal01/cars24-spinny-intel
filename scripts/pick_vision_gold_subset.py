@@ -112,7 +112,7 @@ def pick_subset(gold: list[dict]) -> tuple[list[dict], list[dict]]:
         # Reserve one multi-owner slot if any multi-owner row exists in this platform's gold.
         multi_owners = [r for r in annotated if r["_owners"] is not None and r["_owners"] >= 2]
         if multi_owners:
-            best_mo = max(multi_owners, key=lambda r: (r["_photos"], r["_disclosure"]))
+            best_mo = max(multi_owners, key=lambda r: (r["_photos"], r["_disclosure"], r["score_common"]))
             chosen.append(best_mo)
             seen_ids.add(best_mo["listing_id"])
             filled_quintiles.add(best_mo["_quintile"])
@@ -122,13 +122,13 @@ def pick_subset(gold: list[dict]) -> tuple[list[dict], list[dict]]:
             cands = [r for r in annotated if r["_quintile"] == q and r["listing_id"] not in seen_ids]
             if not cands:
                 continue
-            cand = max(cands, key=lambda r: (r["_photos"], r["_disclosure"]))
+            cand = max(cands, key=lambda r: (r["_photos"], r["_disclosure"], r["score_common"]))
             chosen.append(cand)
             seen_ids.add(cand["listing_id"])
 
         # Pass 2: fill to target with remaining (highest photo+disclosure first).
         remaining = [r for r in annotated if r["listing_id"] not in seen_ids]
-        remaining.sort(key=lambda r: (r["_photos"] + r["_disclosure"]), reverse=True)
+        remaining.sort(key=lambda r: (r["_photos"] + r["_disclosure"], r["score_common"]), reverse=True)
         while len(chosen) < target_per_platform and remaining:
             extra = remaining.pop(0)
             chosen.append(extra)

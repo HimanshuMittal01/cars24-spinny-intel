@@ -211,3 +211,40 @@ def test_pick_subset_no_op_owners_constraint_when_no_multi_owner(
     assert len(cars_picked) == 5
     assert len(spin_picked) == 5
     assert len(dropped) == 7
+
+
+def test_pick_subset_breaks_ties_by_score_common(tmp_path: Path, monkeypatch):
+    """When two candidates tie on (_photos, _disclosure), the higher score_common wins.
+
+    Setup: 5 cars24 rows spanning quintiles 0-4, all with identical _photos=0/_disclosure=2.
+    Add a 6th cars24 row also in q=4 with the same photo/disclosure but a LOWER score.
+    The picker must keep the higher-scored q=4 row, not the lower-scored one.
+    Spinny is 5 identical rows (all in q=4) — just to satisfy platform parity output;
+    their exact picks don't matter for this assertion.
+    """
+    monkeypatch.setattr("scripts.pick_vision_gold_subset.EVAL_DIR", tmp_path)
+    monkeypatch.setattr("scripts.pick_vision_gold_subset.FIXTURES_DIR", tmp_path / "fixtures")
+
+    # 5 cars24 rows in quintiles 0..4, score values 10/30/50/70/90 (spread ensures each quintile)
+    # 6th row shares q=4 range but has a LOWER score (80 < 90); list it FIRST so naïve
+    # iteration would pick it if score_common is not used as a tie-break.
+    cars = [
+        _fake_gold_row("cars24", "c_low_q4",  80.0),  # q=4, lower score — must be DROPPED
+        _fake_gold_row("cars24", "c0",        10.0),  # q=0
+        _fake_gold_row("cars24", "c1",        30.0),  # q=1
+        _fake_gold_row("cars24", "c2",        50.0),  # q=2
+        _fake_gold_row("cars24", "c3",        70.0),  # q=3
+        _fake_gold_row("cars24", "c_high_q4", 90.0),  # q=4, higher score — must be PICKED
+    ]
+    # 5 spinny rows; scores spread across 0..4 quintiles, one per quintile
+    spin = [_fake_gold_row("spinny", f"s{i}", 20.0 * i) for i in range(5)]
+
+    _setup_labels(tmp_path, cars + spin)
+
+    picked, dropped = pick_subset(cars + spin)
+
+    cars_picked_ids   = {p["listing_id"] for p in picked  if p["platform"] == "cars24"}
+    cars_dropped_ids  = {d["listing_id"] for d in dropped if d["platform"] == "cars24"}
+
+    assert "c_high_q4" in cars_picked_ids,  "higher-scored q=4 row must be in picks"
+    assert "c_low_q4"  in cars_dropped_ids, "lower-scored q=4 row must be dropped"
