@@ -1,7 +1,7 @@
 [project]
 name = "ci"
 version = "0.1.0"
-description = "Add your description here"
+description = "Multi-agent extraction + ranking pipeline for used-car listings on Cars24 and Spinny"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

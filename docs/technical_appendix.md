@@ -177,10 +177,6 @@ Readings:
 - Ranking is **stable to ±25% weight perturbation** (τ ≥ 0.87).
 - **km_driven has the strongest single influence** — removing it drops τ to 0.60. The other features stay 0.73–0.87. No single feature alone determines the ranking, but km matters most.
 
-### Determinism
-
-The pipeline has no LLM call, no async, no `random`, no time-dependent hashing — output is byte-stable across re-runs by construction. There is no separate eval for it; it's a property of the code structure.
-
 ## 5. Disclosure asymmetry — side observation, not a ranking input
 
 `disclosure_count` is **not** a scoring dimension. It does not affect the ranking in `README.md`. It is reported as a descriptive metric because the gap between the two platforms is large and structural — but it speaks to platform *positioning*, not to *which-listing-is-the-better-deal*. Anyone acting on the ranking should set it aside.
