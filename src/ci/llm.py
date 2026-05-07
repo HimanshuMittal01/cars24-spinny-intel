@@ -1,8 +1,6 @@
-from __future__ import annotations
-
 import os
 from dataclasses import dataclass, field
-from typing import Any, Optional, Protocol
+from typing import Any, Protocol
 
 from anthropic import Anthropic
 
@@ -33,7 +31,7 @@ class LLMClient(Protocol):
 
 
 class AnthropicLLMClient:
-    def __init__(self, api_key: Optional[str] = None, model: str = MODEL_EXTRACTOR):
+    def __init__(self, api_key: str | None = None, model: str = MODEL_EXTRACTOR):
         self.client = Anthropic(api_key=api_key or os.environ["ANTHROPIC_API_KEY"])
         self.model = model
 
