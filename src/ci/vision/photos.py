@@ -33,37 +33,61 @@ def extract_photo_urls_cars24(fields: dict[str, Any]) -> list[dict]:
 
 
 def extract_photo_urls_spinny(fields: dict[str, Any]) -> list[dict]:
-    """Prefer `galleryV3` (richer + sectioned); fall back to `product_photos`.
+    """Prefer `galleryV3` (richer + sectioned); fall back to `product_photos.images`.
 
-    galleryV3 entries have a `url` and an optional `section` label; product_photos
-    have only a `url`.
+    galleryV3 is a list of category objects, each with an `images` list whose
+    entries have a `path` field. Paths are protocol-relative (//host/...) so we
+    prepend `https:`. product_photos has a different shape (dict-of-dicts);
+    we walk product_photos.images.<section> -> [{file: {url}}, ...] as fallback.
     """
+    out: list[dict] = []
+    seen: set[str] = set()
+
     g3 = fields.get("galleryV3")
     if isinstance(g3, list) and g3:
-        out: list[dict] = []
-        seen: set[str] = set()
         for entry in g3:
             if not isinstance(entry, dict):
                 continue
-            url = entry.get("url")
-            if not isinstance(url, str) or not url or url in seen:
+            category = entry.get("category")
+            images = entry.get("images", [])
+            if not isinstance(images, list):
                 continue
-            seen.add(url)
-            out.append({"url": url, "hint": entry.get("section")})
-        return out
+            for img in images:
+                if not isinstance(img, dict):
+                    continue
+                path = img.get("path")
+                if not isinstance(path, str) or not path:
+                    continue
+                url = "https:" + path if path.startswith("//") else path
+                if url in seen:
+                    continue
+                seen.add(url)
+                out.append({"url": url, "hint": category})
+        if out:
+            return out
 
     pp = fields.get("product_photos")
-    if isinstance(pp, list):
-        out2: list[dict] = []
-        seen2: set[str] = set()
-        for entry in pp:
-            if not isinstance(entry, dict):
-                continue
-            url = entry.get("url")
-            if not isinstance(url, str) or not url or url in seen2:
-                continue
-            seen2.add(url)
-            out2.append({"url": url, "hint": None})
-        return out2
+    if isinstance(pp, dict):
+        images_by_section = pp.get("images")
+        if isinstance(images_by_section, dict):
+            for section, entries in images_by_section.items():
+                if not isinstance(entries, list):
+                    continue
+                for entry in entries:
+                    if not isinstance(entry, dict):
+                        continue
+                    file_obj = entry.get("file")
+                    if not isinstance(file_obj, dict):
+                        continue
+                    url = file_obj.get("url")
+                    if not isinstance(url, str) or not url:
+                        continue
+                    if url.startswith("//"):
+                        url = "https:" + url
+                    if url in seen:
+                        continue
+                    seen.add(url)
+                    out.append({"url": url, "hint": section})
+        return out
 
     return []

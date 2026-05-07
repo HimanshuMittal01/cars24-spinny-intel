@@ -50,33 +50,59 @@ def test_extract_cars24_handles_missing_gallery():
     assert extract_photo_urls_cars24({"media": {}}) == []
 
 
-def test_extract_spinny_prefers_galleryV3():
+def test_extract_spinny_walks_galleryV3_categories():
     fields = {
         "galleryV3": [
-            {"url": "https://spn-mda.spinny.com/img/a/raw/file.jpg",
-             "section": "exterior"},
-            {"url": "https://spn-mda.spinny.com/img/b/raw/file.jpg",
-             "section": "interior"},
-        ],
-        "product_photos": [
-            {"url": "https://spn-mda.spinny.com/img/Z/raw/file.jpg"},
+            {"category": "exterior", "images": [
+                {"path": "//mda.spinny.com/abc/raw/file.JPG", "label": "Front"},
+                {"path": "//mda.spinny.com/def/raw/file.JPG", "label": "Side"},
+            ]},
+            {"category": "interior", "images": [
+                {"path": "//mda.spinny.com/ghi/raw/file.JPG", "label": "Dashboard"},
+            ]},
+            {"category": "engine", "images": []},
         ],
     }
     urls = extract_photo_urls_spinny(fields)
-    assert len(urls) == 2  # galleryV3 wins
+    assert len(urls) == 3
+    assert all(u["url"].startswith("https://mda.spinny.com/") for u in urls)
     assert urls[0]["hint"] == "exterior"
+    assert urls[2]["hint"] == "interior"
 
 
-def test_extract_spinny_falls_back_to_product_photos():
+def test_extract_spinny_falls_back_to_product_photos_when_galleryV3_empty():
     fields = {
-        "product_photos": [
-            {"url": "https://spn-mda.spinny.com/img/x/raw/file.jpg"},
-            {"url": "https://spn-mda.spinny.com/img/y/raw/file.jpg"},
+        "galleryV3": [],
+        "product_photos": {
+            "images": {
+                "exterior": [
+                    {"file": {"url": "//mda.spinny.com/x/raw/file.JPG"}},
+                    {"file": {"url": "//mda.spinny.com/y/raw/file.JPG"}},
+                ],
+                "interior": [
+                    {"file": {"url": "//mda.spinny.com/z/raw/file.JPG"}},
+                ],
+            },
+        },
+    }
+    urls = extract_photo_urls_spinny(fields)
+    assert len(urls) == 3
+    assert urls[0]["hint"] == "exterior"
+    assert urls[2]["hint"] == "interior"
+    assert all(u["url"].startswith("https://") for u in urls)
+
+
+def test_extract_spinny_dedupes_paths():
+    fields = {
+        "galleryV3": [
+            {"category": "exterior", "images": [
+                {"path": "//x/a.jpg"},
+                {"path": "//x/a.jpg"},  # dup
+            ]},
         ],
     }
     urls = extract_photo_urls_spinny(fields)
-    assert len(urls) == 2
-    assert urls[0]["hint"] is None
+    assert len(urls) == 1
 
 
 def test_extract_spinny_handles_missing_both():
