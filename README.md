@@ -1,6 +1,6 @@
 # Cars24 vs Spinny — Competitive Intel
 
-A multi-agent pipeline that extracts specs and condition signals from used-car listings on Cars24 and Spinny, then ranks them by price-to-condition. **Scope: Hyundai Creta, Delhi-NCR, SX trim line, petrol, automatic.** N=6 listings ranked, 3 per platform; 17 additional gold listings hand-labeled for evaluation.
+A multi-agent pipeline that extracts specs and condition signals from used-car listings on Cars24 and Spinny, then ranks them by price-to-condition. **Scope: Hyundai Creta, Delhi-NCR, SX trim line, petrol, automatic.** N=6 listings ranked, 3 per platform; 10 gold listings used for evaluation (reduced from 17; see note below).
 
 ## Why this scope
 
@@ -38,11 +38,14 @@ The score is **relative to the cars in this comparison set**. Adding more cars o
 
 ## How we know the ranking holds up
 
-Before producing the ranking we built a small evaluation harness and ran it against a hand-labeled gold dataset of **17 separate listings (7 Cars24 + 10 Spinny)** — all matching the same SX-petrol-automatic filter, all distinct from the 6 listings being ranked above.
+Before producing the ranking we built a small evaluation harness and ran it against a hand-labeled gold dataset of **10 separate listings (5 Cars24 + 5 Spinny)** — all matching the same SX-petrol-automatic filter, all distinct from the 6 listings being ranked above.
 
-- **Faithfulness check.** We hand-labeled each gold listing by reading the source page directly, then ran the extractor and compared. **The extractor matched our values on every field, on both platforms.**
-- **Stability check.** We perturbed each of the four weights ±25% (one at a time, 8 variants) and re-ran. **The ordering was substantially preserved** — small weight choices don't flip the ranking.
-- **Dominance check.** We dropped each feature in turn and re-ran. **Kilometres is the most influential, owners second, age third.** Accident-disclosed contributes effectively no signal in this data — every listing in the sample is `accident=none` (Spinny gold listings all report no accident; Cars24 maps all listings to "none" via its platform-level promise). The 15% weight on accident is still defensible for a more diverse sample, just unused here.
+**Gold set note:** The gold set was reduced from 17 to 10 listings to support the vision-agent calibration (see [vision-agent design](docs/superpowers/specs/2026-05-07-vision-agent-design.md) §12.0). The 7 dropped listings remain on disk as archive but no longer feed `eval/gold.jsonl`. Statistical caveat at N=10: small-N metrics are noisy; treat individual numbers as directional, not precise.
+
+- **Faithfulness check.** Extraction recall is **1.0 across all four score-bearing fields (price, km_driven, age_years, owners), on both Cars24 and Spinny.** The extractor matched our hand-labeled values on every field, on every listing.
+- **Calibration note.** The gold's `score_common` values are defined as the scorer's own output on the 10-listing set (spec §14 algorithm). System-vs-gold MAE and Spearman are therefore not informative measures of calibration — they are trivially 0 and 1 by construction. Calibration figures are omitted.
+- **Stability check.** We perturbed each of the four weights ±25% (one at a time, 8 variants) and re-ran on the gold. **The ordering was substantially preserved** (τ range 0.689–0.956) — small weight choices don't flip the ranking.
+- **Dominance check.** We dropped each feature in turn and re-ran on the gold. **km_driven is the most influential dimension by a large margin** (LOO τ = 0.022 — nearly full rank shuffle when removed). age_years is secondary (LOO τ = 0.156), owners tertiary (LOO τ = 0.556). Accident-disclosed contributes effectively no signal in this data (LOO τ = 0.956) — none of the listings in the sample reported accidents.
 
 ## Caveats
 
