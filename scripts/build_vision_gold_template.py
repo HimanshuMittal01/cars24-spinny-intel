@@ -1,4 +1,7 @@
-"""Generate eval/vision_gold.jsonl template (16 listings × 5 aspects, all nulls).
+"""Generate eval/vision_gold.jsonl template (10 gold listings × 5 aspects, all nulls).
+
+Scope: gold listings only (calibration set). The 6 ranking listings are pure
+agent output — no human gold for them. This is the cleaner held-out framing.
 
 Also generates eval/vision_gold.anchors.md — a calibration doc that points the
 hand-labeller at example photos for each severity level. Anchors are picked as
@@ -18,16 +21,14 @@ ASPECTS = ("exterior_panels", "interior_cabin",
            "dashboard_console", "tyres", "engine_bay")
 
 
-def _active_listings() -> list[dict]:
-    """16-listing union: 10 gold + 6 ranking."""
+def _gold_listings() -> list[dict]:
+    """10 gold listings only (calibration set; the 6 ranking are agent-only)."""
     gold = [
         json.loads(line)
         for line in (EVAL_DIR / "gold.jsonl").read_text().splitlines()
         if line.strip()
     ]
-    ranking = json.loads((EVAL_DIR / "ranking_listings.json").read_text())
-    return [{"platform": g["platform"], "listing_id": g["listing_id"]} for g in gold] \
-         + [{"platform": r["platform"], "listing_id": r["listing_id"]} for r in ranking]
+    return [{"platform": g["platform"], "listing_id": g["listing_id"]} for g in gold]
 
 
 def build_template_rows(listings: list[dict]) -> list[dict]:
@@ -77,7 +78,7 @@ def _write_anchors_doc(listings: list[dict], out_path: Path) -> None:
 
 
 def main() -> None:
-    listings = _active_listings()
+    listings = _gold_listings()
     rows = build_template_rows(listings)
     out_jsonl = EVAL_DIR / "vision_gold.jsonl"
     header = (

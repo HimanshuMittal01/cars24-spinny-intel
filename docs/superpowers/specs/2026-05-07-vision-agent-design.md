@@ -418,17 +418,18 @@ All hyperparameter selection — α, severity-to-numeric mapping, prompt-version
 bumps, agent budget caps, plus the existing rule-scorer weights — is
 performed on the **10-listing gold subset only**. The **6-listing ranking
 subset is held out**: it receives `composite_score` under the fixed-on-gold α,
-and that scored output is the deliverable. Held-out spot-checks against gold
-for the 6 are reported (since the 6 are also hand-labeled, see §12.1) but
-**never trigger retuning**.
+and that scored output is the deliverable. The 6 ranking listings receive
+`composite_score` under the fixed-on-gold α, and that scored output is the
+deliverable. They are not hand-labeled — they are pure agent output, which is
+the cleanest held-out framing.
 
 Per-eval scope is summarized below and detailed in §12.3-§12.6.
 
 | Eval               | Scope                                                              | What it measures                                                                                                                                  |
 |--------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| **vision gold**    | 16 listings × 5 aspects, hand-labeled by user (10 gold + 6 ranking) | ground truth (split: 10 calibration / 6 held-out)                                                                                                |
-| **E6** (new)       | primary on 10 gold; held-out spot-check on 6 ranking               | agent vs gold: exact, adjacent, Cohen's κ — per aspect, per platform; 6-set values reported but never used to retune                              |
-| **E3** (extended)  | primary on 10 gold (three-way Spearman); held-out Spearman on 6    | rule / gold-visual / agent-visual rank agreement                                                                                                  |
+| **vision gold**    | 10 listings × 5 aspects, hand-labeled by user (gold subset only)    | ground truth for calibration; the 6 ranking listings are pure agent output (stronger held-out story)                                             |
+| **E6** (new)       | 10 gold (only — the 6 ranking have no gold labels)                  | agent vs gold: exact, adjacent, Cohen's κ — per aspect, per platform                                                                             |
+| **E3** (extended)  | 10 gold (three-way Spearman: rule / gold-visual / agent-visual)     | how the rubric, the photos, and the agent agree on ranking                                                                                        |
 | **E4** (extended)  | weights × α joint sweep, computed on 10 gold                       | calibration stability; a separate "applied stability" readout shows the 6 ranking's rank-stability under the fixed-on-gold α                       |
 | **E5** (extended)  | 5 listings sampled from the 10 gold (never from the 6) × 3 cold runs | vision determinism: exact, adjacent, score range; targets ≥ 0.7, ≥ 0.85, < 5pt                                                                  |
 
@@ -476,8 +477,9 @@ Header comment lists the allowed severity values and the optional `notes` shape.
 
 ### 12.2 Labeling support tooling
 
-`scripts/build_vision_gold_template.py` produces the empty template with all
-16 active fixtures (10 gold + 6 ranking) pre-populated as `null`s, and writes
+`scripts/build_vision_gold_template.py` produces the empty template with the
+10 gold fixtures pre-populated as `null`s (the 6 ranking listings are excluded
+— they are pure agent output, no human labels), and writes
 `eval/vision_gold.anchors.md` — a small reference doc with one or two example
 photos at each severity level (drawn from the dataset itself) so the user has
 calibration anchors before starting. Reduces severity-drift across the
@@ -497,10 +499,9 @@ Per aspect, per platform, computed in `src/ci/eval/vision_agreement.py`:
   separate "missing" category for the kappa or restrict to mutually-visible
   rows; both computed and reported).
 
-**Reported in two splits**: primary on the 10 gold (calibration) and a
-held-out spot-check on the 6 ranking. Held-out values are surfaced for
-honesty; they never feed back into prompt-version bumps, severity-mapping
-changes, α, or any other tunable.
+**Reported on the 10 gold only.** The 6 ranking listings have no human labels
+— they receive `composite_score` from the agent and that scored output is the
+deliverable, no validation signal beyond the calibration κ on the 10.
 
 ### 12.4 E5 — vision determinism (cold-cache)
 
@@ -522,12 +523,8 @@ Extends existing cross-method eval. Compute three rank vectors:
 - `gold_visual_rank` (NEW, from gold-derived `visual_score`).
 - `agent_visual_rank` (NEW, from agent-derived `visual_score`).
 
-**Primary analysis on 10 gold:** pairwise Spearman ρ, scatterplot triptych,
+**Analysis on 10 gold:** pairwise Spearman ρ, scatterplot triptych,
 top-divergence-listings table in the appendix.
-
-**Held-out report on 6 ranking:** same three vectors restricted to the 6
-listings; pairwise Spearman ρ reported as a held-out check. Small-N (n=6),
-so ρ has wide CIs — reported with that caveat.
 
 ### 12.6 E4 — weights × α joint sweep
 
@@ -580,10 +577,8 @@ rule_score` (today's behavior).
 10. **Divergence transparency table**: top-5 listings where `rule_score` and
     `visual_score` diverge most. Annotation only — not a primary deliverable.
 11. **Calibration vs held-out separation**: every eval section reports
-    primary metrics on the 10 gold and held-out values on the 6 ranking, in
-    that order, with the held-out tag explicit. The reader sees what was
-    used to set the knob and what the knob's behavior looks like on
-    untouched data.
+    metrics on the 10 gold only (the 6 ranking listings have no human labels
+    and ship as agent-only `composite_score`).
 
 ---
 
