@@ -61,6 +61,17 @@ async def inspect_photo(
     img_bytes = photo_path.read_bytes()
     img_b64 = base64.standard_b64encode(img_bytes).decode()
 
+    # Detect media type from magic bytes — fixtures are saved as .jpg but actual content
+    # may be PNG/WEBP because we content-hash bytes without re-encoding.
+    if img_bytes.startswith(b"\x89PNG"):
+        media_type = "image/png"
+    elif img_bytes.startswith(b"GIF8"):
+        media_type = "image/gif"
+    elif img_bytes[:4] == b"RIFF" and img_bytes[8:12] == b"WEBP":
+        media_type = "image/webp"
+    else:
+        media_type = "image/jpeg"
+
     response = await client.messages.create(
         model=INSPECTOR_MODEL,
         max_tokens=1024,
@@ -72,7 +83,7 @@ async def inspect_photo(
                     "type": "image",
                     "source": {
                         "type": "base64",
-                        "media_type": "image/jpeg",
+                        "media_type": media_type,
                         "data": img_b64,
                     },
                 },
