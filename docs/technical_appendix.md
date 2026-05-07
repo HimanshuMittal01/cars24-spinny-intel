@@ -1,6 +1,6 @@
 # Technical Appendix — Cars24 vs Spinny Competitive Intel
 
-_Run id: `20260507T085230-477ddc`_
+_Run id: `20260507T101410-3c6ec3`_
 
 _Companion to [`../README.md`](../README.md). All methodology, per-feature breakdown, eval harness numbers, and limitations live here._
 
@@ -33,12 +33,12 @@ Each feature, raw value, and rank-score (0-100) for the 6 listings. Composite is
 
 | listing | platform | price | km | age | own | accident | km_score | age_score | own_score | acc_score | composite |
 |---|---|---:|---:|---:|---:|---|---:|---:|---:|---:|---:|
-| `10076268734` | cars24 | ₹764,000 | 50,208 | 5 | 1 | none | 80.0 | 80.0 | 60.0 | 50.0 | **70.5** |
-| `28476005` | spinny | ₹1,347,000 | 33,191 | 4 | 1 | none | 100.0 | 100.0 | 60.0 | 50.0 | **82.5** |
-| `10096166769` | cars24 | ₹700,389 | 66,306 | 7 | 1 | none | 40.0 | 10.0 | 60.0 | 50.0 | **39.0** |
-| `10041693110` | cars24 | ₹950,000 | 50,673 | 6 | 2 | none | 60.0 | 50.0 | 0.0 | 50.0 | **41.0** |
-| `28198885` | spinny | ₹747,000 | 88,785 | 7 | 1 | none | 20.0 | 10.0 | 60.0 | 50.0 | **32.0** |
-| `27839393` | spinny | ₹987,000 | 90,428 | 6 | 1 | none | 0.0 | 50.0 | 60.0 | 50.0 | **35.0** |
+| `10096166769` | cars24 | ₹700,389 | 66,306 | 7 | 1 | none | 60.0 | 30.0 | 50.0 | 50.0 | **48.5** |
+| `10126364760` | cars24 | ₹508,700 | 86,100 | 10 | 1 | none | 40.0 | 0.0 | 50.0 | 50.0 | **34.0** |
+| `10067090111` | cars24 | ₹1,080,000 | 58,147 | 5 | 1 | none | 80.0 | 80.0 | 50.0 | 50.0 | **68.0** |
+| `28476005` | spinny | ₹1,347,000 | 33,191 | 4 | 1 | none | 100.0 | 100.0 | 50.0 | 50.0 | **80.0** |
+| `28198885` | spinny | ₹747,000 | 88,785 | 7 | 1 | none | 20.0 | 30.0 | 50.0 | 50.0 | **34.5** |
+| `27839393` | spinny | ₹987,000 | 90,428 | 6 | 1 | none | 0.0 | 60.0 | 50.0 | 50.0 | **35.0** |
 
 ## 3. Pairwise win matrices
 
@@ -46,67 +46,67 @@ Pairwise comparison per feature. `1` = row beats column on this feature, `0` = l
 
 ### km_driven
 
-| | `…8734` | `…6005` | `…6769` | `…3110` | `…8885` | `…9393` |
+| | `…6769` | `…4760` | `…0111` | `…6005` | `…8885` | `…9393` |
 |---|---:|---:|---:|---:|---:|---:|
-| `…8734` | — | 0 | 1 | 1 | 1 | 1 |
-| `…6005` | 1 | — | 1 | 1 | 1 | 1 |
-| `…6769` | 0 | 0 | — | 0 | 1 | 1 |
-| `…3110` | 0 | 0 | 1 | — | 1 | 1 |
+| `…6769` | — | 1 | 0 | 0 | 1 | 1 |
+| `…4760` | 0 | — | 0 | 0 | 1 | 1 |
+| `…0111` | 1 | 1 | — | 0 | 1 | 1 |
+| `…6005` | 1 | 1 | 1 | — | 1 | 1 |
 | `…8885` | 0 | 0 | 0 | 0 | — | 1 |
 | `…9393` | 0 | 0 | 0 | 0 | 0 | — |
 
 ### age_years
 
-| | `…8734` | `…6005` | `…6769` | `…3110` | `…8885` | `…9393` |
+| | `…6769` | `…4760` | `…0111` | `…6005` | `…8885` | `…9393` |
 |---|---:|---:|---:|---:|---:|---:|
-| `…8734` | — | 0 | 1 | 1 | 1 | 1 |
-| `…6005` | 1 | — | 1 | 1 | 1 | 1 |
-| `…6769` | 0 | 0 | — | 0 | ½ | 0 |
-| `…3110` | 0 | 0 | 1 | — | 1 | ½ |
-| `…8885` | 0 | 0 | ½ | 0 | — | 0 |
-| `…9393` | 0 | 0 | 1 | ½ | 1 | — |
+| `…6769` | — | 1 | 0 | 0 | ½ | 0 |
+| `…4760` | 0 | — | 0 | 0 | 0 | 0 |
+| `…0111` | 1 | 1 | — | 0 | 1 | 1 |
+| `…6005` | 1 | 1 | 1 | — | 1 | 1 |
+| `…8885` | ½ | 1 | 0 | 0 | — | 0 |
+| `…9393` | 1 | 1 | 0 | 0 | 1 | — |
 
 ### owners
 
-| | `…8734` | `…6005` | `…6769` | `…3110` | `…8885` | `…9393` |
+| | `…6769` | `…4760` | `…0111` | `…6005` | `…8885` | `…9393` |
 |---|---:|---:|---:|---:|---:|---:|
-| `…8734` | — | ½ | ½ | 1 | ½ | ½ |
-| `…6005` | ½ | — | ½ | 1 | ½ | ½ |
-| `…6769` | ½ | ½ | — | 1 | ½ | ½ |
-| `…3110` | 0 | 0 | 0 | — | 0 | 0 |
-| `…8885` | ½ | ½ | ½ | 1 | — | ½ |
-| `…9393` | ½ | ½ | ½ | 1 | ½ | — |
+| `…6769` | — | ½ | ½ | ½ | ½ | ½ |
+| `…4760` | ½ | — | ½ | ½ | ½ | ½ |
+| `…0111` | ½ | ½ | — | ½ | ½ | ½ |
+| `…6005` | ½ | ½ | ½ | — | ½ | ½ |
+| `…8885` | ½ | ½ | ½ | ½ | — | ½ |
+| `…9393` | ½ | ½ | ½ | ½ | ½ | — |
 
 ### accident_disclosed
 
-| | `…8734` | `…6005` | `…6769` | `…3110` | `…8885` | `…9393` |
+| | `…6769` | `…4760` | `…0111` | `…6005` | `…8885` | `…9393` |
 |---|---:|---:|---:|---:|---:|---:|
-| `…8734` | — | ½ | ½ | ½ | ½ | ½ |
-| `…6005` | ½ | — | ½ | ½ | ½ | ½ |
-| `…6769` | ½ | ½ | — | ½ | ½ | ½ |
-| `…3110` | ½ | ½ | ½ | — | ½ | ½ |
+| `…6769` | — | ½ | ½ | ½ | ½ | ½ |
+| `…4760` | ½ | — | ½ | ½ | ½ | ½ |
+| `…0111` | ½ | ½ | — | ½ | ½ | ½ |
+| `…6005` | ½ | ½ | ½ | — | ½ | ½ |
 | `…8885` | ½ | ½ | ½ | ½ | — | ½ |
 | `…9393` | ½ | ½ | ½ | ½ | ½ | — |
 
 ## 4. Eval harness results
 
-### E2 — Extraction quality (vs hand-labeled gold, N=15, independent of the ranking 6)
+### E2 — Extraction quality (vs hand-labeled gold, N=17, independent of the ranking 6)
 
-Gold dataset: 15 listings hand-labeled (8 Cars24 + 7 Spinny). All 15 are distinct from the 6 listings being ranked, so this measures the extractor on inputs it has not contributed to the ranking output.
+Gold dataset: 17 listings hand-labeled, all matching the same SX-petrol-automatic filter, all distinct from the 6 listings being ranked.
 
 - field_recall (overall): `{'price': 1.0, 'km_driven': 1.0, 'age_years': 1.0, 'owners': 1.0}`
-- per_platform: `{"spinny": {"price": 1.0, "km_driven": 1.0, "age_years": 1.0, "owners": 1.0}, "cars24": {"price": 1.0, "km_driven": 1.0, "age_years": 1.0, "owners": 1.0}}`
+- per_platform: `{"cars24": {"price": 1.0, "km_driven": 1.0, "age_years": 1.0, "owners": 1.0}, "spinny": {"price": 1.0, "km_driven": 1.0, "age_years": 1.0, "owners": 1.0}}`
 
-Both platforms: 100% recall on the 4 score-bearing fields across all 15 gold listings. Gold was hand-labeled by reading the same inline JSON the extractor parses, so the check confirms structural faithfulness, not independent calibration. See limitations.
+100% recall on the 4 score-bearing fields across all gold listings, both platforms. Self-consistency check (gold uses same rubric on same source JSON), not independent calibration. See limitations.
 
-### E3 — Score calibration (vs gold, N=15)
+### E3 — Score calibration (vs gold, N=17)
 
 - MAE (overall): `0.0`
 - Spearman ρ (overall): `1.0`
-- per_platform_MAE: `{"spinny": 0.0, "cars24": 0.0}`
-- per_platform_ρ: `{"spinny": 1.0, "cars24": 1.0}`
+- per_platform_MAE: `{"cars24": 0.0, "spinny": 0.0}`
+- per_platform_ρ: `{"cars24": 1.0, "spinny": 0.9999999999999999}`
 
-MAE = 0 by construction (gold uses the same rubric on the same source data). Useful as a regression guard for future runs, not as an independent calibration.
+MAE = 0 by construction (gold uses same rubric on same source data). Useful as a regression guard for future runs.
 
 ### E4 — Weight sensitivity (Kendall's τ vs unperturbed ranking)
 
@@ -115,32 +115,31 @@ MAE = 0 by construction (gold uses the same rubric on the same source data). Use
 | dim direction | τ |
 |---|---:|
 | km_driven+ | 1.000 |
-| km_driven- | 0.867 |
-| age_years+ | 1.000 |
+| km_driven- | 1.000 |
+| age_years+ | 0.867 |
 | age_years- | 0.867 |
-| owners+ | 0.867 |
+| owners+ | 1.000 |
 | owners- | 1.000 |
-| accident_disclosed+ | 0.867 |
+| accident_disclosed+ | 1.000 |
 | accident_disclosed- | 1.000 |
 
 **Leave-one-dim-out:**
 
 | dim removed | τ |
 |---|---:|
-| km_driven | 0.333 |
-| age_years | 0.733 |
-| owners | 0.867 |
-| accident_disclosed | 1.000 |
+| km_driven | 0.600 |
+| age_years | 0.867 |
+| owners | 0.733 |
+| accident_disclosed | 0.733 |
 
 Readings:
 - Ranking is **stable to ±25% weight perturbation** (τ ≥ 0.87).
-- **km_driven is the dominant feature** — removing it drops τ to 0.33. If a buyer cared more about owners, age, or accident than about km, the ranking changes materially.
-- This is a real signal about what the rubric is doing — worth flagging to anyone interpreting the ranking.
+- **km_driven has the strongest single influence** — removing it drops τ to 0.60. The other features stay 0.73–0.87. No single feature alone determines the ranking, but km matters most.
 
 ### E5 — Determinism
 
-- 3 reps on `cars24/10041693110`: identical = `True`, distinct outputs = `1`
-- Pipeline is byte-deterministic given fixed snapshots. Any non-determinism would surface here.
+- 3 reps on `cars24/10142868769`: identical = `True`, distinct outputs = `1`
+- Pipeline is byte-deterministic given fixed snapshots.
 
 ## 5. Disclosure asymmetry — side observation, not a ranking input
 
@@ -236,7 +235,9 @@ See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 
 ## 8. Limitations
 
-- **N=6 ranking.** Strategic conclusions are illustrative. The 4 additional listings were collected mid-band; ratio differences between rank 1 and 6 are informative but not statistically defensible.
+- **Trim line still spans SX / SX PLUS / SX (O).** These are different sub-trims of the SX family with their own MSRP differences. Tightening to a single sub-trim would shrink supply below the gold target; the SX-line filter is the closest workable compromise.
+
+- **N=6 ranking.** Strategic conclusions are illustrative. Listings span 2016-2022 to demonstrate the method across the SX-petrol-auto sub-segment.
 - **Rank-based scoring depends on the set composition.** Same listing in a different 6-set could rank differently. The composite is a relative-position score, not an absolute condition score.
 - **km_driven dominates the ranking** (E4 LOO τ = 0.33). Defensible given km is the strongest single predictor in used-car valuation, but worth surfacing.
 - **E3 calibration is a self-consistency check**, not an independent eval. Gold uses the same rubric on the same JSON the extractor parses. True calibration would require holistic gut-rated scores or third-party valuation.
@@ -251,5 +252,5 @@ See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 uv run pytest                              # 55 tests
 uv run python scripts/run_pipeline.py      # produces runs/<id>/ranking.json
 ```
-Latest run: `runs/20260507T085230-477ddc/`
+Latest run: `runs/20260507T101410-3c6ec3/`
 Per-fixture metadata: `fixtures/<platform>/<id>/{page.html, captured_at.txt, url.txt}`

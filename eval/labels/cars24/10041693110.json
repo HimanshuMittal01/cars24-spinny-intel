@@ -1,0 +1,25 @@
+{
+  "listing_id": "10041693110",
+  "platform": "cars24",
+  "full_fields": {
+    "listingPrice": 950000,
+    "odometerReading": 50673,
+    "year": 2020,
+    "ownerNumber": 2
+  },
+  "score_common": 46.41,
+  "notes": {
+    "km_driven": "50,673 km",
+    "age_years": "2020 \u2192 age 6y",
+    "owners": "#2",
+    "accident_disclosed": "none",
+    "scope": "Hyundai Creta, Delhi-NCR, SX trim line, petrol, automatic.",
+    "scoring": "Rank-based composite over the gold set per spec \u00a714."
+  },
+  "per_feature_rank_scores": {
+    "km_driven": 68.75,
+    "age_years": 50.0,
+    "owners": 9.38,
+    "accident_disclosed": 50.0
+  }
+}

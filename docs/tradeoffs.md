@@ -108,3 +108,47 @@ scorer, E4 leave-one-out τ became more sensitive. **km_driven removal drops
 τ to 0.33** (from 0.73 under bands). km is the load-bearing feature in this
 ranking — a real finding that band-based smoothing was hiding. Now surfaced
 in the report and appendix.
+
+---
+
+## 2026-05-07 — tight scope filter (variant + fuel + transmission)
+
+**Situation.** The first 6-listing ranking filtered only on make/model/region/
+price-band. After running, we noticed the listings spanned petrol/diesel,
+manual/automatic, and trim levels EX/SX/SX (O). These spec differences carry
+their own market premiums — a diesel manual EX is structurally cheaper than a
+petrol auto SX (O), and that gap has nothing to do with car *condition*. The
+"price-to-condition ratio" was therefore contaminated by spec heterogeneity.
+The first-place listing in that ranking won partly because it was the only
+diesel-manual-EX in the set, not just because of condition.
+
+**Decision.** Re-collected the dataset under a tight filter: **Hyundai Creta,
+Delhi-NCR, SX trim line, petrol, automatic.** No price band. Now 23 matching
+listings (10 cars24 + 13 spinny). Partition: 6 ranking + 17 gold. The 13
+listings collected during the loose-filter pass that don't match (manual,
+diesel, off-trim) are retained on disk for traceability and tagged `X` in
+`docs/extraction_review.md`.
+
+**Alternative considered.** Hedonic regression on a 5,000+ listing corpus
+(remove the matching constraint by *modelling* the price effect of each spec
+instead of filtering it out). Rejected for this exercise — too much data
+collection for a small-N illustrative project. Documented as the scale-up
+path in `docs/technical_appendix.md` §6.
+
+**What hurt.** ~30 fixtures collected in total; 13 of them excluded by the
+tight filter and unused in either ranking or gold. No code changes — just
+data hygiene and re-running the pipeline + evals.
+
+**What it bought.** The price-to-condition ratio is now a fair comparison.
+All 6 ranked listings are SX-line petrol automatic Cretas; ratio differences
+between them reflect km/age/owners/accident, not trim or powertrain choices.
+Top-3 of the new ranking is dominated by Cars24 — not because Cars24 lists
+cheaper cars in absolute terms, but because Cars24 prices its SX-petrol-auto
+inventory *lower per condition-point* than Spinny does. That's a real
+competitive signal.
+
+**Eval-side observation.** Under the tight filter, E4 leave-one-out τ for
+km_driven moved from 0.33 (loose filter) to 0.60. Still the most influential
+single feature, but no longer overwhelming — the other features (age,
+owners, accident) all matter visibly. With variance reduced on the
+non-condition specs, the condition features get cleaner play.

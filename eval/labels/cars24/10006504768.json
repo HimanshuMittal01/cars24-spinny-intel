@@ -7,18 +7,19 @@
     "year": 2016,
     "ownerNumber": 1
   },
-  "score_common": 40.36,
+  "score_common": 36.25,
   "notes": {
     "km_driven": "69,401 km",
     "age_years": "2016 \u2192 age 10y",
     "owners": "#1",
     "accident_disclosed": "none",
-    "annotation_method": "Independent regex extraction from raw HTML; rank-based score computed over the 15-listing gold set per spec \u00a714."
+    "scope": "Hyundai Creta, Delhi-NCR, SX trim line, petrol, automatic.",
+    "scoring": "Rank-based composite over the gold set per spec \u00a714."
   },
   "per_feature_rank_scores": {
-    "km_driven": 42.86,
-    "age_years": 7.14,
-    "owners": 64.29,
+    "km_driven": 37.5,
+    "age_years": 0.0,
+    "owners": 62.5,
     "accident_disclosed": 50.0
   }
 }

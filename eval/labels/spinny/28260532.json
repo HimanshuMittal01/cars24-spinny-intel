@@ -1,0 +1,33 @@
+{
+  "listing_id": "28260532",
+  "platform": "spinny",
+  "full_fields": {
+    "productPrice": 1257000.0,
+    "productMileage": 62736,
+    "make_year": 2023,
+    "no_of_owners": "1st",
+    "procurement_category": "assured",
+    "inspection_report": {
+      "report": {
+        "summary": {
+          "is_accidental": false
+        }
+      }
+    }
+  },
+  "score_common": 60.16,
+  "notes": {
+    "km_driven": "62,736 km",
+    "age_years": "2023 \u2192 age 3y",
+    "owners": "#1",
+    "accident_disclosed": "none",
+    "scope": "Hyundai Creta, Delhi-NCR, SX trim line, petrol, automatic.",
+    "scoring": "Rank-based composite over the gold set per spec \u00a714."
+  },
+  "per_feature_rank_scores": {
+    "km_driven": 50.0,
+    "age_years": 78.12,
+    "owners": 62.5,
+    "accident_disclosed": 50.0
+  }
+}
