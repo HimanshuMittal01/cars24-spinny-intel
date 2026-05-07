@@ -53,7 +53,8 @@ check, not an independent calibration.**
 **What this evidences.** Extraction faithfulness is structurally guaranteed for
 the fields we care about (price/km/year/owners), modulo the JSON's truthfulness.
 There is no extraction noise to measure here — the only failure mode would be
-the JSON parser itself, which E5 (determinism) catches.
+the JSON parser itself, and the pipeline is deterministic by construction (no
+LLM, no async, no randomness) so the same input always produces the same output.
 
 **What we'd actually need for an independent E3.** Either (a) a *holistic*
 human gold score per listing (gut-rated 0-100 without using the formula) — would

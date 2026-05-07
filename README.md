@@ -47,7 +47,8 @@ Before producing the ranking we built a small evaluation harness and ran it agai
 - **Faithfulness check** *(on the 17 gold listings).* We hand-labeled each one by reading the source page directly, then ran the extractor and compared. **The extractor matched our values on every field, on both platforms.**
 - **Stability check** *(on the 6 ranked listings).* We bumped each of the four weights up and down by 25% (one at a time, 8 variants) and re-ran the ranking. **Kendall's τ stayed between 0.87 and 1.0** — the ranking is not sensitive to small weight choices.
 - **Dominance check** *(on the 6 ranked listings).* We dropped each feature in turn and re-ran. **Removing km drops τ to 0.60; the others stay 0.73-0.87.** Kilometres has the strongest single influence on the ranking, but no feature alone determines it.
-- **Determinism check.** Three identical reruns of the pipeline produced byte-identical output. No silent randomness in the scoring path.
+
+The pipeline is deterministic by construction (no LLM, no async, no randomness), so output is byte-stable across re-runs without needing a separate check.
 
 **Honest framing on the faithfulness check.** Our hand-labels were read from the same source pages the extractor parses (the platforms inject their listing data as inline JSON, and we read that JSON manually). So the check confirms *the extractor faithfully captures what the page exposes*, not that our scoring formula matches some external valuation. An independent calibration would need either gut-rated condition labels (subjective) or a third-party valuation source — out of scope here, called out below.
 

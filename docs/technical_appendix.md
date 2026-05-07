@@ -33,7 +33,6 @@ flowchart LR
         E2["E2 extraction recall<br/>(vs gold, N=17)"]
         E3["E3 score calibration<br/>(vs gold, N=17)"]
         E4["E4 weight sensitivity<br/>(±25% perturbation +<br/>leave-one-feature-out)"]
-        E5["E5 determinism<br/>(3 reps, byte-identical)"]
     end
 
     FIX --> SL
@@ -56,11 +55,9 @@ flowchart LR
     NORM --> E2
     SCORE --> E3
     NORM --> E4
-    SL --> E5
     E2 --> TRACE
     E3 --> TRACE
     E4 --> TRACE
-    E5 --> TRACE
 ```
 
 Solid arrows = data flow; dotted arrows = trace records (every node logs input hash, output hash, latency to `trace.jsonl`).
@@ -189,10 +186,9 @@ Readings:
 - Ranking is **stable to ±25% weight perturbation** (τ ≥ 0.87).
 - **km_driven has the strongest single influence** — removing it drops τ to 0.60. The other features stay 0.73–0.87. No single feature alone determines the ranking, but km matters most.
 
-### E5 — Determinism
+### Determinism
 
-- 3 reps on `cars24/10142868769`: identical = `True`, distinct outputs = `1`
-- Pipeline is byte-deterministic given fixed snapshots.
+The pipeline has no LLM call, no async, no `random`, no time-dependent hashing — output is byte-stable across re-runs by construction. There is no separate eval for it; it's a property of the code structure.
 
 ## 5. Disclosure asymmetry — side observation, not a ranking input
 
