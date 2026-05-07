@@ -1,0 +1,78 @@
+{
+  "picked": [
+    {
+      "platform": "cars24",
+      "listing_id": "10017390119"
+    },
+    {
+      "platform": "cars24",
+      "listing_id": "10041693110"
+    },
+    {
+      "platform": "cars24",
+      "listing_id": "10142868769"
+    },
+    {
+      "platform": "cars24",
+      "listing_id": "10182490193"
+    },
+    {
+      "platform": "cars24",
+      "listing_id": "10526397177"
+    },
+    {
+      "platform": "spinny",
+      "listing_id": "27723929"
+    },
+    {
+      "platform": "spinny",
+      "listing_id": "27741490"
+    },
+    {
+      "platform": "spinny",
+      "listing_id": "28240497"
+    },
+    {
+      "platform": "spinny",
+      "listing_id": "28260532"
+    },
+    {
+      "platform": "spinny",
+      "listing_id": "28564392"
+    }
+  ],
+  "dropped": [
+    {
+      "platform": "cars24",
+      "listing_id": "10006504768"
+    },
+    {
+      "platform": "cars24",
+      "listing_id": "44546195190"
+    },
+    {
+      "platform": "spinny",
+      "listing_id": "26195999"
+    },
+    {
+      "platform": "spinny",
+      "listing_id": "27649805"
+    },
+    {
+      "platform": "spinny",
+      "listing_id": "28000255"
+    },
+    {
+      "platform": "spinny",
+      "listing_id": "28011937"
+    },
+    {
+      "platform": "spinny",
+      "listing_id": "28436012"
+    }
+  ],
+  "reasoning": {
+    "criteria": "platform parity 5+5; quintile spread within platform; photo+disclosure diversity",
+    "spec_ref": "docs/superpowers/specs/2026-05-07-vision-agent-design.md \u00a712.0"
+  }
+}

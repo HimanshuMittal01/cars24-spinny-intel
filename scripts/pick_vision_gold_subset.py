@@ -38,7 +38,7 @@ def count_photos(platform: str, listing_id: str) -> int:
     if platform == "spinny":
         urls = re.findall(r"spn-mda\.spinny\.com/img/[A-Za-z0-9%_+\-/]+", html)
     else:
-        urls = re.findall(r"fastly-production\.24c\.in/india/used-cars/[A-Za-z0-9%_+\-/.]+", html)
+        urls = re.findall(r"media\.cars24\.com/hello-ar/[A-Za-z0-9%_+\-/.]+", html)
     return len(set(urls))
 
 
@@ -49,6 +49,21 @@ def disclosure_count(platform: str, listing_id: str) -> int:
         return 0
     fields = json.loads(label_path.read_text()).get("full_fields", {})
     return len(fields)
+
+
+def _owners_from_full_fields(platform: str, full_fields: dict) -> int | None:
+    """Parse owner count from a gold row's full_fields. None if unparseable."""
+    if platform == "cars24":
+        v = full_fields.get("ownerNumber")
+        return int(v) if v is not None else None
+    if platform == "spinny":
+        v = full_fields.get("no_of_owners")
+        if not v:
+            return None
+        import re as _re
+        m = _re.match(r"^(\d+)", str(v).strip())
+        return int(m.group(1)) if m else None
+    return None
 
 
 def load_gold() -> list[dict]:
@@ -63,9 +78,15 @@ def load_gold() -> list[dict]:
 def pick_subset(gold: list[dict]) -> tuple[list[dict], list[dict]]:
     """Pick 5 cars24 + 5 spinny preserving diversity. Returns (picked, dropped).
 
-    Note: when all score_common values within a platform are equal, every row
-    lands in quintile 4 — the algorithm still picks 5 valid rows but the
-    "quintile spread" claim is degenerate. Acceptable for the real gold data we expect.
+    Diversity criteria:
+      - quintile spread within platform (one pick per quintile when possible)
+      - photo + disclosure prefer-higher tie-break
+      - if multi-owner rows exist in a platform, at least one is reserved in picks
+        (so calibration of owner-influence remains honest on the smaller set)
+
+    Note: when all score_common values within a platform are equal, every row lands
+    in quintile 4 — the algorithm still picks 5 valid rows but the "quintile spread"
+    claim is degenerate. Acceptable for the real gold data we expect.
     """
     target_per_platform = 5
     picked: list[dict] = []
@@ -81,19 +102,31 @@ def pick_subset(gold: list[dict]) -> tuple[list[dict], list[dict]]:
                 "_quintile": percentile_quintile(r["score_common"], scores),
                 "_photos": count_photos(platform, r["listing_id"]),
                 "_disclosure": disclosure_count(platform, r["listing_id"]),
+                "_owners": _owners_from_full_fields(platform, r.get("full_fields", {})),
             })
 
-        # Stratified pick: one per quintile (max diversity), then fill with leftover diversity.
         chosen: list[dict] = []
         seen_ids: set[str] = set()
-        # Pass 1: best-of-each-quintile by (photos, disclosure)
-        for q in sorted({r["_quintile"] for r in annotated}):
-            cands = [r for r in annotated if r["_quintile"] == q]
+        filled_quintiles: set[int] = set()
+
+        # Reserve one multi-owner slot if any multi-owner row exists in this platform's gold.
+        multi_owners = [r for r in annotated if r["_owners"] is not None and r["_owners"] >= 2]
+        if multi_owners:
+            best_mo = max(multi_owners, key=lambda r: (r["_photos"], r["_disclosure"]))
+            chosen.append(best_mo)
+            seen_ids.add(best_mo["listing_id"])
+            filled_quintiles.add(best_mo["_quintile"])
+
+        # Pass 1: best-of-each-remaining-quintile by (photos, disclosure).
+        for q in sorted({r["_quintile"] for r in annotated} - filled_quintiles):
+            cands = [r for r in annotated if r["_quintile"] == q and r["listing_id"] not in seen_ids]
+            if not cands:
+                continue
             cand = max(cands, key=lambda r: (r["_photos"], r["_disclosure"]))
             chosen.append(cand)
             seen_ids.add(cand["listing_id"])
 
-        # Pass 2: fill to target with remaining (highest photo+disclosure first)
+        # Pass 2: fill to target with remaining (highest photo+disclosure first).
         remaining = [r for r in annotated if r["listing_id"] not in seen_ids]
         remaining.sort(key=lambda r: (r["_photos"] + r["_disclosure"]), reverse=True)
         while len(chosen) < target_per_platform and remaining:
