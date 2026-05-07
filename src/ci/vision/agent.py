@@ -89,7 +89,14 @@ async def run_vision_agent(
     """Run the outer agent loop until final_assessment or budget exceeded."""
     photos_inspected: list[int] = []
     inspect_count = 0
-    messages: list[dict] = []
+    messages: list[dict] = [{
+        "role": "user",
+        "content": (
+            f"Inspect the photos for listing {listing_id} on {platform}. "
+            f"Use list_photos to begin, inspect_photo to gather evidence, "
+            f"and final_assessment to submit your per-aspect ratings."
+        ),
+    }]
     turn = 0
     final_payload: dict | None = None
 
