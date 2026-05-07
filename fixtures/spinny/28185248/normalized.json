@@ -1,0 +1,30 @@
+{
+  "platform": "spinny",
+  "listing_id": "28185248",
+  "price": 1294000,
+  "km_driven": 22621,
+  "age_years": 3,
+  "owners": 1,
+  "certification_flag": "mid",
+  "accident_disclosed": "none",
+  "disclosed_fields": {
+    "accident_history_detail": true,
+    "inspection_per_section_ratings": true,
+    "inspection_repair_statements": true,
+    "tyre_condition_per_wheel": true,
+    "service_history_records": true,
+    "warranty_remaining_months": true,
+    "noc_status": false,
+    "rc_type": false,
+    "insurance_type": true,
+    "insurance_validity": true,
+    "previous_use_type": false,
+    "challan_status": false,
+    "hypothecation_status": false,
+    "inspection_photo_count": true,
+    "per_listing_certification_tier": true,
+    "buy_back_pricing": true,
+    "market_price_delta": true
+  },
+  "disclosure_count": 12
+}

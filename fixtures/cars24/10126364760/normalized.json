@@ -1,0 +1,30 @@
+{
+  "platform": "cars24",
+  "listing_id": "10126364760",
+  "price": 508700,
+  "km_driven": 86100,
+  "age_years": 10,
+  "owners": 1,
+  "certification_flag": null,
+  "accident_disclosed": "none",
+  "disclosed_fields": {
+    "accident_history_detail": false,
+    "inspection_per_section_ratings": false,
+    "inspection_repair_statements": false,
+    "tyre_condition_per_wheel": false,
+    "service_history_records": true,
+    "warranty_remaining_months": true,
+    "noc_status": false,
+    "rc_type": false,
+    "insurance_type": true,
+    "insurance_validity": true,
+    "previous_use_type": false,
+    "challan_status": false,
+    "hypothecation_status": false,
+    "inspection_photo_count": false,
+    "per_listing_certification_tier": false,
+    "buy_back_pricing": false,
+    "market_price_delta": false
+  },
+  "disclosure_count": 4
+}

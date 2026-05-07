@@ -51,6 +51,7 @@ Before producing the ranking we built a small evaluation harness and ran it agai
 
 ## Further reading
 
+- [`docs/extraction_review.md`](docs/extraction_review.md) — every listing (21 total: 6 ranking + 15 gold) with link to source URL and the four scoring fields read off it. Per-fixture raw + normalized extractions live alongside the snapshot at `fixtures/<platform>/<id>/{page.html, url.txt, captured_at.txt, extracted.json, normalized.json}`.
 - [`docs/technical_appendix.md`](docs/technical_appendix.md) — methodology, per-feature rank breakdown, pairwise win matrices, full eval numbers, the platform-positioning side observation.
 - [`docs/superpowers/specs/2026-05-06-cars24-spinny-comp-intel-design.md`](docs/superpowers/specs/2026-05-06-cars24-spinny-comp-intel-design.md) — design spec (§13 reality-check, §14 rank-based-scoring amendments).
 - [`docs/tradeoffs.md`](docs/tradeoffs.md) — engineering tradeoffs journal.

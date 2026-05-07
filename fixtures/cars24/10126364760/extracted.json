@@ -1,0 +1,3010 @@
+{
+  "appointmentId": "10126364760",
+  "baseUrl": "https://media.cars24.com/",
+  "videoBaseUrl": "https://videos.24c.in/prod/",
+  "make": "Hyundai",
+  "model": "Creta",
+  "variant": "SX PLUS AT 1.6 PETROL",
+  "variantId": 8324,
+  "year": 2016,
+  "transmission": "Automatic",
+  "bodyType": "SUV",
+  "fuelType": "Petrol",
+  "ownerNumber": 1,
+  "ownerNumberDisplay": "1st owner",
+  "odometerReading": 86100,
+  "cityRto": "DL5C",
+  "registrationNumber": "DL5C*5111",
+  "listing": "LISTED",
+  "status": "AVAILABLE",
+  "listingPrice": 508700,
+  "cumulativeListingPrice": 508700,
+  "originalPrice": 513305,
+  "onRoadPrice": 0,
+  "discount": 0,
+  "fitnessUpto": "04-Nov-2031",
+  "insuranceType": "3rd Party",
+  "insuranceExpiry": "1793298600",
+  "lastServicedAt": "2026-04-23T12:47:00.899Z",
+  "duplicateKey": true,
+  "city": "New Delhi",
+  "hub": {
+    "legacyId": 3250,
+    "name": "Cars24 Hub, Near Radisson Blu, Dwarka, Delhi",
+    "locality": "Radisson Blu, Sector 13, Dwarka, New Delhi",
+    "code": "IN_CAR_CC_2_FC_7",
+    "address": "Ground Floor, Dwarka Walk Mall, Radisson Blu, Sector 13, Dwarka, New Delhi, 110078",
+    "mapLink": "https://maps.app.goo.gl/Zfib6tsDgstntkHY7",
+    "pincode": 110078,
+    "hubImage": "https://fastly-production.24c.in/india/homepage/3x-Photos/DSC04933%20copy.png",
+    "slugUrl": "cars24-hub-near-radisson-blu-dwarka-delhi",
+    "displayName": "Cars24 Hub, Near Radisson Blu, Dwarka, Delhi",
+    "timing": {
+      "from": "11:00 AM",
+      "to": "08:00 PM"
+    },
+    "salesManager": {
+      "name": "Ayush Singh",
+      "email": null,
+      "phone": "8929759586"
+    },
+    "geoLocation": [
+      28.596066,
+      77.035995
+    ],
+    "locationType": "FULFILLMENT_CENTER",
+    "active": true,
+    "workingDays": "All Days",
+    "timings": "11AM - 8PM",
+    "hubVideo": {
+      "url": "https://videos.24c.in/stage/location/videos/LC_4/HubHeaderVideo.mp4.m3u8"
+    },
+    "gallery": [
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/f5f4734a-ac20-45a7-be3b-6e6e70c84b881.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/f5e54194-bbc3-42d6-b26f-ac7dd12051ee2.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/1e6217b2-eea1-4e6b-a71c-59bd5ce1d69f3.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/42b0a422-3643-4743-b5ec-7941b7d85bd74.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/35c35967-3f7b-4556-ae7f-20063e35d30f5.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/d348486e-2dba-4048-9ac7-f4be67d27fed6.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/033bfe9a-3afa-499f-b2d8-c4b51d67e7847.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/1c8a41c4-ceed-45ee-9d81-ae819ae96e1c8.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/5b6ee51b-9b79-4175-b943-babdf08b612c9.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/052c901c-4ec8-4a72-bd5e-52cf94de02b010.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/76b30b15-cd4a-45b1-8e61-8692020fc5fb11.jpg",
+      "https://static-cdn.cars24.com/qa/cms/2026/04/14/548b147a-a993-476b-b334-33ec05049efe12.jpg"
+    ],
+    "hubImagePortrait": "https://media.cars24.com/india/buy/showroom/IN_CAR_CC_2378_FC_11.jpg",
+    "hubImageLandscape": "https://static-cdn.cars24.com/qa/cms/2026/04/12/9011dd3d-b789-4d3c-a324-e76fdb2e9bab3360x1440%20%2811%29.jpg",
+    "title": "Near Radisson Blu",
+    "subTitle": "Soul City Mall, Dwarka, Delhi",
+    "weekoffDays": [],
+    "googleRating": 4.900000095367432,
+    "isEliteHub": false,
+    "cityCode": "CC_2",
+    "hanaId": "5501340",
+    "yardCode": "0131",
+    "geoLocationValid": true
+  },
+  "registrationMonth": 11,
+  "registrationYear": "2016",
+  "emiDetails": {
+    "cashDownPayment": 0,
+    "emiStartingValue": 11316,
+    "emiEndingValue": 11316,
+    "roiMinDiscounted": 12,
+    "roiMaxDiscounted": 12,
+    "roiMinOriginal": 12,
+    "roiMaxOriginal": 12,
+    "emiOriginalStartingValue": 11316,
+    "emiOriginalEndingValue": 11316,
+    "tenure": 60,
+    "displayText": "EMI \u00e2\u0082\u00b911,316/m*",
+    "notAvailableText": "Not available on EMI"
+  },
+  "websiteUrl": "https://www.cars24.com/buy-used-hyundai-creta-2016-cars-new-delhi-10126364760",
+  "fitnessAge": 15,
+  "breadCrumbs": [
+    {
+      "name": "Home",
+      "url": ""
+    },
+    {
+      "name": "Used Cars",
+      "url": "buy-used-cars/"
+    },
+    {
+      "name": "Used Cars in Delhi NCR",
+      "url": "buy-used-cars-delhi-ncr/"
+    },
+    {
+      "name": "Used Cars in New Delhi",
+      "url": "buy-used-cars-new-delhi/"
+    },
+    {
+      "name": "Used Hyundai Cars in New Delhi",
+      "url": "buy-used-hyundai-cars-new-delhi/"
+    },
+    {
+      "name": "Used Hyundai Creta Cars in New Delhi",
+      "url": "buy-used-hyundai-creta-cars-new-delhi/"
+    },
+    {
+      "name": "Used 2016 Hyundai Creta SX PLUS AT 1.6 PETROL Automatic",
+      "url": null
+    }
+  ],
+  "listingImage": {
+    "key": "Exterior + Diagonal + FRONT + RHS",
+    "checkpoint": "Right Front Diagonal",
+    "category": "Exterior",
+    "label": "Right Front Diagonal",
+    "uri": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/06912fe2-6e65-4b9a-8eaf-6059cf266be9/b9225faa-41e6-45a5-8d25-f530e50a70a2/8069edf9-ff89-4d49-84a3-1453ccec30f2/slot/1.jpg",
+    "bgRemovedUri": "https://media.cars24.com/hello-ar/dev/transformed/uploads/no_bg/603c6e40-3ef6-11f1-bd54-02ede2007fbe/m/f5705e54-d323-43a8-9443-b8a079e9b196/b9225faa-41e6-45a5-8d25-f530e50a70a2/fd93be64-fc41-4862-9f40-eca1d45b2760/slot/1.png",
+    "mediaType": "IMAGE"
+  },
+  "detailImage": {
+    "key": "Exterior + Diagonal + FRONT + RHS",
+    "checkpoint": "Right Front Diagonal",
+    "category": "Exterior",
+    "label": "Right Front Diagonal",
+    "uri": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/06912fe2-6e65-4b9a-8eaf-6059cf266be9/b9225faa-41e6-45a5-8d25-f530e50a70a2/8069edf9-ff89-4d49-84a3-1453ccec30f2/slot/1.jpg",
+    "bgRemovedUri": "https://media.cars24.com/hello-ar/dev/transformed/uploads/no_bg/603c6e40-3ef6-11f1-bd54-02ede2007fbe/m/f5705e54-d323-43a8-9443-b8a079e9b196/b9225faa-41e6-45a5-8d25-f530e50a70a2/fd93be64-fc41-4862-9f40-eca1d45b2760/slot/1.png",
+    "mediaType": "IMAGE"
+  },
+  "priceSummary": {
+    "title": "Price Summary",
+    "subTitle": "Check your complete price breakup",
+    "nudge": {
+      "icon": "https://media.cars24.com/india/buy/category_page/rupees.png",
+      "description": "**Drive-away price:** Save time, no surprises"
+    },
+    "charges": [
+      {
+        "id": "BasePrice",
+        "title": "Base price",
+        "amount": 508700
+      },
+      {
+        "id": "RcTransfer",
+        "title": "RC transfer price",
+        "description": "Seamless RC transfer services with RTO assistance",
+        "paragraph": [
+          "To facilitate the transfer of ownership of this car with the Regional Transport Authority(RTO). These charges are specific to the car and transfer location. Additional charges might be applicable based on the documents submitted for the RC transfer."
+        ],
+        "amount": 10000
+      },
+      {
+        "id": "Insurance",
+        "title": "Third party insurance",
+        "description": "Govt mandated insurance against third party damages",
+        "paragraph": [
+          "The Motor Vehicles Act of 1988 requires all motor vehicles in India to have valid third-party insurance."
+        ],
+        "amount": 8277
+      },
+      {
+        "id": "12MonthWarranty",
+        "title": "Extended Warranty \u00e2\u0080\u0093 12 Months",
+        "description": "Built-in protection for your car\u00e2\u0080\u0099s engine, gearbox & drivetrain for a full year so you drive worry free",
+        "paragraph": [
+          "After the free 1-month Welcome Cover, your car continues to stay protected for another 12 months or 10,000 km under Cars24\u00e2\u0080\u0099s Powertrain Warranty. This plan safeguards the core systems like engine Assembly, Transmission, Drivetrain of your car against mechanical breakdowns."
+        ],
+        "amount": 20000
+      },
+      {
+        "id": "CarServiceCharge",
+        "title": "Car Servicing Charges",
+        "description": "One-time fee for pre-sale car maintenance to ensure safe drives",
+        "paragraph": [
+          "One-time servicing fee for your car to ensure safe drive, covering oil change, filter replacements, brake fluid, coolant top-up, battery check, wheel alignment, and balancing before sale."
+        ],
+        "amount": 11000
+      }
+    ],
+    "totalExtraCharges": 49277,
+    "finalPrice": {
+      "amount": 557977,
+      "title": "Total car price",
+      "description": "*Visit hub soon to lock this price"
+    },
+    "vas": {}
+  },
+  "additionalInfo": {
+    "experimentFlags": {
+      "skipHomeTestDrive": true
+    },
+    "aiHighlightsAvailable": false,
+    "otherChargesLabel": "+ \u00e2\u0082\u00b949,277 other charges",
+    "showOtherCharges": true
+  },
+  "businessVertical": "GS",
+  "carSegment": "STANDARD",
+  "makeId": 15,
+  "modelId": 320,
+  "mmvId": "2709",
+  "carCategory": "PRIME",
+  "odometerDisplay": "86,100 km",
+  "sellerSubType": "CARS24_OWNED",
+  "qualityVideo": "india/homepage/Sequence 01.mp4",
+  "qualityThumbnail": "india/homepage/CARS 24_MASTER_DIGITAL 2009122.jpg",
+  "media": {
+    "gallery": {
+      "Highlights": [
+        {
+          "key": "Exterior + Diagonal + FRONT + RHS",
+          "label": "Right Front Diagonal",
+          "category": "Highlights",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/06912fe2-6e65-4b9a-8eaf-6059cf266be9/b9225faa-41e6-45a5-8d25-f530e50a70a2/8069edf9-ff89-4d49-84a3-1453ccec30f2/slot/1.jpg",
+          "overlayIcon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/gallery/reasons_to_buy.png",
+          "bgRemovedImage": "https://media.cars24.com/hello-ar/dev/transformed/uploads/no_bg/603c6e40-3ef6-11f1-bd54-02ede2007fbe/m/f5705e54-d323-43a8-9443-b8a079e9b196/b9225faa-41e6-45a5-8d25-f530e50a70a2/fd93be64-fc41-4862-9f40-eca1d45b2760/slot/1.png",
+          "overlay": {
+            "key": "GalleryHighlight_CarHighlight",
+            "label": "Reasons to buy",
+            "description": "this car",
+            "viewType": "VERTICAL",
+            "infos": [
+              {
+                "key": "X_INCH_ALLOY_WHEELS",
+                "label": "17-inch alloy wheels",
+                "icon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/highlights_overlay/Aloy_Wheels.png"
+              },
+              {
+                "key": "GPS_NAVIGATION",
+                "label": "GPS connectivity",
+                "icon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/highlights_overlay/GPS_Connectivity.png"
+              },
+              {
+                "key": "ESSENTIAL_FEATURES",
+                "label": "Essential features",
+                "icon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/highlights_overlay/OEM_Accessories.png"
+              }
+            ]
+          }
+        },
+        {
+          "key": "Exterior + Diagonal + FRONT + RHS",
+          "label": "Right Front Diagonal",
+          "category": "Highlights",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/06912fe2-6e65-4b9a-8eaf-6059cf266be9/b9225faa-41e6-45a5-8d25-f530e50a70a2/8069edf9-ff89-4d49-84a3-1453ccec30f2/slot/1.jpg",
+          "overlayIcon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/gallery/top_feature.png",
+          "bgRemovedImage": "https://media.cars24.com/hello-ar/dev/transformed/uploads/no_bg/603c6e40-3ef6-11f1-bd54-02ede2007fbe/m/f5705e54-d323-43a8-9443-b8a079e9b196/b9225faa-41e6-45a5-8d25-f530e50a70a2/fd93be64-fc41-4862-9f40-eca1d45b2760/slot/1.png",
+          "overlay": {
+            "key": "GalleryHighlight_TopFeature",
+            "label": "Top features",
+            "description": "of this car",
+            "viewType": "GRID",
+            "infos": [
+              {
+                "key": "ABSAntilockBrakingSystem",
+                "label": "ABS - Anti-lock Braking System",
+                "icon": "https://media.cars24.com/india/homepage/specs/23b62209-e664-4b74-9c93-32b30a28d5b0ABS2.png"
+              },
+              {
+                "key": "AirConditioner",
+                "label": "Air Conditioner",
+                "icon": "https://media.cars24.com/india/homepage/specs/a7ca5655-56a2-468c-b442-ea171a83eb87AC2.png"
+              },
+              {
+                "key": "Airbags",
+                "label": "Airbags",
+                "icon": "https://media.cars24.com/india/homepage/specs/60a4bcd8-19a5-4ab5-8f13-e5e3b70e6dccAirBags2.png"
+              },
+              {
+                "key": "BluetoothCompatibility",
+                "label": "Bluetooth Compatibility",
+                "icon": "https://media.cars24.com/india/homepage/specs/e2dd57dc-03bb-461e-b710-ea9bcbe68014bluetooth.png"
+              }
+            ]
+          }
+        },
+        {
+          "key": "Exterior + Diagonal + FRONT + RHS",
+          "label": "Right Front Diagonal",
+          "category": "Highlights",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/06912fe2-6e65-4b9a-8eaf-6059cf266be9/b9225faa-41e6-45a5-8d25-f530e50a70a2/8069edf9-ff89-4d49-84a3-1453ccec30f2/slot/1.jpg",
+          "overlayIcon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/gallery/why_choose.png",
+          "bgRemovedImage": "https://media.cars24.com/hello-ar/dev/transformed/uploads/no_bg/603c6e40-3ef6-11f1-bd54-02ede2007fbe/m/f5705e54-d323-43a8-9443-b8a079e9b196/b9225faa-41e6-45a5-8d25-f530e50a70a2/fd93be64-fc41-4862-9f40-eca1d45b2760/slot/1.png",
+          "overlay": {
+            "key": "GalleryHighlight_PlatformUsp",
+            "label": "Why choose Cars24?",
+            "viewType": "HORIZONTAL",
+            "infos": [
+              {
+                "key": "GS_7DayEasyReturns",
+                "label": "30-day easy returns",
+                "icon": "https://media.cars24.com/india/buy/car-catalog/platform-usp/30_day.png"
+              },
+              {
+                "key": "GS_1MonthWarranty",
+                "label": "Lifetime Warranty Upgrade",
+                "icon": "https://media.cars24.com/india/buy/car-catalog/platform-usp/free_warranty.png"
+              },
+              {
+                "key": "GS_AssuredBuyback",
+                "label": "Assured buyback",
+                "icon": "https://media.cars24.com/india/buy/car-catalog/platform-usp/best_price_guaranteed.png"
+              }
+            ]
+          }
+        }
+      ],
+      "Tyres": [
+        {
+          "key": "MANUAL + Right Front Wheel",
+          "label": "Right Front Wheel",
+          "category": "Tyres",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/f0c93df2-8aa1-4115-9f43-eb0c495f94dd/b9225faa-41e6-45a5-8d25-f530e50a70a2/a5d3adf9-af60-4d2d-9b05-b7ec05144eb8/slot/1.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "MANUAL + Right Rear Wheel",
+          "label": "Right Rear Wheel",
+          "category": "Tyres",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/67c91556-fbe0-4680-a2f5-d16a5a078451/b9225faa-41e6-45a5-8d25-f530e50a70a2/30caa7c4-c4b0-457d-9f08-f55d14375f42/slot/3.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "MANUAL + Left Front Wheel",
+          "label": "Left Front Wheel",
+          "category": "Tyres",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/6a21aa22-7c78-43c7-8af5-67011ee566a0/b9225faa-41e6-45a5-8d25-f530e50a70a2/eb3a95eb-c4c5-49de-8f03-996ed682a17f/slot/3.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "MANUAL + Left Rear Wheel",
+          "label": "Left Rear Wheel",
+          "category": "Tyres",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/8dc33a4e-8ea9-42c2-abdc-75705a2889ae/b9225faa-41e6-45a5-8d25-f530e50a70a2/83656b34-0445-4d92-8cd1-4045c72b88ab/slot/1.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "MANUAL + Spare Tyre",
+          "label": "Spare Tyre",
+          "category": "Tyres",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/b9225faa-41e6-45a5-8d25-f530e50a70a2/d0aa08d3-97be-40da-aeed-30d2ffe86b44/slot/5.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "MANUAL + Right Front Tyre Tread",
+          "label": "Right Front Tyre Tread",
+          "category": "Tyres",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/d5405fef-5a98-4f93-8715-30172ecb8651/slot/Left-Front-Tyre-Tread---Original.png",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "MANUAL + Right Rear Tyre Tread",
+          "label": "Right Rear Tyre Tread",
+          "category": "Tyres",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/e518d2b1-87a2-44ea-8115-9a2a4686f851/slot/Left-Front-Tyre-Tread---Original.png",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "MANUAL + Left Front Tyre Tread",
+          "label": "Left Front Tyre Tread",
+          "category": "Tyres",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/907e3325-453a-4260-80f5-a2f9075cc154/slot/myTransformedImage.jpeg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "MANUAL + Left Rear Tyre Tread",
+          "label": "Left Rear Tyre Tread",
+          "category": "Tyres",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/391266e4-b976-42c1-8e7c-cd62324e1e2a/slot/Left-Front-Tyre-Tread---Original.png",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        }
+      ],
+      "Features": [
+        {
+          "key": "Parking Camera",
+          "label": "Parking Camera",
+          "category": "Features",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/73520d1d-a55b-439b-ac2b-8ba02310686e/slot/Parking-Camera---Original.png",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Air Conditioner",
+          "label": "Air Conditioner",
+          "category": "Features",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/af325f36-9ded-4626-8e0a-77f18b1f765d/b9225faa-41e6-45a5-8d25-f530e50a70a2/fc6d1a73-8160-44b4-9bed-5215a2ee7a20/slot/13.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Keyless Start/ Stop Button",
+          "label": "Keyless Start/ Stop Button",
+          "category": "Features",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/b9225faa-41e6-45a5-8d25-f530e50a70a2/95d8adda-50d3-48ba-b1b5-2a718267f2f6/slot/19.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        }
+      ],
+      "Interior": [
+        {
+          "key": "Interior + Dashboard",
+          "label": "Dashboard",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/ca7f8039-e890-408b-8bc4-bb0e9916319c/b9225faa-41e6-45a5-8d25-f530e50a70a2/d0c1b835-7b7a-48cb-9470-d4efaffeb2df/slot/12.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior + Odometer Image",
+          "label": "Odometer Image",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/b9225faa-41e6-45a5-8d25-f530e50a70a2/83a08788-fe74-4867-ac87-404b00d056a1/slot/11.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Steering Wheel Close Up",
+          "label": "Steering Wheel Close Up",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/e3b061d3-3549-4cff-a3e7-74e8124aaabe/b9225faa-41e6-45a5-8d25-f530e50a70a2/a131b4af-78bb-40c9-8115-7d9c03248367/slot/14.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Gear Lever",
+          "label": "Gear Lever",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/b9225faa-41e6-45a5-8d25-f530e50a70a2/dff169d8-4cbf-4914-a337-9185fd178eca/slot/2.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Pedals",
+          "label": "Pedals",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/b9225faa-41e6-45a5-8d25-f530e50a70a2/653c4023-92cf-4a94-a5e8-80df2eaea7fd/slot/1.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Right Side Front Door Cabin",
+          "label": "Right Side Front Door Cabin",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/8fcffdc8-b7d6-4ab4-9f11-798222a16c4f/b9225faa-41e6-45a5-8d25-f530e50a70a2/e82839dc-c321-4825-a7fe-8208655591dd/slot/3.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Right Side Rear Door Cabin",
+          "label": "Right Side Rear Door Cabin",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/366338aa-04e5-499e-9d3f-3b61c28b0721/b9225faa-41e6-45a5-8d25-f530e50a70a2/952db9de-b9e4-4c55-b24d-8a8bd4908221/slot/4.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Driver Side Door Panels Control",
+          "label": "Driver Side Door Panels Control",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/b9225faa-41e6-45a5-8d25-f530e50a70a2/f45f5a22-4eb7-4418-82cc-da8ad855fa2e/slot/5.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Driver Side Adjustment Panel",
+          "label": "Driver Side Adjustment Panel",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/b9225faa-41e6-45a5-8d25-f530e50a70a2/7c53c790-3b33-4746-af24-cd715827d31c/slot/6.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Boot Inside",
+          "label": "Boot Inside",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/583faf29-f3e2-4e5e-b46b-c510cd73491b/slot/myTransformedImage.jpeg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Boot Door Open",
+          "label": "Boot Door Open",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/ed88b1bc-7d2d-4ba4-8297-db9d8bef4eab/b9225faa-41e6-45a5-8d25-f530e50a70a2/7bd09ae9-92e4-4f3a-8223-3b7742b3d0fe/slot/17.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Key Close Up",
+          "label": "Key Close Up",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/b9225faa-41e6-45a5-8d25-f530e50a70a2/149f75c0-0daa-4834-9114-8f45d0b27baa/slot/20.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_RHS Rear Door",
+          "label": "RHS Rear Door",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/b37766e4-e19b-49af-8ed1-63cdce44d433/b9225faa-41e6-45a5-8d25-f530e50a70a2/16845327-5678-40af-9b77-32de4d5fe0c0/slot/8.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_LHS Rear Door",
+          "label": "LHS Rear Door",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/f8deb00e-7018-4da8-b959-e23e21208c2d/b9225faa-41e6-45a5-8d25-f530e50a70a2/7bd21524-46f0-4de3-8209-112deadb5b92/slot/9.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_LHS Front Door",
+          "label": "LHS Front Door",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/1b6db5ff-4b32-4ccf-b753-fb22e181d1b0/b9225faa-41e6-45a5-8d25-f530e50a70a2/17723791-0feb-47e8-9282-8ae268574aed/slot/10.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_Boot Open Zoomed View",
+          "label": "Boot Open Zoomed View",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/07ba4e9b-d917-4cd7-941d-955bdd092b73/b9225faa-41e6-45a5-8d25-f530e50a70a2/4064e67c-eaa5-4095-86df-0cca7d75fef0/slot/16.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Interior_RHS Front Door",
+          "label": "RHS Front Door",
+          "category": "Interior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/d6cdcf53-6221-4401-8813-b8eb06d8f38b/b9225faa-41e6-45a5-8d25-f530e50a70a2/d21c0129-2914-487f-ba79-7d48bcd38bfa/slot/7.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        }
+      ],
+      "Exterior": [
+        {
+          "key": "Exterior + Diagonal + FRONT + RHS",
+          "label": "Right Front Diagonal",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/06912fe2-6e65-4b9a-8eaf-6059cf266be9/b9225faa-41e6-45a5-8d25-f530e50a70a2/8069edf9-ff89-4d49-84a3-1453ccec30f2/slot/1.jpg",
+          "bgRemovedImage": "https://media.cars24.com/hello-ar/dev/transformed/uploads/no_bg/603c6e40-3ef6-11f1-bd54-02ede2007fbe/m/f5705e54-d323-43a8-9443-b8a079e9b196/b9225faa-41e6-45a5-8d25-f530e50a70a2/fd93be64-fc41-4862-9f40-eca1d45b2760/slot/1.png"
+        },
+        {
+          "key": "Exterior + Front",
+          "label": "Front",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/96b7e326-1aed-4a1d-8cb9-45c8f122c68d/b9225faa-41e6-45a5-8d25-f530e50a70a2/e1254903-88f9-428b-8ebd-cafcc5179afd/slot/1.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior + RHS",
+          "label": "Right Side View",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/79ac4cc2-9725-48cb-bd3a-86ad1ab860f6/b9225faa-41e6-45a5-8d25-f530e50a70a2/6710a572-e3e0-4bd5-a56b-6e2c2c97a6df/slot/2.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior + Diagonal + BACK + RHS",
+          "label": "Right Back Diagonal",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/f8d2eb85-4e42-44d7-b63c-9db446f39edf/b9225faa-41e6-45a5-8d25-f530e50a70a2/53906bfe-7cf7-4d55-8f19-8028d7adc584/slot/3.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior + BACK + REAR",
+          "label": "Back/Rear",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/d8077d2f-53cb-4544-acc6-5742ac22b62f/b9225faa-41e6-45a5-8d25-f530e50a70a2/05903ad3-92ec-4097-823c-01c6fee32cdf/slot/4.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior + Diagonal + BACK + LEFT",
+          "label": "Left Back Diagonal",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/3f482550-bb47-428a-8afa-baaa0d99a737/b9225faa-41e6-45a5-8d25-f530e50a70a2/b26ff300-018d-49b2-ac3c-75b9bd83b8b0/slot/2.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior + LHS",
+          "label": "Left Side",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/fdf05357-0e6f-41a8-9174-812985885f29/b9225faa-41e6-45a5-8d25-f530e50a70a2/c7acfad8-1f9d-4522-9fa7-a1f4d3f4cde6/slot/3.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior + Diagonal + FRONT + LEFT",
+          "label": "Left Front Diagonal",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/9a66495b-9735-4b92-b642-bf437b31a204/b9225faa-41e6-45a5-8d25-f530e50a70a2/446bb48d-7d72-4d50-a669-8d924b29396b/slot/4.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "MANUAL + Roof",
+          "label": "Roof",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/92c63d70-0d98-43a8-90d2-559dc0a93301/b9225faa-41e6-45a5-8d25-f530e50a70a2/a9206eca-8103-4cdb-94e4-6a1f49668197/slot/6.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "MANUAL + Open Bonet",
+          "label": "Open Bonet",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/9073284b-300e-4d73-900e-193afefe4561/b9225faa-41e6-45a5-8d25-f530e50a70a2/267307de-5728-410f-b73b-4c083f49e0ab/slot/4.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior Manual_Rear Windshield",
+          "label": "Rear Windshield",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/ea6ff24e-f4af-4e69-856b-93c5e8224c63/69e9c2e309b6ffb503db1923/cf38c12d-4039-43d6-8278-f22686456ad6/slot/Rear-Windshield---Processed.png",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Thumbnails_SRP",
+          "label": "SRP",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/f5705e54-d323-43a8-9443-b8a079e9b196/b9225faa-41e6-45a5-8d25-f530e50a70a2/fd93be64-fc41-4862-9f40-eca1d45b2760/slot/1.jpg",
+          "bgRemovedImage": "https://media.cars24.com/hello-ar/dev/transformed/uploads/no_bg/603c6e40-3ef6-11f1-bd54-02ede2007fbe/m/f5705e54-d323-43a8-9443-b8a079e9b196/b9225faa-41e6-45a5-8d25-f530e50a70a2/fd93be64-fc41-4862-9f40-eca1d45b2760/slot/1.png"
+        },
+        {
+          "key": "Exterior Manual_Rear Wiper",
+          "label": "Rear Wiper",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/70acc356-db48-448f-94ab-448abe0f7666/slot/Rear-Wiper---Original.png",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior Manual_Engine View - Right",
+          "label": "Engine View - Right",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/0f8ffad2-8939-4e78-86c3-e48f2ce48513/slot/myTransformedImage.jpeg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior Manual_Engine View - Left",
+          "label": "Engine View - Left",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/7e2e412b-786e-4c2b-9e2b-35dd5023d689/slot/myTransformedImage.jpeg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior Manual_Front Windshield",
+          "label": "Front Windshield",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/transformed/uploads/9745bf8a-e569-4aa8-a3e3-1c55a84bae40/b9225faa-41e6-45a5-8d25-f530e50a70a2/3fea0c0c-95bf-43ac-ac05-c16f989c5bbb/slot/7.jpg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        },
+        {
+          "key": "Exterior Manual_Engine View",
+          "label": "Engine View",
+          "category": "Exterior",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/8ead0387-26e2-488f-b00c-b8674542b03e/slot/myTransformedImage.jpeg",
+          "bgRemovedImage": "https://media.cars24.com/india/listingpage/UPCOMING_CAR.png"
+        }
+      ],
+      "Defects": [
+        {
+          "key": "Driver-side door - Door Stopper rubber missing",
+          "label": "Driver-side door - Door Stopper rubber missing",
+          "category": "Defects",
+          "image": "https://media.cars24.com/india/homepage/ExteriorDummy.png",
+          "dummyImage": true
+        },
+        {
+          "key": "Right rear door - Paint has faded",
+          "label": "Right rear door - Paint has faded",
+          "category": "Defects",
+          "image": "https://media.cars24.com/india/homepage/ExteriorDummy.png",
+          "dummyImage": true
+        },
+        {
+          "key": "Right rear door - Graphic sticker",
+          "label": "Right rear door - Graphic sticker",
+          "category": "Defects",
+          "image": "https://media.cars24.com/india/homepage/ExteriorDummy.png",
+          "dummyImage": true
+        },
+        {
+          "key": "Left quarter panel - Cladding has minor damage",
+          "label": "Left quarter panel - Cladding has minor damage",
+          "category": "Defects",
+          "image": "https://media.cars24.com/india/homepage/ExteriorDummy.png",
+          "dummyImage": true
+        },
+        {
+          "key": "Roof - Antenna Broken",
+          "label": "Roof - Antenna Broken",
+          "category": "Defects",
+          "image": "https://media.cars24.com/india/homepage/ExteriorDummy.png",
+          "dummyImage": true
+        },
+        {
+          "key": "Right running board - Cladding has minor damage",
+          "label": "Right running board - Cladding has minor damage",
+          "category": "Defects",
+          "image": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/653000de-6cad-4bf9-a70f-2e707abf5c43/slot/Exterior---Tyres---Running-Board---RHS---Cladding-broken-not-fixed-properly.png",
+          "dummyImage": false
+        }
+      ]
+    },
+    "categories": [
+      {
+        "category": "Exterior",
+        "order": 1,
+        "label": "Exterior",
+        "icon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/exterior.png",
+        "iconV2": "https://media.cars24.com/hello-ar/dev/transformed/uploads/m/06912fe2-6e65-4b9a-8eaf-6059cf266be9/b9225faa-41e6-45a5-8d25-f530e50a70a2/8069edf9-ff89-4d49-84a3-1453ccec30f2/slot/1.jpg",
+        "lockable": false
+      },
+      {
+        "category": "Interior",
+        "order": 2,
+        "label": "Interior",
+        "icon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/interior.png",
+        "iconV2": "https://media.cars24.com/hello-ar/dev/transformed/uploads/ca7f8039-e890-408b-8bc4-bb0e9916319c/b9225faa-41e6-45a5-8d25-f530e50a70a2/d0c1b835-7b7a-48cb-9470-d4efaffeb2df/slot/12.jpg",
+        "lockable": false
+      },
+      {
+        "category": "Features",
+        "order": 4,
+        "label": "Features",
+        "icon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/features.png",
+        "iconV2": "https://media.cars24.com/hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/73520d1d-a55b-439b-ac2b-8ba02310686e/slot/Parking-Camera---Original.png",
+        "lockable": true
+      },
+      {
+        "category": "Highlights",
+        "order": 5,
+        "label": "Highlights",
+        "icon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/highlights.png",
+        "iconV2": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/highlight.png",
+        "lockable": true
+      },
+      {
+        "category": "Tyres",
+        "order": 6,
+        "label": "Tyres",
+        "icon": "https://media.cars24.com/india/car-catalog/icons_04012025/cdp/tyres.png",
+        "iconV2": "https://media.cars24.com/hello-ar/dev/transformed/uploads/f0c93df2-8aa1-4115-9f43-eb0c495f94dd/b9225faa-41e6-45a5-8d25-f530e50a70a2/a5d3adf9-af60-4d2d-9b05-b7ec05144eb8/slot/1.jpg",
+        "lockable": true
+      }
+    ]
+  },
+  "highlights": [
+    {
+      "key": "X_INCH_ALLOY_WHEELS",
+      "label": "17-inch alloy wheels",
+      "description": "Stylish features for a polished look.",
+      "icon": "india/car-catalog/icons_04012025/cdp/Aloy_Wheels.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/Aloy_Wheels.png"
+    },
+    {
+      "key": "GPS_NAVIGATION",
+      "label": "GPS connectivity",
+      "description": "Precise navigation with in-built GPS.",
+      "icon": "india/car-catalog/icons_04012025/cdp/GPS_Connectivity.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/GPS_Connectivity.png"
+    },
+    {
+      "key": "ESSENTIAL_FEATURES",
+      "label": "Essential features",
+      "description": "AC, power windows, music system.",
+      "icon": "india/car-catalog/icons_04012025/cdp/OEM_Accessories.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/OEM_Accessories.png"
+    },
+    {
+      "key": "TOP_MODEL",
+      "label": "Top model",
+      "description": "Packed with high-end features.",
+      "icon": "india/car-catalog/icons_04012025/cdp/Top_Model.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/Top_Model.png"
+    },
+    {
+      "key": "EXCELLENT_GROUND_CLEARANCE",
+      "label": "190 mm ground clearance",
+      "description": "High clearance for bumpy roads.",
+      "icon": "india/car-catalog/icons_04012025/cdp/Ground_Clearance.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/Ground_Clearance.png"
+    },
+    {
+      "key": "STANDARD_SAFETY_FEATURES",
+      "label": "2 airbags and ABS",
+      "description": "Superior safety and protection.",
+      "icon": "india/car-catalog/icons_04012025/cdp/Standard_safety_features.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/Standard_safety_features.png"
+    }
+  ],
+  "priceJustificationUsp": [
+    {
+      "key": "ODOMETER_PER_YEAR",
+      "label": "Driven only 8610 km/year",
+      "description": "Lower run than similar 10-year old cars."
+    },
+    {
+      "key": "X_INCH_ALLOY_WHEELS",
+      "label": "17-inch alloy wheels",
+      "description": "For a commanding road presence.",
+      "icon": "india/car-catalog/icons_04012025/cdp/Aloy_Wheels.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/Aloy_Wheels.png"
+    },
+    {
+      "key": "GPS_NAVIGATION",
+      "label": "GPS connectivity",
+      "description": "Helps you with real-time navigation.",
+      "icon": "india/car-catalog/icons_04012025/cdp/GPS_Connectivity.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/GPS_Connectivity.png"
+    },
+    {
+      "key": "ESSENTIAL_FEATURES",
+      "label": "Essential features",
+      "description": "AC, power windows, music system.",
+      "icon": "india/car-catalog/icons_04012025/cdp/OEM_Accessories.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/OEM_Accessories.png"
+    },
+    {
+      "key": "TOP_MODEL",
+      "label": "Top-model",
+      "description": "Power packed with high-end features.",
+      "icon": "india/car-catalog/icons_04012025/cdp/Top_Model.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/Top_Model.png"
+    },
+    {
+      "key": "EXCELLENT_GROUND_CLEARANCE",
+      "label": "190 mm ground clearance",
+      "description": "High clearance for bumpy roads.",
+      "icon": "india/car-catalog/icons_04012025/cdp/Ground_Clearance.png",
+      "overlayIcon": "india/car-catalog/icons_04012025/cdp/highlights_overlay/Ground_Clearance.png"
+    }
+  ],
+  "overview": [
+    {
+      "key": "registrationYear",
+      "label": "Reg. year",
+      "value": "Nov 2016",
+      "icon": "india/car-catalog/cdp_07022024/reg-year.png",
+      "showWhenCollapsed": true
+    },
+    {
+      "key": "fuelType",
+      "label": "Fuel",
+      "value": "Petrol",
+      "icon": "india/car-catalog/cdp_07022024/fuel.png",
+      "showWhenCollapsed": false
+    },
+    {
+      "key": "odometerReading",
+      "label": "KM driven",
+      "value": "86,100 km",
+      "icon": "india/car-catalog/cdp_07022024/odometer.png",
+      "showWhenCollapsed": false
+    },
+    {
+      "key": "transmissionType",
+      "label": "Transmission",
+      "value": "Automatic",
+      "icon": "india/car-catalog/cdp_07022024/transmission.png",
+      "showWhenCollapsed": false
+    },
+    {
+      "key": "engineCapacity",
+      "label": "Engine capacity",
+      "value": "1591cc",
+      "icon": "india/car-catalog/cdp_07022024/engine-capacity.png",
+      "showWhenCollapsed": true
+    },
+    {
+      "key": "ownershipType",
+      "label": "Ownership",
+      "value": "1st",
+      "icon": "india/car-catalog/cdp_07022024/ownership.png",
+      "showWhenCollapsed": false
+    },
+    {
+      "key": "manufacturingYear",
+      "label": "Make year",
+      "value": "Sep 2016",
+      "icon": "india/car-catalog/cdp_07022024/make-year.png",
+      "showWhenCollapsed": true
+    },
+    {
+      "key": "duplicateKey",
+      "label": "Spare key",
+      "value": "Yes",
+      "icon": "india/car-catalog/cdp_07022024/key.png",
+      "showWhenCollapsed": false
+    },
+    {
+      "key": "registration",
+      "label": "Reg number",
+      "value": "DL5C*5111",
+      "icon": "india/car-catalog/cdp_07022024/rto.png",
+      "showWhenCollapsed": true
+    },
+    {
+      "key": "insuranceExpiry",
+      "label": "Insurance",
+      "value": "Need renewal",
+      "icon": "india/car-catalog/cdp_07022024/insurance.png",
+      "info": {
+        "label": "Insurance",
+        "description": "Attention - The original car insurance is expired but you need not worry as we have you covered.",
+        "image": "https://media.cars24.com/india/homepage/seller_insurance.png",
+        "banners": [
+          {
+            "description": "Buy a new Third Party insurance for as low as \u00e2\u0082\u00b98,277 per annum",
+            "icon": "https://media.cars24.com/india/cardetail/tick.png",
+            "highlights": [
+              {
+                "key": "\u00e2\u0082\u00b98,277 per annum",
+                "display": "\u00e2\u0082\u00b98,277 per annum"
+              }
+            ]
+          }
+        ]
+      },
+      "showWhenCollapsed": true
+    },
+    {
+      "key": "insuranceType",
+      "label": "Insurance type",
+      "value": "Plans from \u00e2\u0082\u00b98,277/y",
+      "icon": "india/car-catalog/cdp_07022024/insurance_type.png",
+      "showWhenCollapsed": true
+    }
+  ],
+  "carCondition": {
+    "categories": [
+      {
+        "key": "Exteriors",
+        "label": "Exteriors",
+        "value": 6,
+        "description": "6 minor imperfections were found which are purely cosmetic, not affecting the car's performance in any way.",
+        "icon": "india/homepage/Car-Condition-Icons/exterior.png",
+        "status": "ERROR"
+      },
+      {
+        "key": "Engine & Transmission",
+        "label": "Engine & Transmission",
+        "value": 0,
+        "description": "",
+        "icon": "india/homepage/Car-Condition-Icons/engine_transmission.png",
+        "status": "OK",
+        "audio": "https://fastly-videos.24c.in/v3/inspection/2026-03-27/RC6YCQXX/1/video/IMG_20260327_110505030.mp4"
+      },
+      {
+        "key": "Air-conditioning",
+        "label": "Air-Conditioning",
+        "value": 0,
+        "description": "",
+        "icon": "india/homepage/Car-Condition-Icons/air_conditioning.png",
+        "status": "OK"
+      },
+      {
+        "key": "Electricals & Interior",
+        "label": "Electricals & Interior",
+        "value": 0,
+        "description": "",
+        "icon": "india/homepage/Car-Condition-Icons/electrical_interior.png",
+        "status": "OK"
+      },
+      {
+        "key": "Steering, Suspension & Brakes",
+        "label": "Steering, Suspension & Brakes",
+        "value": 0,
+        "description": "",
+        "icon": "india/homepage/Car-Condition-Icons/steering_suspension_brakes.png",
+        "status": "OK"
+      },
+      {
+        "key": "tyresLife",
+        "label": "Tyres(Life Remaining)",
+        "value": 0,
+        "description": "",
+        "icon": "india/homepage/Car-Condition-Icons/tyres.png",
+        "status": "WARN"
+      }
+    ],
+    "checkpoints": [
+      {
+        "key": "Exterior + Tyres + Door + LHS Front",
+        "label": "Front passenger door",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Door + RHS Front.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": true
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Door + LHS Rear",
+        "label": "Rear left door",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Door + RHS Rear.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": true
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Door + RHS Front",
+        "label": "Driver-side door",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Door + LHS Front.png",
+        "status": "ERROR",
+        "infos": [
+          {
+            "label": "Door Stopper rubber missing",
+            "image": "india/homepage/ExteriorDummy.png",
+            "dummyImage": true
+          }
+        ],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Door + RHS Rear",
+        "label": "Right rear door",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Door + LHS Rear.png",
+        "status": "ERROR",
+        "infos": [
+          {
+            "label": "Paint has faded",
+            "description": "",
+            "image": "india/homepage/ExteriorDummy.png",
+            "dummyImage": true
+          },
+          {
+            "label": "Graphic sticker",
+            "description": "",
+            "image": "india/homepage/ExteriorDummy.png",
+            "dummyImage": true
+          }
+        ],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Bumper + Front",
+        "label": "Front bumper",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Bumper + Front.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": true
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Bumper + Rear",
+        "label": "Rear bumper",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Bumper + Rear.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": true
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Dicky /Boot Door",
+        "label": "Dicky (Boot door)",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Boot Door.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": true
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Fender + LHS",
+        "label": "Left fender",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Fender + RHS.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": true
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Fender + RHS",
+        "label": "Right fender",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Fender + LHS.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": true
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Bonnet/Hood",
+        "label": "Bonnet (hood)",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Hood.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Boot Floor",
+        "label": "Boot floor",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Boot Floor.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Apron + LHS",
+        "label": "Left Apron",
+        "category": "Exteriors",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Apron + RHS",
+        "label": "Right Apron",
+        "category": "Exteriors",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Pillar + LHS A",
+        "label": "Left A pillar",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Pillar + RHS A.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Pillar + LHS B",
+        "label": "Left B pillar",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Pillar + RHS B.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Pillar + LHS C",
+        "label": "Left C pillar",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Pillar + RHS C.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Pillar + RHS A",
+        "label": "Right A pillar",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Pillar + LHS A.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Pillar + RHS B",
+        "label": "Right B pillar",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Pillar + LHS B.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Pillar + RHS C",
+        "label": "Right C pillar",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Pillar + LHS C.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Quarter Panel + LHS",
+        "label": "Left quarter panel",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Quarter Panel + RHS.png",
+        "status": "ERROR",
+        "infos": [
+          {
+            "label": "Cladding has minor damage",
+            "image": "india/homepage/ExteriorDummy.png",
+            "dummyImage": true
+          }
+        ],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Quarter Panel + RHS",
+        "label": "Right quarter panel",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Quarter Panel + LHS.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": true
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Roof",
+        "label": "Roof",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Roof.png",
+        "status": "ERROR",
+        "infos": [
+          {
+            "label": "Antenna Broken",
+            "description": "",
+            "image": "india/homepage/ExteriorDummy.png",
+            "dummyImage": true
+          }
+        ],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Running Board + LHS",
+        "label": "Left running board",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Running Board + RHS.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + Running Board + RHS",
+        "label": "Right running board",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Running Board + LHS.png",
+        "status": "ERROR",
+        "infos": [
+          {
+            "label": "Cladding has minor damage",
+            "image": "hello-ar/dev/uploads/69e9c2e309b6ffb503db1923/653000de-6cad-4bf9-a70f-2e707abf5c43/slot/Exterior---Tyres---Running-Board---RHS---Cladding-broken-not-fixed-properly.png",
+            "dummyImage": false
+          }
+        ],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + ORVM + LHS",
+        "label": "Left rear-view mirror",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + ORVM + RHS.png",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Exterior + Tyres + ORVM + RHS",
+        "label": "Right rear-view mirror",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + ORVM + LHS.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Lights + Head Light + LHS",
+        "label": "Left headlight",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Lights + Head Light + RHS.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Lights + Head Light + RHS",
+        "label": "Right headlight",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Lights + Head Light + LHS.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Lights + Tail Light + LHS",
+        "label": "Left tail light",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Lights + Tail Light + LHS.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Lights + Tail Light + RHS",
+        "label": "Right tail light",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Lights + Tail Light + RHS.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Exterior + Tyres + Windshield + Front",
+        "label": "Front windshield",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Windshield + Front.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Exterior + Tyres + Windshield + Rear",
+        "label": "Rear windshield",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Exterior + Tyres + Windshield + Rear.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Exterior + Tyres + Firewall",
+        "label": "Firewall",
+        "category": "Exteriors",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Lights + Fog Light + LHS",
+        "label": "Left fog light",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Lights + Fog Light + RHS.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Lights + Fog Light + RHS",
+        "label": "Right fog light",
+        "category": "Exteriors",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Lights + Fog Light + LHS.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Exterior + Tyres + Tyre + LHS Front",
+        "label": "Left front tyre",
+        "category": "Tyres",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Exterior + Tyres + Tyre + RHS-Front",
+        "label": "Right front tyre",
+        "category": "Tyres",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Exterior + Tyres + Tyre + LHS Rear",
+        "label": "Left rear tyre",
+        "category": "Tyres",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Exterior + Tyres + Tyre + RHS Rear",
+        "label": "Right rear tyre",
+        "category": "Tyres",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Exterior + Tyres + Tyre + Spare",
+        "label": "Spare wheel",
+        "category": "Tyres",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Infotainment System",
+        "label": "Infotainment system",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Combination Switch",
+        "label": "Combination switch",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Instrument Cluster",
+        "label": "Instrument cluster",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Ceiling",
+        "label": "Ceiling",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Dashboard",
+        "label": "Dashboard",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Flooring",
+        "label": "Flooring",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Gear lever",
+        "label": "Gear lever",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Lock System",
+        "label": "Lock system",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Seat + LHS Front",
+        "label": "Front left seat (passenger seat)",
+        "category": "Electricals & Interior",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Electrical + Interior + Feature + Seat + RHS Front.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission_Engine_Underbody",
+        "label": "Engine",
+        "category": "Engine + Transmission",
+        "status": "OK",
+        "infos": [],
+        "repaint": {
+          "value": false
+        }
+      },
+      {
+        "key": "Electrical + Interior + Feature + Seat + RHS Front",
+        "label": "Driver seat",
+        "category": "Electricals & Interior",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Electrical + Interior + Feature + Seat + LHS Front.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Seat + 2nd Row LHS",
+        "label": "Second-row left seat",
+        "category": "Electricals & Interior",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Electrical + Interior + Feature + Seat + 2nd Row LHS.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Seat + 2nd Row RHS",
+        "label": "Second-row right seat",
+        "category": "Electricals & Interior",
+        "icon": "india/homepage/SUV_Hatchback For Condition Report Devlopment Only/Electrical + Interior + Feature + Seat + 2nd Row RHS.png",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Steering Handle",
+        "label": "Steering wheel",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Window Switch/Handle + LHS Front",
+        "label": "Left front window switch / handle",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Window Switch/Handle + LHS Rear",
+        "label": "Left rear window switch / handle",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Window Switch/Handle + RHS Front",
+        "label": "Right front window switch / handle",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Electrical + Interior + Feature + Window Switch/Handle + RHS Rear",
+        "label": "Right rear window switch / handle",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "AC + AC Unit",
+        "label": "AC Unit",
+        "category": "Air-conditioning",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Battery",
+        "label": "Battery",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Engine Oil",
+        "label": "Engine Oil",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Transmission",
+        "label": "Transmission",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Alternator",
+        "label": "Alternator",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Axle",
+        "label": "Axle",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Suspension + RHS Front",
+        "label": "Right front suspension",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Cooling System",
+        "label": "Cooling System",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Suspension + RHS Rear",
+        "label": "Right rear suspension",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Engine",
+        "label": "Engine",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Brakes",
+        "label": "Brakes",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Gear shifting/Gearbox Mount",
+        "label": "Gear shifting/Gearbox Mount",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Brake master cylinder",
+        "label": "Brake master cylinder",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Radiator Support",
+        "label": "Radiator support",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Exterior + Tyres + Upper cross member",
+        "label": "Upper cross member",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Engine Assembly",
+        "label": "Engine Assembly",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Engine + Transmission + Engine permissible blow by(black compression)",
+        "label": "Engine permissible blow by(black compression)",
+        "category": "Engine & Transmission",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Steering",
+        "label": "Steering",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Suspension + LHS Front",
+        "label": "Left front suspension",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Suspension + LHS Rear",
+        "label": "Left rear suspension",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Jumping rod bush + LHS Front",
+        "label": "Left front jumping rod bush",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Jumping rod bush + LHS Rear",
+        "label": "Left rear jumping rod bush",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Jumping rod bush + RHS Front",
+        "label": "Jumping rod bush",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Steering + Suspension + Brakes + Jumping rod bush + RHS Rear",
+        "label": "Right rear jumping rod bush",
+        "category": "Steering, Suspension & Brakes",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Standard Photos + Exterior + Front",
+        "label": "Front standard photo",
+        "category": "Exteriors",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Standard Photos + Exterior + Front - engine section",
+        "label": "Exterior - Front - engine section",
+        "category": "Exteriors",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Standard Photos + Exterior + Left",
+        "label": "Left standard Photo",
+        "category": "Exteriors",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Standard Photos + Exterior + Right",
+        "label": "Right standard photo",
+        "category": "Exteriors",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Standard Photos + Exterior + Rear",
+        "label": "Exterior - Rear",
+        "category": "Exteriors",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Standard Photos + Exterior + Rear with dicky door open",
+        "label": "Exterior - Rear with dicky door open",
+        "category": "Exteriors",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Standard Photos + Interior + LHS front door",
+        "label": "Interior - LHS front door",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Standard Photos + Interior + LHS rear door",
+        "label": "Interior - LHS rear door",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Standard Photos + Interior + RHS front door",
+        "label": "Interior - RHS front door",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "Standard Photos + Interior + RHS rear door",
+        "label": "Interior - RHS rear door",
+        "category": "Electricals & Interior",
+        "status": "OK",
+        "infos": []
+      },
+      {
+        "key": "frontRight",
+        "label": "Right Front Tyre",
+        "value": 76,
+        "category": "tyresLife",
+        "status": "OK"
+      },
+      {
+        "key": "rearLeft",
+        "label": "Left Rear Tyre",
+        "value": 84,
+        "category": "tyresLife",
+        "status": "OK"
+      },
+      {
+        "key": "frontLeft",
+        "label": "Left Front Tyre",
+        "value": 77,
+        "category": "tyresLife",
+        "status": "OK"
+      },
+      {
+        "key": "rearRight",
+        "label": "Right Rear Tyre",
+        "value": 86,
+        "category": "tyresLife",
+        "status": "OK"
+      },
+      {
+        "key": "spare",
+        "label": "Spare Tyre",
+        "value": 44,
+        "category": "tyresLife",
+        "status": "WARN"
+      }
+    ],
+    "blurInspectionReport": "https://media.cars24.com/india/cardetail/blurred-inspection-report-v2.png",
+    "repainted": true,
+    "noImperfection": false,
+    "minTyreLifeKm": 45000
+  },
+  "specsAndFeatures": {
+    "all": [
+      {
+        "key": "ABSAntilockBrakingSystem",
+        "label": "ABS - Anti-lock Braking System",
+        "value": true,
+        "category": "Safety",
+        "description": "Prevents the wheels from locking up during braking, thereby maintaining tractive contact with the road surface",
+        "icon": "india/homepage/specs/8ee1ae66-03db-4a04-bdb5-39c230fa165dABS.png",
+        "overlayIcon": "india/homepage/specs/23b62209-e664-4b74-9c93-32b30a28d5b0ABS2.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "ABS - Anti-lock Braking System",
+          "description": "Prevents the wheels from locking up during braking, thereby maintaining tractive contact with the road surface",
+          "image": "india/homepage/specs/8df41b8b-ca95-41b9-807b-32757bd08c59absi.png"
+        }
+      },
+      {
+        "key": "AirConditioner",
+        "label": "Air Conditioner",
+        "value": true,
+        "category": "Comfort & Convenience",
+        "description": "Helps occupants stay cool and comfortable during hot summer days",
+        "icon": "india/homepage/specs/e13d0b84-2924-4003-bf4c-387793af9c0dAC.png",
+        "overlayIcon": "india/homepage/specs/a7ca5655-56a2-468c-b442-ea171a83eb87AC2.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Air Conditioner",
+          "description": "Helps occupants stay cool and comfortable during hot summer days"
+        }
+      },
+      {
+        "key": "Airbags",
+        "label": "Airbags",
+        "value": "2",
+        "category": "Safety",
+        "description": "Reduce the risk and severity of injuries in the event of a collision or crash",
+        "icon": "india/homepage/specs/0962b8f2-e6e6-4df4-b1b3-7fe2d4c14d67AirBags.png",
+        "overlayIcon": "india/homepage/specs/60a4bcd8-19a5-4ab5-8f13-e5e3b70e6dccAirBags2.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Airbags",
+          "description": "Reduce the risk and severity of injuries in the event of a collision or crash"
+        }
+      },
+      {
+        "key": "AudioSystem",
+        "label": "Audio System",
+        "value": true,
+        "category": "Entertainment & Communication",
+        "type": "FEATURE",
+        "info": {
+          "label": "Audio System"
+        }
+      },
+      {
+        "key": "BluetoothCompatibility",
+        "label": "Bluetooth Compatibility",
+        "value": true,
+        "category": "Entertainment & Communication",
+        "description": "Allows drivers to make hands-free calling; promotes safer driving",
+        "icon": "india/homepage/specs/c495db96-11ef-4e3f-9162-16349ac3bf40Group640334.png",
+        "overlayIcon": "india/homepage/specs/e2dd57dc-03bb-461e-b710-ea9bcbe68014bluetooth.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Bluetooth Compatibility",
+          "description": "Allows drivers to make hands-free calling; promotes safer driving"
+        }
+      },
+      {
+        "key": "CentralLocking",
+        "label": "Central Locking",
+        "value": true,
+        "category": "Safety",
+        "description": "Allows you to lock or unlock all the doors of the car by pressing a button on the key fob or inside the car",
+        "icon": "india/homepage/specs/42578710-557b-4c25-b055-202b6a4fe42dcentrallockblack.png",
+        "overlayIcon": "india/homepage/specs/b04fedba-59d3-4b67-956c-398f7f03cb82Group640358.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Central Locking",
+          "description": "Allows you to lock or unlock all the doors of the car by pressing a button on the key fob or inside the car",
+          "image": "india/homepage/specs/6d8d2e24-2265-43da-9671-49eb8bf9a8a4centerlock.png"
+        }
+      },
+      {
+        "key": "ColorORVM",
+        "label": "Color ORVM ",
+        "value": "Body Coloured",
+        "category": "Interior & Exterior",
+        "description": "Body-colored mirrors for aesthetic and streamlined appearance.",
+        "type": "SPEC",
+        "info": {
+          "label": "Color ORVM ",
+          "description": "Body-colored mirrors for aesthetic and streamlined appearance."
+        }
+      },
+      {
+        "key": "Cylinders",
+        "label": "Cylinders",
+        "value": "4",
+        "category": "Engine, Transmission & Brakes",
+        "type": "SPEC",
+        "info": {
+          "label": "Cylinders"
+        }
+      },
+      {
+        "key": "DRLDaytimeRunningLights",
+        "label": "DRL - Daytime Running Lights",
+        "value": true,
+        "category": "Interior & Exterior",
+        "description": "Placed in front of the car that always turns on when the car is running",
+        "icon": "india/homepage/specs/85491e5f-e624-4bc6-9098-924a1646cbb4drl.png",
+        "overlayIcon": "india/homepage/specs/f054830a-696a-45e8-8449-e9dbec045deaGroup640338.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "DRL - Daytime Running Lights",
+          "description": "Placed in front of the car that always turns on when the car is running",
+          "image": "india/homepage/specs/48ba97a4-0b6a-477b-9fc1-b56268f06d35drli.png"
+        }
+      },
+      {
+        "key": "Displacementcc",
+        "label": "Displacement (cc)",
+        "value": "1591",
+        "category": "Engine, Transmission & Brakes",
+        "type": "SPEC",
+        "info": {
+          "label": "Displacement (cc)"
+        }
+      },
+      {
+        "key": "DriverArmrestStorage",
+        "label": "Driver Armrest Storage",
+        "value": true,
+        "category": "Comfort & Convenience",
+        "description": "Extra storage within the armrest for small items.",
+        "type": "FEATURE",
+        "info": {
+          "label": "Driver Armrest Storage",
+          "description": "Extra storage within the armrest for small items."
+        }
+      },
+      {
+        "key": "Drivetrain",
+        "label": "Drivetrain",
+        "value": "Front Wheel Drive",
+        "category": "Engine, Transmission & Brakes",
+        "type": "SPEC",
+        "info": {
+          "label": "Drivetrain"
+        }
+      },
+      {
+        "key": "EBDElectronicBrakeforceDistribution",
+        "label": "EBD - Electronic Brakeforce Distribution",
+        "value": true,
+        "category": "Safety",
+        "description": "Uses the vehicle\u00e2\u0080\u0099s ESC and ABS to determine the ideal brake force distribution to all four wheels in a braking event",
+        "icon": "india/homepage/specs/c1a10147-33b8-41ab-b553-206ab49ef635ebd.png",
+        "overlayIcon": "india/homepage/specs/2b1761fe-972c-44cc-9449-bb16543adad0ebdwhite.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "EBD - Electronic Brakeforce Distribution",
+          "description": "Uses the vehicle\u00e2\u0080\u0099s ESC and ABS to determine the ideal brake force distribution to all four wheels in a braking event"
+        }
+      },
+      {
+        "key": "ElectricallyFoldableMirrors",
+        "label": "Electrically Foldable Mirrors",
+        "value": true,
+        "category": "Interior & Exterior",
+        "type": "FEATURE",
+        "info": {
+          "label": "Electrically Foldable Mirrors"
+        }
+      },
+      {
+        "key": "FrontFogLights",
+        "label": "Front Fog Lights",
+        "value": true,
+        "category": "Safety",
+        "type": "FEATURE",
+        "info": {
+          "label": "Front Fog Lights"
+        }
+      },
+      {
+        "key": "FueltankCapacitylitres",
+        "label": "Fueltank Capacity (litres)",
+        "value": "55",
+        "category": "Fuel & Performance",
+        "type": "SPEC",
+        "info": {
+          "label": "Fueltank Capacity (litres)"
+        }
+      },
+      {
+        "key": "GPSNavigationSystem",
+        "label": "GPS Navigation System",
+        "value": "3D And Voice",
+        "category": "Entertainment & Communication",
+        "type": "FEATURE",
+        "info": {
+          "label": "GPS Navigation System"
+        }
+      },
+      {
+        "key": "GearBoxNumberOfGears",
+        "label": "Gear Box - Number Of Gears",
+        "value": "6",
+        "category": "Engine, Transmission & Brakes",
+        "type": "SPEC",
+        "info": {
+          "label": "Gear Box - Number Of Gears"
+        }
+      },
+      {
+        "key": "GroundClearancemm",
+        "label": "Ground Clearance (mm)",
+        "value": "190",
+        "category": "Dimensions & Capacity",
+        "type": "SPEC",
+        "info": {
+          "label": "Ground Clearance (mm)"
+        }
+      },
+      {
+        "key": "HeadlampBulbTypeHighBeam",
+        "label": "Headlamp Bulb Type - High Beam",
+        "value": "Halogen",
+        "category": "Interior & Exterior",
+        "type": "FEATURE",
+        "info": {
+          "label": "Headlamp Bulb Type - High Beam"
+        }
+      },
+      {
+        "key": "HeadlampBulbTypeLowBeam",
+        "label": "Headlamp Bulb Type - Low Beam",
+        "value": "Halogen",
+        "category": "Interior & Exterior",
+        "type": "FEATURE",
+        "info": {
+          "label": "Headlamp Bulb Type - Low Beam"
+        }
+      },
+      {
+        "key": "HeadlampLensType",
+        "label": "Headlamp Lens Type",
+        "value": "Projector Beam",
+        "category": "Interior & Exterior",
+        "type": "FEATURE",
+        "info": {
+          "label": "Headlamp Lens Type"
+        }
+      },
+      {
+        "key": "HeadlightHeightAdjuster",
+        "label": "Headlight Height Adjuster",
+        "value": "Manual",
+        "category": "Comfort & Convenience",
+        "description": "Adjusts headlight angle for optimal road illumination.",
+        "type": "FEATURE",
+        "info": {
+          "label": "Headlight Height Adjuster",
+          "description": "Adjusts headlight angle for optimal road illumination."
+        }
+      },
+      {
+        "key": "Lengthmm",
+        "label": "Length (mm)",
+        "value": "4270",
+        "category": "Dimensions & Capacity",
+        "type": "SPEC",
+        "info": {
+          "label": "Length (mm)"
+        }
+      },
+      {
+        "key": "MaxPowerbhp",
+        "label": "Max Power (bhp)",
+        "value": "123",
+        "category": "Fuel & Performance",
+        "type": "SPEC",
+        "info": {
+          "label": "Max Power (bhp)"
+        }
+      },
+      {
+        "key": "MaxPowerrpm",
+        "label": "Max Power (rpm)",
+        "value": "6400",
+        "category": "Fuel & Performance",
+        "type": "SPEC",
+        "info": {
+          "label": "Max Power (rpm)"
+        }
+      },
+      {
+        "key": "MaxTorqueNm",
+        "label": "Max Torque (Nm)",
+        "value": "151",
+        "category": "Fuel & Performance",
+        "type": "SPEC",
+        "info": {
+          "label": "Max Torque (Nm)"
+        }
+      },
+      {
+        "key": "NumberOfDiscBrakes",
+        "label": "Number Of Disc Brakes",
+        "value": "2",
+        "category": "Engine, Transmission & Brakes",
+        "type": "FEATURE",
+        "info": {
+          "label": "Number Of Disc Brakes"
+        }
+      },
+      {
+        "key": "NumberOfSpeakers",
+        "label": "Number Of Speakers",
+        "value": "6",
+        "category": "Entertainment & Communication",
+        "type": "FEATURE",
+        "info": {
+          "label": "Number Of Speakers"
+        }
+      },
+      {
+        "key": "ParkingAssistRear",
+        "label": "Parking Assist - Rear",
+        "value": "Sensor & Camera",
+        "category": "Comfort & Convenience",
+        "type": "FEATURE",
+        "info": {
+          "label": "Parking Assist - Rear"
+        }
+      },
+      {
+        "key": "PowerWindowsFront",
+        "label": "Power Windows - Front",
+        "value": true,
+        "category": "Comfort & Convenience",
+        "type": "FEATURE",
+        "info": {
+          "label": "Power Windows - Front"
+        }
+      },
+      {
+        "key": "PowerWindowsRear",
+        "label": "Power Windows - Rear",
+        "value": true,
+        "category": "Comfort & Convenience",
+        "type": "FEATURE",
+        "info": {
+          "label": "Power Windows - Rear"
+        }
+      },
+      {
+        "key": "RearAC",
+        "label": "Rear AC",
+        "value": true,
+        "category": "Comfort & Convenience",
+        "description": "Helps maintain a comfortable and consistent temperature throughout the vehicle's interior, including the rear seats",
+        "icon": "india/homepage/specs/c0810eb7-b237-4218-af72-269d67d7b1a9rac.png",
+        "overlayIcon": "india/homepage/specs/4733125a-8c81-4d35-a7ec-26d709f71a6frearacwhite.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Rear AC",
+          "description": "Helps maintain a comfortable and consistent temperature throughout the vehicle's interior, including the rear seats",
+          "image": "india/homepage/specs/e2af7249-55ed-479c-a197-32403a8cf0c0rear_ac_vents.png"
+        }
+      },
+      {
+        "key": "RearDefogger",
+        "label": "Rear Defogger",
+        "value": true,
+        "category": "Safety",
+        "description": "Removes condensation and thaw frost from the rear windshield",
+        "icon": "india/homepage/specs/168e6056-7360-4c3d-81a5-c789470a469aRearDefogger.png",
+        "overlayIcon": "india/homepage/specs/51304054-5214-467a-ad71-1da3d6e11a11RearDefogger2.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Rear Defogger",
+          "description": "Removes condensation and thaw frost from the rear windshield"
+        }
+      },
+      {
+        "key": "RimTypeFrontWheels",
+        "label": "Rim Type - Front Wheels",
+        "value": "Alloy",
+        "category": "Interior & Exterior",
+        "type": "FEATURE",
+        "info": {
+          "label": "Rim Type - Front Wheels"
+        }
+      },
+      {
+        "key": "RimTypeRearWheels",
+        "label": "Rim Type - Rear Wheels",
+        "value": "Alloy",
+        "category": "Interior & Exterior",
+        "type": "FEATURE",
+        "info": {
+          "label": "Rim Type - Rear Wheels"
+        }
+      },
+      {
+        "key": "SeatUpholstery",
+        "label": "Seat Upholstery",
+        "value": "Cloth",
+        "category": "Comfort & Convenience",
+        "type": "FEATURE",
+        "info": {
+          "label": "Seat Upholstery"
+        }
+      },
+      {
+        "key": "SeatingCapacity",
+        "label": "Seating Capacity",
+        "value": "5",
+        "category": "Dimensions & Capacity",
+        "type": "SPEC",
+        "info": {
+          "label": "Seating Capacity"
+        }
+      },
+      {
+        "key": "SmartCardSmartKey",
+        "label": "Smart Card/Smart Key",
+        "value": true,
+        "category": "Comfort & Convenience",
+        "type": "FEATURE",
+        "info": {
+          "label": "Smart Card/Smart Key"
+        }
+      },
+      {
+        "key": "SteeringAdjustment",
+        "label": "Steering Adjustment",
+        "value": true,
+        "category": "Comfort & Convenience",
+        "description": "Allows drivers to find a comfortable driving position; reduces fatigue during long drives",
+        "icon": "india/homepage/specs/b8fc9cb0-9a9b-4cd7-bd49-4f6d7518942asteeringadjt.png",
+        "overlayIcon": "india/homepage/specs/00e329e3-a6af-4a66-a7f1-c412018f2ca0Group640362.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Steering Adjustment",
+          "description": "Allows drivers to find a comfortable driving position; reduces fatigue during long drives"
+        }
+      },
+      {
+        "key": "SteeringMountedControls",
+        "label": "Steering Mounted Controls",
+        "value": true,
+        "category": "Entertainment & Communication",
+        "description": "Allow you to control stereo, make and receive calls on bluetooth stereo systems without taking your eyes off the road",
+        "icon": "india/homepage/specs/e37862ef-7191-42ca-932f-50e9d25e59edSteeringMountedAudioControl.png",
+        "overlayIcon": "india/homepage/specs/8501fb7c-f590-42d0-8a2e-26d546f4aa29SteeringMountedControls2.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Steering Mounted Controls",
+          "description": "Allow you to control stereo, make and receive calls on bluetooth stereo systems without taking your eyes off the road",
+          "image": "india/homepage/specs/c5ccf3f2-5546-430d-9dd1-37670a0bda43steering_mounted.png"
+        }
+      },
+      {
+        "key": "SteeringType",
+        "label": "Steering Type",
+        "value": "Electric",
+        "category": "Engine, Transmission & Brakes",
+        "description": "Determines vehicle steering mechanism for precise handling.",
+        "type": "SPEC",
+        "info": {
+          "label": "Steering Type",
+          "description": "Determines vehicle steering mechanism for precise handling."
+        }
+      },
+      {
+        "key": "SteeringWheelMaterial",
+        "label": "Steering Wheel Material",
+        "value": "Alloy & Leather",
+        "category": "Comfort & Convenience",
+        "type": "FEATURE",
+        "info": {
+          "label": "Steering Wheel Material"
+        }
+      },
+      {
+        "key": "Tachometer",
+        "label": "Tachometer",
+        "value": true,
+        "category": "Interior & Exterior",
+        "type": "FEATURE",
+        "info": {
+          "label": "Tachometer"
+        }
+      },
+      {
+        "key": "TransmissionType",
+        "label": "Transmission Type",
+        "value": "Automatic With Manual Mode",
+        "category": "Engine, Transmission & Brakes",
+        "type": "SPEC",
+        "info": {
+          "label": "Transmission Type"
+        }
+      },
+      {
+        "key": "TurnIndicatorsonORVMs",
+        "label": "Turn Indicators on ORVMs",
+        "value": true,
+        "category": "Interior & Exterior",
+        "description": "Integrated blinkers for enhanced side visibility signaling",
+        "type": "SPEC",
+        "info": {
+          "label": "Turn Indicators on ORVMs",
+          "description": "Integrated blinkers for enhanced side visibility signaling"
+        }
+      },
+      {
+        "key": "USBConnectionFront",
+        "label": "USB Connection - Front",
+        "value": true,
+        "category": "Comfort & Convenience",
+        "type": "FEATURE",
+        "info": {
+          "label": "USB Connection - Front"
+        }
+      },
+      {
+        "key": "WheelBasemm",
+        "label": "Wheel Base (mm)",
+        "value": "2590",
+        "category": "Dimensions & Capacity",
+        "type": "SPEC",
+        "info": {
+          "label": "Wheel Base (mm)"
+        }
+      },
+      {
+        "key": "RimDiameterFrontWheelsin",
+        "label": "Wheel Size - Front (in)",
+        "value": "17.0",
+        "category": "Dimensions & Capacity",
+        "type": "SPEC",
+        "info": {
+          "label": "Wheel Size - Front (in)"
+        }
+      },
+      {
+        "key": "RimDiameterRearWheelsin",
+        "label": "Wheel Size - Rear (in)",
+        "value": "17.0",
+        "category": "Dimensions & Capacity",
+        "type": "SPEC",
+        "info": {
+          "label": "Wheel Size - Rear (in)"
+        }
+      },
+      {
+        "key": "Widthmm",
+        "label": "Width (mm)",
+        "value": "1780",
+        "category": "Dimensions & Capacity",
+        "type": "SPEC",
+        "info": {
+          "label": "Width (mm)"
+        }
+      },
+      {
+        "key": "3603DSurroundViewCameraSystem",
+        "label": "360\u00c2\u00b0 3D Surround View Camera System",
+        "value": false,
+        "category": "Safety",
+        "description": "Combines multiple camera feeds to create a 3D bird\u00e2\u0080\u0099s-eye view, aiding in parking and tight maneuvering.",
+        "type": "SPEC",
+        "info": {
+          "label": "360\u00c2\u00b0 3D Surround View Camera System",
+          "description": "Combines multiple camera feeds to create a 3D bird\u00e2\u0080\u0099s-eye view, aiding in parking and tight maneuvering.",
+          "image": "india/homepage/specs/a974c81a-adfb-490c-afde-ef4b5db1bc76ADAS.png"
+        }
+      },
+      {
+        "key": "Automaticheadlights",
+        "label": "Automatic headlights",
+        "value": false,
+        "category": "Comfort & Convenience",
+        "description": "Automatically toggles between high and low beams.",
+        "type": "SPEC",
+        "info": {
+          "label": "Automatic headlights",
+          "description": "Automatically toggles between high and low beams.",
+          "image": "india/homepage/specs/adef5941-e45c-45af-8281-691e42a3b863Automaticheadlights.png"
+        }
+      },
+      {
+        "key": "CooledGlovebox",
+        "label": "Cooled Glovebox",
+        "value": false,
+        "category": "Comfort & Convenience",
+        "description": "Keeps items cool and visible inside the glove compartment.",
+        "type": "SPEC",
+        "info": {
+          "label": "Cooled Glovebox",
+          "description": "Keeps items cool and visible inside the glove compartment.",
+          "image": "india/homepage/specs/bda1b04b-aff3-4fcb-b47d-593dbf7067dcIlluminatedcoolglovebox.png"
+        }
+      },
+      {
+        "key": "CruiseControl",
+        "label": "Cruise Control",
+        "value": false,
+        "category": "Comfort & Convenience",
+        "description": "Automatically controls the speed of car. It takes over the throttle of the car to maintain a steady speed as set by the driver",
+        "icon": "india/homepage/specs/455ad281-d4ad-491c-9531-6381565ef90dCruiseControl.png",
+        "overlayIcon": "india/homepage/specs/470cfc41-b966-49d5-8e85-03286542a995CruiseControl2.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Cruise Control",
+          "description": "Automatically controls the speed of car. It takes over the throttle of the car to maintain a steady speed as set by the driver",
+          "image": "india/homepage/specs/92d39461-9ff8-4acb-ae13-07c7b3ff0919cruise_control.png"
+        }
+      },
+      {
+        "key": "Electronicparkingbrakewithautohold",
+        "label": "Electronic parking brake with auto hold",
+        "value": false,
+        "category": "Safety",
+        "description": "Automatically engages the parking brake and holds the car stationary at stops.",
+        "type": "SPEC",
+        "info": {
+          "label": "Electronic parking brake with auto hold",
+          "description": "Automatically engages the parking brake and holds the car stationary at stops.",
+          "image": "india/homepage/specs/2e020829-f7b6-4d2f-8f0d-6c7c11bd17e3Electronicparkingbrakewithautohold.png"
+        }
+      },
+      {
+        "key": "HillHoldControl",
+        "label": "Hill Hold Control",
+        "value": false,
+        "category": "Safety",
+        "description": "Prevents the car from rolling backwards on an uphill road when driving from a stationary position",
+        "icon": "india/homepage/specs/285cb33d-8580-41e3-83f8-9bba3b8f97dfhillhold.png",
+        "overlayIcon": "india/homepage/specs/99fea297-0423-414b-837b-c230dbb5ee1dGroup640350.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Hill Hold Control",
+          "description": "Prevents the car from rolling backwards on an uphill road when driving from a stationary position",
+          "image": "india/homepage/specs/be0e982d-b39f-4ee1-b98f-13fd3b0be045hill_hold_assisti.png"
+        }
+      },
+      {
+        "key": "IRVMwithAutoDimming",
+        "label": "IRVM with Auto Dimming ",
+        "value": false,
+        "category": "Comfort & Convenience",
+        "description": "Automatically dims the rearview mirror to reduce glare and improve night driving comfort and safety.",
+        "type": "SPEC",
+        "info": {
+          "label": "IRVM with Auto Dimming ",
+          "description": "Automatically dims the rearview mirror to reduce glare and improve night driving comfort and safety.",
+          "image": "india/homepage/specs/1533a85b-d535-4238-b0e3-208bc5a9d6cfIRVMwithAuto-dimming.png"
+        }
+      },
+      {
+        "key": "InternalHardDrive",
+        "label": "Internal Hard Drive",
+        "value": false,
+        "category": "Entertainment & Communication",
+        "description": "Built-in storage for music, videos, and navigation data.",
+        "type": "FEATURE",
+        "info": {
+          "label": "Internal Hard Drive",
+          "description": "Built-in storage for music, videos, and navigation data."
+        }
+      },
+      {
+        "key": "LaneDepartureWarningLDW",
+        "label": "Lane Departure Warning (LDW)",
+        "value": false,
+        "category": "Safety",
+        "description": "Alerts the driver when the vehicle unintentionally drifts out of its lane.",
+        "type": "SPEC",
+        "info": {
+          "label": "Lane Departure Warning (LDW)",
+          "description": "Alerts the driver when the vehicle unintentionally drifts out of its lane.",
+          "image": "india/homepage/specs/6d4bd9b1-15e7-4d28-a038-b6ba8e9b61deADAS.png"
+        }
+      },
+      {
+        "key": "Rainsensingwipers",
+        "label": "Rain sensing wipers",
+        "value": false,
+        "category": "Comfort & Convenience",
+        "description": "Automatically activates wipers when rain is detected.",
+        "type": "SPEC",
+        "info": {
+          "label": "Rain sensing wipers",
+          "description": "Automatically activates wipers when rain is detected.",
+          "image": "india/homepage/specs/260d5571-0120-432a-9813-d572fc53128fRainsensingwipers.png"
+        }
+      },
+      {
+        "key": "TPMSTyrePressureMonitoringSystem",
+        "label": "TPMS - Tyre Pressure Monitoring System",
+        "value": false,
+        "category": "Safety",
+        "description": "Monitors the air pressure inside the tyres on vehicles and warns the driver if the pressure is too low",
+        "icon": "india/homepage/specs/d221e6aa-7fb7-49ca-90a2-f478836cc57edummy.png",
+        "overlayIcon": "india/homepage/specs/d18d7758-4f8a-4947-89b3-fd7eed157cf3Group640345.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "TPMS - Tyre Pressure Monitoring System",
+          "description": "Monitors the air pressure inside the tyres on vehicles and warns the driver if the pressure is too low",
+          "image": "india/homepage/specs/afc8a6a6-5880-40ee-9dfa-b36c08a14624tyre_pressurei.png"
+        }
+      },
+      {
+        "key": "TractionControl",
+        "label": "Traction Control",
+        "value": false,
+        "category": "Safety",
+        "description": "Helps to keep a car\u00e2\u0080\u0099s grip between the tires and the road in slippery or dangerous conditions",
+        "icon": "india/homepage/specs/f9246163-e9e1-4f8c-89c8-7932257f335cGroup640348.png",
+        "overlayIcon": "india/homepage/specs/4f62d910-3f05-48cc-9e8a-905194a928b4traction.png",
+        "type": "FEATURE",
+        "info": {
+          "label": "Traction Control",
+          "description": "Helps to keep a car\u00e2\u0080\u0099s grip between the tires and the road in slippery or dangerous conditions",
+          "image": "india/homepage/specs/cbdcc539-db9f-451c-8d85-0d3ef66de42ctraction_control.png"
+        }
+      },
+      {
+        "key": "VentilatedSeatsFront",
+        "label": "Ventilated Seats - Front",
+        "value": false,
+        "category": "Comfort & Convenience",
+        "type": "FEATURE",
+        "info": {
+          "label": "Ventilated Seats - Front"
+        }
+      }
+    ],
+    "topSpecs": [
+      "Displacementcc",
+      "Cylinders",
+      "MaxPowerbhp",
+      "SeatingCapacity",
+      "GroundClearancemm"
+    ],
+    "topFeatures": [
+      "SteeringMountedControls",
+      "BluetoothCompatibility",
+      "Airbags",
+      "RearAC",
+      "DRLDaytimeRunningLights",
+      "ABSAntilockBrakingSystem",
+      "EBDElectronicBrakeforceDistribution",
+      "AirConditioner",
+      "CentralLocking",
+      "RearDefogger"
+    ],
+    "modifications": []
+  },
+  "inventoryShortUrls": [
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/ynsaou",
+      "trackingParameter": {
+        "code": "NO_TRACKING_PARAMS",
+        "utmSource": "",
+        "utmMedium": "",
+        "utmCampaign": ""
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/yearqp",
+      "trackingParameter": {
+        "code": "WEBSITE_NO_RESULT_FOUND",
+        "utmSource": "WebsiteSMS",
+        "utmMedium": "WebsiteSMS",
+        "utmCampaign": ""
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/spvcn0",
+      "trackingParameter": {
+        "code": "WEBSITE_SHARE_WHATSAPP",
+        "utmSource": "WebsiteSMS",
+        "utmMedium": "WebsiteSMS",
+        "utmCampaign": ""
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/w6weln",
+      "trackingParameter": {
+        "code": "WEBSITE_SHARE_FACEBOOK",
+        "utmSource": "facebook",
+        "utmMedium": "facebook",
+        "utmCampaign": ""
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/rvh73w",
+      "trackingParameter": {
+        "code": "WEBSITE_SMS_DETAIL_PAGE",
+        "utmSource": "WebsiteSMS",
+        "utmMedium": "WebsiteSMS",
+        "utmCampaign": ""
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/vf9e3s",
+      "trackingParameter": {
+        "code": "ANDROID_APP_SMS_DETAIL_PAGE",
+        "utmSource": "Android",
+        "utmMedium": "Android",
+        "utmCampaign": ""
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/7kdavt",
+      "trackingParameter": {
+        "code": "IOS_APP_SMS_DETAIL_PAGE",
+        "utmSource": "IOS",
+        "utmMedium": "IOS",
+        "utmCampaign": ""
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/8e6j8y",
+      "trackingParameter": {
+        "code": "LMS_APP_SHARE",
+        "utmSource": "LMS_SMS",
+        "utmMedium": "LMS_SMS",
+        "utmCampaign": ""
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/zxxj4h",
+      "trackingParameter": {
+        "code": "SELLER_PORTAL_REVISE_PAGE",
+        "utmSource": "CRM",
+        "utmMedium": "CRM",
+        "utmCampaign": "SellerListing_t3_revise"
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/ndfpfe",
+      "trackingParameter": {
+        "code": "SELLER_PORTAL_DELIST_PAGE",
+        "utmSource": "CRM",
+        "utmMedium": "CRM",
+        "utmCampaign": "SellerListing_t3_delist"
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/b5hhog",
+      "trackingParameter": {
+        "code": "INSPECTION_REPORT_DETAIL_PAGE",
+        "utmSource": "CRM",
+        "utmMedium": "CRM",
+        "utmCampaign": "inspection_report_car_detail"
+      }
+    },
+    {
+      "appointmentId": "10126364760",
+      "url": "https://cars24.world/95p6ox",
+      "trackingParameter": {
+        "code": "INSPECTION_REPORT_CITY_URL",
+        "utmSource": "CRM",
+        "utmMedium": "CRM",
+        "utmCampaign": "inspection_report_city_list"
+      }
+    }
+  ],
+  "oemServiceHistoryAvailable": false,
+  "serviceHistory": {
+    "makeLogo": null,
+    "version": null,
+    "baseUrl": null,
+    "banner": {
+      "description": "Inspected across 300 parameters at our Mega Refurbishment Lab (MRL)",
+      "icon": "india/cardetail/white_check.png",
+      "highlights": [
+        {
+          "key": "",
+          "display": ""
+        }
+      ]
+    },
+    "note": null,
+    "pdfUrl": null,
+    "highlights": null,
+    "visits": null,
+    "purchased": false,
+    "viewed": false,
+    "expired": null,
+    "fulfillmentData": null,
+    "blurredBackgroundImage": null,
+    "blurredBackgroundSmallImage": null,
+    "serviceHistoryPlans": null,
+    "monetized": false,
+    "header": null,
+    "summary": [],
+    "visitCount": null
+  },
+  "bankOffers": [],
+  "metaContent": {
+    "title": "Used 2016 Hyundai Creta SX PLUS AT 1.6 PETROL Automatic in New Delhi | 86,100 Kms - Cars24",
+    "description": "Explore the 2016 Hyundai Creta SX PLUS AT 1.6 PETROL with 86,100 Kms at Cars24 New Delhi. Petrol, smooth Automatic transmission. Verified, 300+ checks, 30-day return, easy financing.",
+    "indexed": true
+  },
+  "wishlistCount": 60,
+  "carBuybackAvailability": {
+    "appointmentId": "10126364760",
+    "enabled": true
+  },
+  "testDriveLabel": "Today",
+  "platformUsp": [
+    {
+      "key": "GS_7DayEasyReturns",
+      "label": "30-day easy returns",
+      "description": "Buy it. Drive it, Return if it\u00e2\u0080\u0099s not right for you.",
+      "icon": "india/buy/car-catalog/platform-usp/30_day.png"
+    },
+    {
+      "key": "GS_1MonthWarranty",
+      "label": "Lifetime Warranty Upgrade",
+      "description": "All cars come with a 13-month warranty \u00e2\u0080\u0094 upgrade to get lifetime coverage.",
+      "icon": "india/buy/car-catalog/platform-usp/free_warranty.png"
+    },
+    {
+      "key": "GS_AssuredBuyback",
+      "label": "Assured buyback",
+      "description": "Get a fair value on resale and upgrade easily with our assured buyback prices.",
+      "icon": "india/buy/car-catalog/platform-usp/best_price_guaranteed.png"
+    }
+  ],
+  "mmvAttributes": {
+    "TopModel": "Yes",
+    "CNGFitmentAvailable": "Yes"
+  },
+  "priceTagInfo": {
+    "listingPrice": {
+      "value": 508700,
+      "display": "\u00e2\u0082\u00b95.09 lakhs"
+    },
+    "averageMarketPrice": {
+      "value": 650562,
+      "display": "\u00e2\u0082\u00b96.51 lakhs"
+    },
+    "minMarketPrice": null,
+    "maxMarketPrice": null,
+    "amountSaved": "\u00e2\u0082\u00b91,42,000",
+    "amountSavedPercentage": 21.8,
+    "label": "STEAL_DEAL"
+  },
+  "eventName": "GS | PRIME | STANDARD",
+  "starHighlight": {
+    "displayText": "Cars24 ASSURED",
+    "iconUrl": "india/car-catalog/icons_03022025/blue_tick.png"
+  },
+  "businessTag": {
+    "label": "Cars24 Assured",
+    "display": "Cars24 Assured",
+    "icon": "india/car-catalog/icons_13122024/cars24-assured.png",
+    "color": "#4E34FF",
+    "darkBgColor": "#FFFFFF"
+  },
+  "businessTagV2": {
+    "key": "GS",
+    "text": "Cars24 Owned Stock",
+    "media": {
+      "url": "https://static-cdn.cars24.com/prod/cms/2026/02/18/874ad34c-cc0a-4129-917d-8824151794efOwnership_tag_large%20%2811%29.png",
+      "alt": "Cars24 owned stock",
+      "aspectRatio": "6.333"
+    },
+    "desktopMedia": {
+      "url": "https://static-cdn.cars24.com/prod/cms/2025/12/26/c875199d-a85f-4350-b5a8-81cffe722da4Frame%202147233492.png",
+      "alt": "Cars24 owned stock"
+    },
+    "cdpImage": {
+      "url": "https://static-cdn.cars24.com/prod/cms/2025/12/26/c3e1a4b8-a125-4b18-a2d0-58d9704e2f6dPartner%20Dealer.png",
+      "alt": "Cars24 owned stock",
+      "aspectRatio": "6.7461"
+    },
+    "highlightImage": {
+      "url": "https://static-cdn.cars24.com/prod/cms/2026/02/18/987dead3-797a-4df4-b1fa-d49024b3b1c7VAS%20from%20left%20%285%29.png",
+      "alt": "Cars24 owned stock",
+      "aspectRatio": "6.65"
+    }
+  },
+  "assurance": {
+    "key": "ZERO_WORRY_MAX",
+    "title": "Zero Worry Max",
+    "bgColor": [
+      "#F7EEFF",
+      "#FDFCFF",
+      "#FFFFFF"
+    ],
+    "media": {
+      "url": "https://static-cdn.cars24.com/prod/cms/2025/12/10/3b295198-e9be-4054-8772-5ae696535f97zero_worry_max.png",
+      "alt": ""
+    },
+    "separatorIcon": {
+      "name": "chevron-right-outline",
+      "color": "#3C018C",
+      "url": "https://static-cdn.cars24.com/qa/cms/2025/12/22/70e1024c-9e02-4fbc-ae83-a662a688397bchevron-right.png"
+    },
+    "items": [
+      {
+        "text": "Zero Worry Max",
+        "color": "#3C018C",
+        "bold": true
+      }
+    ],
+    "subItems": [
+      {
+        "title": "Lifetime warranty",
+        "color": "#62748E",
+        "icon": {
+          "name": "circle-check-line",
+          "color": "#62748E",
+          "url": "https://static-cdn.cars24.com/prod/cms/2026/01/05/46fa53a6-02fd-46bf-9b1b-df777ddc1e9fcircle-check%2C%20check%20radio%2C%20circle%2C%20checkbox%2C%20check%2C%20checkmark%2C%20confirm.png"
+        }
+      },
+      {
+        "title": "30 days return",
+        "color": "#62748E",
+        "icon": {
+          "name": "circle-check-line",
+          "color": "#62748E",
+          "url": "https://static-cdn.cars24.com/prod/cms/2026/01/05/46fa53a6-02fd-46bf-9b1b-df777ddc1e9fcircle-check%2C%20check%20radio%2C%20circle%2C%20checkbox%2C%20check%2C%20checkmark%2C%20confirm.png"
+        }
+      },
+      {
+        "title": "300+ quality checks",
+        "color": "#62748E",
+        "icon": {
+          "name": "circle-check-line",
+          "color": "#62748E",
+          "url": "https://static-cdn.cars24.com/prod/cms/2026/01/05/46fa53a6-02fd-46bf-9b1b-df777ddc1e9fcircle-check%2C%20check%20radio%2C%20circle%2C%20checkbox%2C%20check%2C%20checkmark%2C%20confirm.png"
+        }
+      },
+      {
+        "title": "Best price",
+        "color": "#62748E",
+        "icon": {
+          "name": "circle-check-line",
+          "color": "#62748E",
+          "url": "https://static-cdn.cars24.com/prod/cms/2026/01/05/46fa53a6-02fd-46bf-9b1b-df777ddc1e9fcircle-check%2C%20check%20radio%2C%20circle%2C%20checkbox%2C%20check%2C%20checkmark%2C%20confirm.png"
+        }
+      },
+      {
+        "title": "Core structure intact",
+        "color": "#62748E",
+        "icon": {
+          "name": "circle-check-line",
+          "color": "#62748E",
+          "url": "https://static-cdn.cars24.com/prod/cms/2026/01/05/46fa53a6-02fd-46bf-9b1b-df777ddc1e9fcircle-check%2C%20check%20radio%2C%20circle%2C%20checkbox%2C%20check%2C%20checkmark%2C%20confirm.png"
+        }
+      },
+      {
+        "title": "No odometer tampering",
+        "color": "#62748E",
+        "icon": {
+          "name": "circle-check-line",
+          "color": "#62748E",
+          "url": "https://static-cdn.cars24.com/prod/cms/2026/01/05/46fa53a6-02fd-46bf-9b1b-df777ddc1e9fcircle-check%2C%20check%20radio%2C%20circle%2C%20checkbox%2C%20check%2C%20checkmark%2C%20confirm.png"
+        }
+      },
+      {
+        "title": "No water damages",
+        "color": "#62748E",
+        "icon": {
+          "name": "circle-check-line",
+          "color": "#62748E",
+          "url": "https://static-cdn.cars24.com/prod/cms/2026/01/05/46fa53a6-02fd-46bf-9b1b-df777ddc1e9fcircle-check%2C%20check%20radio%2C%20circle%2C%20checkbox%2C%20check%2C%20checkmark%2C%20confirm.png"
+        }
+      },
+      {
+        "title": "Service history available",
+        "color": "#62748E",
+        "icon": {
+          "name": "circle-check-line",
+          "color": "#62748E",
+          "url": "https://static-cdn.cars24.com/prod/cms/2026/01/05/46fa53a6-02fd-46bf-9b1b-df777ddc1e9fcircle-check%2C%20check%20radio%2C%20circle%2C%20checkbox%2C%20check%2C%20checkmark%2C%20confirm.png"
+        }
+      },
+      {
+        "title": "RC transfer support",
+        "color": "#62748E",
+        "icon": {
+          "name": "circle-check-line",
+          "color": "#62748E",
+          "url": "https://static-cdn.cars24.com/prod/cms/2026/01/05/46fa53a6-02fd-46bf-9b1b-df777ddc1e9fcircle-check%2C%20check%20radio%2C%20circle%2C%20checkbox%2C%20check%2C%20checkmark%2C%20confirm.png"
+        }
+      }
+    ]
+  },
+  "promises": [
+    {
+      "promiseId": "lifetime_warranty",
+      "name": "Lifetime warranty",
+      "iconUrl": "https://static-cdn.cars24.com/prod/cms/2026/01/27/61dfc045-1d48-4ab4-a781-5c23ba305bffLTW.png"
+    },
+    {
+      "promiseId": "30_day_return",
+      "name": "30 days return",
+      "iconUrl": "https://static-cdn.cars24.com/prod/cms/2026/01/27/c4dd1b34-34c3-489a-b571-767e34699c25TDR.png"
+    },
+    {
+      "promiseId": "300_quality_checks",
+      "name": "300+ quality checks",
+      "iconUrl": "https://static-cdn.cars24.com/prod/cms/2026/01/27/b65b78c1-1cc3-44ac-80f9-9753b3aaa663FIC.png"
+    },
+    {
+      "promiseId": "best_price_guarantee",
+      "name": "Best price",
+      "iconUrl": "https://static-cdn.cars24.com/prod/cms/2026/01/27/a6560a35-335c-41ae-b7d3-a7fff2ce54e4BFG.png"
+    },
+    {
+      "promiseId": "no_accident_history",
+      "name": "Core structure intact",
+      "iconUrl": "https://static-cdn.cars24.com/prod/cms/2026/01/27/6bf62aec-53a1-4aac-b570-76c8b2a050d7CQC.png"
+    },
+    {
+      "promiseId": "no_odometer_tampering",
+      "name": "No odometer tampering",
+      "iconUrl": "https://static-cdn.cars24.com/prod/cms/2026/02/03/ce104c9f-8392-4d45-bdf5-b7240ac95762gauge%2C%20tachometer%2C%20performance%2C%20speed%2C%20scale%20%282%29.png"
+    },
+    {
+      "promiseId": "no_water_damages",
+      "name": "No water damages",
+      "iconUrl": "https://static-cdn.cars24.com/prod/cms/2026/02/03/dddf12f3-d442-4c17-af6b-0627f4460135Frame%202147234125%20%281%29.png"
+    },
+    {
+      "promiseId": "service_history_available",
+      "name": "Service history available",
+      "iconUrl": "https://static-cdn.cars24.com/prod/cms/2026/01/27/a4546e7f-a4f8-4978-91b1-589352431690SH.png"
+    },
+    {
+      "promiseId": "rc_transfer_support",
+      "name": "RC transfer support",
+      "iconUrl": "https://static-cdn.cars24.com/prod/cms/2026/01/27/8aa14e62-d831-4c59-9ae2-b93152aafe24RC.png"
+    }
+  ],
+  "carName": "Hyundai Creta",
+  "cityObj": {
+    "legacyId": 2,
+    "code": "CC_2",
+    "name": "New Delhi",
+    "active": true,
+    "stateCode": "DL",
+    "geoLocation": [
+      28.6129,
+      77.2295
+    ],
+    "pincode": "110001",
+    "alternateName": "NCR",
+    "carCountMap": {},
+    "cityCenterLocality": "India Gate",
+    "luxeAvailable": false,
+    "serviceAble": false,
+    "serviceableBusinessVerticals": [],
+    "gsserviceable": false,
+    "c2CServiceable": false,
+    "geoLocationValid": true,
+    "d2CServiceable": false
+  },
+  "mainImage": "$3a",
+  "highlightsCount": 6,
+  "disablePrimaryActions": false
+}
