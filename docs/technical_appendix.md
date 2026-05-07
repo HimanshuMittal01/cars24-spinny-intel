@@ -209,7 +209,7 @@ The current pipeline is the small-N illustrative version. A serious version of t
 
 ### What this exercise demonstrates instead
 
-With N=6 (and N=15 gold) and no transactional corpus, fitting a regression is overfit on contact. The honest small-N path is **match-then-compare**: tightly filter to listings that share the qualitative specs (same trim band, same fuel, same transmission), then rank-score on the remaining quantitative dims. That's what the redo (current ranking sample notwithstanding) does.
+With N=6 ranking + N=17 gold and no transactional corpus, fitting a regression is overfit on contact. The honest small-N path is **match-then-compare**: tightly filter to listings that share the qualitative specs (same trim band, same fuel, same transmission), then rank-score on the remaining quantitative dims. That's what the current dataset does (Hyundai Creta, Delhi-NCR, SX trim line, petrol, automatic).
 
 Both methods aim at the same thing — a price-to-condition signal that controls for spec heterogeneity. Match-then-compare controls by *exclusion*; hedonic regression controls by *modelling*. With more data, the second is strictly better.
 
@@ -229,9 +229,10 @@ That's a different scope. This project is the small-N illustrative version that 
 
 See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 
-1. **Speculative schema vs real data (2026-05-07).** Mid-build, fetched real listings and discovered the schemas were largely fictional. Pivoted to JSON-parse-first extraction. Rewrote 3 tasks. The pivot turned the disclosure asymmetry from hypothesis to measurement.
+1. **Speculative schema vs real data.** Mid-build, fetched real listings and discovered the schemas were largely fictional. Pivoted to JSON-parse-first extraction. Rewrote 3 tasks.
 2. **Gold-labeling on a deterministic pipeline.** E2/E3 against hand-labeled gold come out perfect by construction. Honest framing in the limitations section.
 3. **Anchored bands → rank-based scoring (spec §14).** Bands were defensible only via sensitivity analysis. Rank-based is defensible by construction ("is A's km better than B's km — yes"). Tradeoff: lost magnitude, gained groundedness.
+4. **Tight scope filter (variant + fuel + transmission).** First ranking mixed petrol/diesel, manual/auto, and EX/SX/SX(O) — spec heterogeneity contaminated the price-to-condition ratio. Re-collected the dataset under a tight filter (SX-petrol-auto). Top-3 cleared up: all Cars24, by a consistent ratio margin. E4 km LOO τ moved from 0.33 to 0.60 (less overwhelming once trim/fuel/transmission heterogeneity removed).
 
 ## 8. Limitations
 
@@ -239,7 +240,7 @@ See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 
 - **N=6 ranking.** Strategic conclusions are illustrative. Listings span 2016-2022 to demonstrate the method across the SX-petrol-auto sub-segment.
 - **Rank-based scoring depends on the set composition.** Same listing in a different 6-set could rank differently. The composite is a relative-position score, not an absolute condition score.
-- **km_driven dominates the ranking** (E4 LOO τ = 0.33). Defensible given km is the strongest single predictor in used-car valuation, but worth surfacing.
+- **km_driven has the strongest single influence on the ranking** (E4 LOO τ = 0.60; other features 0.73–0.87). Defensible given km is the strongest single predictor in used-car valuation, but worth surfacing.
 - **E3 calibration is a self-consistency check**, not an independent eval. Gold uses the same rubric on the same JSON the extractor parses. True calibration would require holistic gut-rated scores or third-party valuation.
 - **Cars24 platform-level no-accident promise is *modelled* as per-listing `accident_disclosed = none`.** Defensible mapping, not a per-listing extraction. Documented and acknowledged.
 - **disclosure_count is binary per field.** A single boolean (Spinny `is_accidental: false`) counts the same as detailed exposure (per-section inspection sub-ratings). Measures *presence*, not *depth*.
@@ -253,4 +254,4 @@ uv run pytest                              # 55 tests
 uv run python scripts/run_pipeline.py      # produces runs/<id>/ranking.json
 ```
 Latest run: `runs/20260507T101410-3c6ec3/`
-Per-fixture metadata: `fixtures/<platform>/<id>/{page.html, captured_at.txt, url.txt}`
+Per-fixture metadata: `fixtures/<platform>/<id>/{page.html, captured_at.txt, url.txt, extracted.json, normalized.json}`
