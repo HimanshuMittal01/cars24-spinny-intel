@@ -30,6 +30,41 @@ flowchart TD
 
 The 6 ranking listings are held out from all calibration. `α` and weights are fixed on the 10-listing gold set only.
 
+### Vision Agent Topology
+
+The "Vision Agent" box above expands into an outer/inner split:
+
+```mermaid
+flowchart LR
+    Loop[Outer agent loop<br/>claude-sonnet-4-6<br/>tools enabled · temp=0]
+    Tools{tool call}
+    LP[list_photos<br/>returns manifest]
+    IP[inspect_photo idx]
+    NG[note_evidence_gap<br/>aspect, reason]
+    FA[final_assessment<br/>per-aspect findings]
+    Inner[Inner inspector<br/>one-shot VLM<br/>single photo + prompt]
+    Cache[(Inner cache<br/>sha256 of prompt+photo)]
+    Out([VisionAssessment])
+
+    Loop --> Tools
+    Tools --> LP
+    Tools --> IP
+    Tools --> NG
+    Tools --> FA
+    LP --> Loop
+    NG --> Loop
+    IP --> Cache
+    Cache -- miss --> Inner
+    Inner --> Cache
+    Cache -- hit / write-through --> Loop
+    FA ==> Out
+```
+
+- **Outer loop** decides *which* photos to inspect, in what order, and when to stop. It reasons across turns; never sees raw image bytes.
+- **Inner inspector** is a separate one-shot VLM call: one photo, one structured-output prompt. No tools, no loop.
+- **Cache** is keyed on `sha256(prompt_version + photo_bytes)`. Identical photo bytes always return the same findings. Re-runs against the same listings cost nothing.
+- **Caps**: max 12 outer turns and 10 inspect_photo calls per listing. Budget breach surfaces as an error tool_result so the outer loop can still call `final_assessment` with whatever findings it has gathered.
+
 ---
 
 ## 2. The Ranking Formulas
