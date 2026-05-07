@@ -99,13 +99,15 @@ async def test_agent_invokes_inspector_when_inspect_photo_called(fake_manifest):
     assert 0 in assessment.photos_inspected
 
 
-async def test_agent_force_finalizes_on_inspect_budget_exceeded(fake_manifest):
-    """If max_inspects=2 is hit, agent is forced to finalize."""
+async def test_agent_recovers_when_inspect_budget_hit(fake_manifest):
+    """When max_inspects is hit on a tool call, agent receives an error tool_result
+    and is expected to consolidate findings via final_assessment.
+    """
     client = _make_client([
         [_tool_use_block("inspect_photo", {"idx": 0})],
         [_tool_use_block("inspect_photo", {"idx": 1})],
-        # no third tool call — this would be the 3rd inspect, blocked by budget
-        [_tool_use_block("inspect_photo", {"idx": 0})],
+        [_tool_use_block("inspect_photo", {"idx": 0})],   # 3rd attempt: budget hit
+        [_tool_use_block("final_assessment", _FINAL_PAYLOAD)],  # agent recovers
     ])
 
     async def inspector(idx):
@@ -116,9 +118,8 @@ async def test_agent_force_finalizes_on_inspect_budget_exceeded(fake_manifest):
         manifest=fake_manifest, client=client, inspector_fn=inspector,
         max_outer_turns=12, max_inspects=2,
     )
-    assert assessment.budget_exceeded is True
-    # All findings present, defaulted to not_visible
-    assert all(f.severity == "not_visible" for f in assessment.findings)
+    assert assessment.budget_exceeded is False
+    assert len(assessment.findings) == 5
 
 
 async def test_agent_force_finalizes_on_outer_turn_budget(fake_manifest):

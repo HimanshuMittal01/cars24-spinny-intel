@@ -130,12 +130,17 @@ async def run_vision_agent(
                 })
             elif name == "inspect_photo":
                 if inspect_count >= max_inspects:
-                    # Force-finalize immediately when inspect budget is hit
-                    return _default_assessment(
-                        listing_id=listing_id, platform=platform,
-                        manifest=manifest, photos_inspected=photos_inspected, turns=turn,
-                        budget_exceeded=True,
-                    )
+                    # Budget hit — surface as error tool_result so the agent can still
+                    # consolidate findings it already gathered into final_assessment.
+                    tool_results.append({
+                        "type": "tool_result", "tool_use_id": tool_use_id,
+                        "content": [{"type": "text",
+                                     "text": "ERROR: inspect_photo budget exceeded. "
+                                             "Call final_assessment now with the findings "
+                                             "you have already gathered. Use 'not_visible' "
+                                             "only for aspects you genuinely could not evidence."}],
+                        "is_error": True,
+                    })
                 else:
                     idx = int(inp["idx"])
                     inspect_count += 1
