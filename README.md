@@ -34,14 +34,14 @@ Why ranks rather than absolute thresholds (e.g., "<20k km is excellent")? Thresh
 
 ## How we know the ranking holds up
 
-Before producing the ranking we built and ran a small evaluation harness against a hand-labeled gold dataset.
+Before producing the ranking we built a small evaluation harness and ran it against a hand-labeled gold dataset of **15 separate listings** (8 Cars24 + 7 Spinny, all different from the 6 listings being ranked above).
 
-- **Faithfulness check.** We hand-labeled all 6 listings by reading the source pages directly, then compared the extractor's output to our labels. **The extractor matched our values on every field, on both platforms.**
-- **Stability check.** We bumped each of the four weights up and down by 25% (one at a time, 8 variants) and re-ran the ranking. **The ordering was substantially preserved across all 8 variants** — the ranking is not sensitive to small weight choices.
-- **Dominance check.** We dropped each feature in turn and re-ran. **Removing km changes the ranking a lot; removing any of the other three barely moves it.** Kilometres is the load-bearing feature — worth knowing if a business interpretation weighs another dimension more.
+- **Faithfulness check** *(on the 15 gold listings).* We hand-labeled each one by reading the source page directly, then ran the extractor and compared. **The extractor matched our values on every field, on both platforms.**
+- **Stability check** *(on the 6 ranked listings).* We bumped each of the four weights up and down by 25% (one at a time, 8 variants) and re-ran the ranking. **The ordering was substantially preserved across all 8 variants** — the ranking is not sensitive to small weight choices.
+- **Dominance check** *(on the 6 ranked listings).* We dropped each feature in turn and re-ran. **Removing km changes the ranking a lot; removing any of the other three barely moves it.** Kilometres is the load-bearing feature — worth knowing if a business interpretation weighs another dimension more.
 - **Determinism check.** Three identical reruns of the pipeline produced byte-identical output. No silent randomness in the scoring path.
 
-**Honest framing on the faithfulness check.** The hand-labels were read from the same source pages the extractor parses, so the check confirms *the extractor faithfully captures what the page exposes*, not that our scoring formula matches some external valuation. An independent calibration would need either gut-rated condition labels (subjective) or a third-party valuation source — out of scope here, called out below.
+**Honest framing on the faithfulness check.** Our hand-labels were read from the same source pages the extractor parses (the platforms inject their listing data as inline JSON, and we read that JSON manually). So the check confirms *the extractor faithfully captures what the page exposes*, not that our scoring formula matches some external valuation. An independent calibration would need either gut-rated condition labels (subjective) or a third-party valuation source — out of scope here, called out below.
 
 ## Caveats
 

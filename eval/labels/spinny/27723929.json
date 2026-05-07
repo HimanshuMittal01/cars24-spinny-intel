@@ -1,0 +1,32 @@
+{
+  "listing_id": "27723929",
+  "platform": "spinny",
+  "full_fields": {
+    "productPrice": 1083000.0,
+    "productMileage": 63745,
+    "make_year": 2020,
+    "no_of_owners": "2nd",
+    "procurement_category": "assured",
+    "inspection_report": {
+      "report": {
+        "summary": {
+          "is_accidental": false
+        }
+      }
+    }
+  },
+  "score_common": 44.64,
+  "notes": {
+    "km_driven": "63,745 km",
+    "age_years": "2020 \u2192 age 6y",
+    "owners": "#2",
+    "accident_disclosed": "none",
+    "annotation_method": "Independent regex extraction from raw HTML; rank-based score computed over the 15-listing gold set per spec \u00a714."
+  },
+  "per_feature_rank_scores": {
+    "km_driven": 50.0,
+    "age_years": 67.86,
+    "owners": 10.71,
+    "accident_disclosed": 50.0
+  }
+}

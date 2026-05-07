@@ -90,14 +90,16 @@ Pairwise comparison per feature. `1` = row beats column on this feature, `0` = l
 
 ## 4. Eval harness results
 
-### E2 — Extraction quality (vs hand-labeled gold, N=6)
+### E2 — Extraction quality (vs hand-labeled gold, N=15, independent of the ranking 6)
+
+Gold dataset: 15 listings hand-labeled (8 Cars24 + 7 Spinny). All 15 are distinct from the 6 listings being ranked, so this measures the extractor on inputs it has not contributed to the ranking output.
 
 - field_recall (overall): `{'price': 1.0, 'km_driven': 1.0, 'age_years': 1.0, 'owners': 1.0}`
 - per_platform: `{"spinny": {"price": 1.0, "km_driven": 1.0, "age_years": 1.0, "owners": 1.0}, "cars24": {"price": 1.0, "km_driven": 1.0, "age_years": 1.0, "owners": 1.0}}`
 
-Both platforms: 100% recall on the 4 score-bearing fields. Gold was hand-labeled by reading the same inline JSON the extractor parses — this is a self-consistency check, not an independent calibration. See limitations.
+Both platforms: 100% recall on the 4 score-bearing fields across all 15 gold listings. Gold was hand-labeled by reading the same inline JSON the extractor parses, so the check confirms structural faithfulness, not independent calibration. See limitations.
 
-### E3 — Score calibration (vs gold)
+### E3 — Score calibration (vs gold, N=15)
 
 - MAE (overall): `0.0`
 - Spearman ρ (overall): `1.0`

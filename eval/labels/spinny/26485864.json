@@ -1,0 +1,32 @@
+{
+  "listing_id": "26485864",
+  "platform": "spinny",
+  "full_fields": {
+    "productPrice": 641000.0,
+    "productMileage": 61731,
+    "make_year": 2019,
+    "no_of_owners": "2nd",
+    "procurement_category": "assured",
+    "inspection_report": {
+      "report": {
+        "summary": {
+          "is_accidental": false
+        }
+      }
+    }
+  },
+  "score_common": 44.46,
+  "notes": {
+    "km_driven": "61,731 km",
+    "age_years": "2019 \u2192 age 7y",
+    "owners": "#2",
+    "accident_disclosed": "none",
+    "annotation_method": "Independent regex extraction from raw HTML; rank-based score computed over the 15-listing gold set per spec \u00a714."
+  },
+  "per_feature_rank_scores": {
+    "km_driven": 57.14,
+    "age_years": 57.14,
+    "owners": 10.71,
+    "accident_disclosed": 50.0
+  }
+}

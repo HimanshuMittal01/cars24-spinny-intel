@@ -1,0 +1,24 @@
+{
+  "listing_id": "10018797175",
+  "platform": "cars24",
+  "full_fields": {
+    "listingPrice": 485000,
+    "odometerReading": 43145,
+    "year": 2017,
+    "ownerNumber": 1
+  },
+  "score_common": 58.21,
+  "notes": {
+    "km_driven": "43,145 km",
+    "age_years": "2017 \u2192 age 9y",
+    "owners": "#1",
+    "accident_disclosed": "none",
+    "annotation_method": "Independent regex extraction from raw HTML; rank-based score computed over the 15-listing gold set per spec \u00a714."
+  },
+  "per_feature_rank_scores": {
+    "km_driven": 78.57,
+    "age_years": 28.57,
+    "owners": 64.29,
+    "accident_disclosed": 50.0
+  }
+}

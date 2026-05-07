@@ -1,0 +1,24 @@
+{
+  "listing_id": "10142868769",
+  "platform": "cars24",
+  "full_fields": {
+    "listingPrice": 862609,
+    "odometerReading": 94180,
+    "year": 2020,
+    "ownerNumber": 1
+  },
+  "score_common": 45.54,
+  "notes": {
+    "km_driven": "94,180 km",
+    "age_years": "2020 \u2192 age 6y",
+    "owners": "#1",
+    "accident_disclosed": "none",
+    "annotation_method": "Independent regex extraction from raw HTML; rank-based score computed over the 15-listing gold set per spec \u00a714."
+  },
+  "per_feature_rank_scores": {
+    "km_driven": 14.29,
+    "age_years": 67.86,
+    "owners": 64.29,
+    "accident_disclosed": 50.0
+  }
+}

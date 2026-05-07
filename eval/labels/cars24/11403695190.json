@@ -1,0 +1,24 @@
+{
+  "listing_id": "11403695190",
+  "platform": "cars24",
+  "full_fields": {
+    "listingPrice": 640000,
+    "odometerReading": 109975,
+    "year": 2018,
+    "ownerNumber": 1
+  },
+  "score_common": 35.18,
+  "notes": {
+    "km_driven": "109,975 km",
+    "age_years": "2018 \u2192 age 8y",
+    "owners": "#1",
+    "accident_disclosed": "none",
+    "annotation_method": "Independent regex extraction from raw HTML; rank-based score computed over the 15-listing gold set per spec \u00a714."
+  },
+  "per_feature_rank_scores": {
+    "km_driven": 0.0,
+    "age_years": 46.43,
+    "owners": 64.29,
+    "accident_disclosed": 50.0
+  }
+}
