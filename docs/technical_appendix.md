@@ -2,7 +2,7 @@
 
 _Run id: `20260507T085230-477ddc`_
 
-_Companion to [`report.md`](report.md). All methodology, per-feature breakdown, eval harness numbers, and limitations live here._
+_Companion to [`../README.md`](../README.md). All methodology, per-feature breakdown, eval harness numbers, and limitations live here._
 
 ## 1. Methodology
 
@@ -142,7 +142,7 @@ Readings:
 
 ## 5. Disclosure asymmetry — side observation, not a ranking input
 
-`disclosure_count` is **not** a scoring dimension. It does not affect the ranking in §1 of `report.md`. It is reported as a descriptive metric because the gap between the two platforms is large and structural — but a CXO acting on the ranking should set this aside; it speaks to *positioning*, not to *which-listing-is-the-better-deal*.
+`disclosure_count` is **not** a scoring dimension. It does not affect the ranking in `README.md`. It is reported as a descriptive metric because the gap between the two platforms is large and structural — but it speaks to platform *positioning*, not to *which-listing-is-the-better-deal*. Anyone acting on the ranking should set it aside.
 
 ### The numbers
 
@@ -212,7 +212,6 @@ See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 ```
 uv run pytest                              # 55 tests
 uv run python scripts/run_pipeline.py      # produces runs/<id>/ranking.json
-uv run python scripts/run_evals.py         # generates docs/report.md + chart
 ```
 Latest run: `runs/20260507T085230-477ddc/`
 Per-fixture metadata: `fixtures/<platform>/<id>/{page.html, captured_at.txt, url.txt}`
