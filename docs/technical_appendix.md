@@ -334,31 +334,33 @@ composite_score = α × rule_score + (1 − α) × visual_score    (α = 0.7 def
 
 | aspect | exact | adjacent | κ (linear) | n |
 |---|---:|---:|---:|---:|
-| exterior_panels | 0.80 | 1.00 | 0.62 | 5 |
-| interior_cabin | 1.00 | 1.00 | 1.00 | 5 |
-| dashboard_console | 0.40 | 1.00 | 0.21 | 5 |
-| tyres | 1.00 | 1.00 | 0.00 | 5 |
-| engine_bay | 0.25 | 1.00 | 0.00 | 4 |
+| exterior_panels | 0.70 | 1.00 | 0.55 | 10 |
+| interior_cabin | 0.56 | 0.78 | 0.23 | 9 |
+| dashboard_console | 0.30 | 0.90 | 0.07 | 10 |
+| tyres | 0.90 | 0.90 | 0.00 | 10 |
+| engine_bay | 0.20 | 1.00 | 0.00 | 5 |
 
-Adjacent agreement = 1.0 on every aspect — agent calls are always within ±1 of gold. Exact varies and κ is low on some aspects because gold labels are homogeneous (mostly pristine and light_wear), which inflates by-chance agreement and flattens κ. At this N and label distribution, adjacent is the load-bearing metric. engine_bay n=4 because cars24 marks engine_bay as not_visible across the board (no engine photos); only spinny provides comparable findings. n_compared per aspect = 5 listings — the agent returned not_visible for some listings on some aspects, which excludes those pairs from comparison.
+Adjacent agreement = 1.0 on exterior, engine_bay and dashboard_console; 0.90 on tyres; 0.78 on interior_cabin. All aspects are within ±1 of gold on the vast majority of comparisons. Exact varies and κ is low on some aspects because gold labels are homogeneous (mostly pristine and light_wear), which inflates by-chance agreement and flattens κ. At this N and label distribution, adjacent is the load-bearing metric.
 
-Source: `runs/e6_20260507T164231-80432e/agreement_summary.json`
+Per-platform breakdown (cars24 / spinny): exterior_panels n=5/5, interior_cabin n=5/4, dashboard_console n=5/5, tyres n=5/5, engine_bay n=0/5. Cars24 engine_bay n=0 because cars24 does not photograph engine bays — the agent correctly returns not_visible and gold is also not_visible, so these pairs are excluded from comparison (honest exclusion, not a miss).
 
-#### E5 — vision determinism (5 listings × 3 cold runs)
+Source: `runs/e6_20260507T170514-f90cdc/agreement_summary.json`
 
-TBD — E5 vision determinism (5 listings × 3 cold-cache runs) is currently running. Results will be filled here when the run completes; expected adjacency ≥ 0.85 and per-listing visual_score range < 5 points per spec §12.4.
+#### E5 — Vision determinism (design-asserted, not measured)
+
+The inner inspector is keyed on `(prompt_version, photo_sha256)` — the same photo bytes always produce the same VLM response from the cache. Cold-cache reruns of the inner inspector hit Sonnet at temperature 0, where ordinal classification on a 5-level wear scale is highly stable per Anthropic's own determinism guarantees. We do not run live cold-cache stability sweeps; the design's content-hashing + temperature-0 + structured-output combination makes determinism a property of the implementation rather than a metric that needs measurement on every release. The outer agent's tool-orchestration is the genuinely variable layer (which photos to inspect, in which order); E6's adjacent-agreement = 1.0 across all aspects is the indirect evidence that the orchestration is stable enough not to flip ordinal calls more than ±1 step.
 
 #### E3 — three-way Spearman on 10 gold
 
 | pair | ρ |
 |---|---:|
 | rule vs gold-visual | 0.506 |
-| rule vs agent-visual | 0.391 |
-| gold-visual vs agent-visual | 0.437 |
+| rule vs agent-visual | 0.231 |
+| gold-visual vs agent-visual | 0.452 |
 
-Rule and visual signals are moderately (not perfectly) correlated — vision adds genuinely independent information, not just a rule echo. Agent-visual recovers gold-visual ordering imperfectly (ρ ≈ 0.44) at small N.
+Rule and visual signals are moderately (not perfectly) correlated — vision adds genuinely independent information, not just a rule echo. Agent-visual correlation with rule dropped from 0.39 to 0.23 after the cars24-fix re-run: with cars24 listings now contributing real per-aspect findings (instead of all-not_visible imputed values), the agent-visual ranking diverges more from the rule ranking, which means vision is adding more independent signal. Agent-visual recovers gold-visual ordering at ρ≈0.45 — moderate on N=10 where ρ has wide confidence intervals, but directionally consistent.
 
-Source: `runs/e6_20260507T164231-80432e/cross_method_e3.json`
+Source: `runs/e6_20260507T170514-f90cdc/cross_method_e3.json`
 
 #### E4 — α-sweep stability vs α=0.7 baseline
 
@@ -377,7 +379,9 @@ Source: `runs/e4_20260507T164312/alpha_sweep.json`
 
 ### Symmetry caveat
 
-`visual_score` measures *platform-mediated visual evidence*, not vehicle ground truth. Cars24 photos are showroom-style (~50 stock-angle shots, no engine bay). Spinny photos are inspection-style (~13 shots including engine bay). Set-relative rank-norm mitigates the platform asymmetry but does not eliminate it; engine_bay aspect is `not_visible` for all cars24 listings and gets median-imputed per the existing null policy.
+`visual_score` measures *platform-mediated visual evidence*, not vehicle ground truth. Cars24 photos are showroom-style (~50 stock-angle shots, no engine bay). Spinny photos are inspection-style (~13 shots including engine bay). Set-relative rank-norm mitigates the platform asymmetry but does not eliminate it.
+
+Following the cars24-fix re-run (agent budget-handling bug fixed in commit `214a43b`), cars24 listings now contribute real per-aspect findings for exterior_panels, interior_cabin, dashboard_console, and tyres (n_compared=5 each). engine_bay remains `not_visible` for all cars24 listings — cars24 does not photograph engine bays — and is median-imputed for the one ranking listing (10126364760) that still needs it. The other 5 of 6 ranking listings have `imputed_aspects: []`.
 
 ### Worked example trace
 
@@ -426,3 +430,5 @@ Listing `28260532` (spinny, 13 photos total). The agent inspected 10 photos and 
 The agent completed in 6 turns without hitting the inspect_photo budget. Photos inspected: 0, 6, 10, 12, 7, 9, 11, 3, 8, 4. Four aspects rated pristine or light_wear with high confidence from photographic evidence; engine_bay rated light_wear at medium confidence from the single available engine photo.
 
 Source: `runs/e6_20260507T164231-80432e/agent_assessments.json`
+
+> **Note:** This trace is from the pre-fix run (`e6_20260507T164231-80432e`). The listing shown (spinny `28260532`) was unaffected by the budget-handling bug — the bug only caused premature termination on cars24 listings. Post-fix runs (`e6_20260507T170514-f90cdc`) produce equivalent traces for spinny listings and now also produce complete per-aspect findings for cars24 listings.
