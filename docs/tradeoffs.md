@@ -125,7 +125,7 @@ diesel-manual-EX in the set, not just because of condition.
 
 **Decision.** Re-collected the dataset under a tight filter: **Hyundai Creta,
 Delhi-NCR, SX trim line, petrol, automatic.** No price band. Now 23 matching
-listings (10 cars24 + 13 spinny). Partition: 6 ranking + 17 gold. The 13
+listings (10 cars24 + 13 spinny). Partition: 6 ranking + 17 gold (subsequently reduced to 10 gold for vision-agent calibration; 7 dropped labels archived on disk). The 13
 listings collected during the loose-filter pass that don't match (manual,
 diesel, off-trim) are retained on disk for traceability and tagged `X` in
 `docs/extraction_review.md`.
