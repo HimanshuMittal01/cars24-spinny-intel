@@ -8,8 +8,6 @@ Ranking only means something between comparable cars. Make, trim, fuel, and tran
 
 The right scope for a small-N comparison is therefore a tight filter: same model, same region, same trim band, same fuel, same transmission. We then score on the remaining quantitative dimensions (km, age, owners, accident).
 
-The honest scale-up — hedonic regression on a 5,000+ listing corpus — would let us drop the matching constraint by *modelling* the price effect of each spec instead of filtering it out. See [`docs/technical_appendix.md` §6](docs/technical_appendix.md#6-with-a-market-corpus-this-would-be-a-different-problem) for the full approach.
-
 ## Ranking
 
 Lower ₹ per condition-point = more car for your money.
