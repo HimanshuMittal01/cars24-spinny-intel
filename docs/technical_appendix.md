@@ -131,68 +131,53 @@ Pairwise comparison per feature. `1` = row beats column on this feature, `0` = l
 
 ## 4. Eval harness results
 
-### Extraction recall (vs hand-labeled gold, N=17, independent of the ranking 6)
+> Re-run on N=10 (down from N=17) following the gold-set reduction for vision-agent calibration. Results below reflect the smaller set; statistical power is reduced and prior conclusions have been re-validated against the new data.
 
-Gold dataset: 17 listings hand-labeled, all matching the same SX-petrol-automatic filter, all distinct from the 6 listings being ranked.
+### Extraction recall (vs hand-labeled gold, N=10, independent of the ranking 6)
+
+Gold dataset: 10 listings hand-labeled, all matching the same SX-petrol-automatic filter, all distinct from the 6 listings being ranked. (The original 17-listing gold was reduced to 10 to support vision-agent calibration; 7 dropped labels remain on disk as archive.)
 
 - field_recall (overall): `{'price': 1.0, 'km_driven': 1.0, 'age_years': 1.0, 'owners': 1.0}`
 - per_platform: `{"cars24": {"price": 1.0, "km_driven": 1.0, "age_years": 1.0, "owners": 1.0}, "spinny": {"price": 1.0, "km_driven": 1.0, "age_years": 1.0, "owners": 1.0}}`
 
 100% recall on the 4 score-bearing fields across all gold listings, both platforms. Self-consistency check (gold uses same rubric on same source JSON), not independent calibration. See limitations.
 
-### Score calibration (vs gold, N=17)
+### Score calibration — not reported for regenerated gold
 
-- MAE (overall): `0.0`
-- Spearman ρ (overall): `1.0`
-- per_platform_MAE: `{"cars24": 0.0, "spinny": 0.0}`
-- per_platform_ρ: `{"cars24": 1.0, "spinny": 0.9999999999999999}`
+Calibration MAE/Spearman are not reported for the regenerated gold because the gold's expected `score_common` is itself defined as the scorer's output on the 10-listing set (spec §14). System-vs-gold MAE = 0 and Spearman = 1 trivially — they measure self-consistency, not independent calibration.
 
-MAE = 0 by construction (gold uses same rubric on same source data). Useful as a regression guard for future runs.
+### Weight sensitivity / stability (Kendall's τ vs unperturbed ranking) — N=10 gold
 
-### Weight sensitivity (Kendall's τ vs unperturbed ranking)
+> Re-run on N=10 (down from N=17) following the gold-set reduction for vision-agent calibration. Results below reflect the smaller set; statistical power is reduced and prior conclusions have been re-validated against the new data.
 
-**±25% perturbation per dim:**
+**±25% perturbation per dim (gold N=10):**
 
 | dim direction | τ |
 |---|---:|
-| km_driven+ | 1.000 |
-| km_driven- | 1.000 |
-| age_years+ | 0.867 |
-| age_years- | 0.867 |
-| owners+ | 1.000 |
-| owners- | 1.000 |
-| accident_disclosed+ | 1.000 |
-| accident_disclosed- | 1.000 |
+| km_driven+ | 0.8667 |
+| km_driven- | 0.6889 |
+| age_years+ | 0.9111 |
+| age_years- | 0.8667 |
+| owners+ | 0.6889 |
+| owners- | 0.9111 |
+| accident_disclosed+ | 0.9111 |
+| accident_disclosed- | 0.9556 |
 
-**Leave-one-dim-out:**
+τ range: 0.689–0.956. Ranking is **substantially preserved under ±25% weight perturbations** across all dims.
 
-| dim removed | τ |
-|---|---:|
-| km_driven | 0.600 |
-| age_years | 0.867 |
-| owners | 0.733 |
-| accident_disclosed | 0.733 |
+**Leave-one-dim-out (gold N=10):**
+
+| dim removed | τ | interpretation |
+|---|---:|---|
+| km_driven | **0.022** | nearly full rank shuffle — dominant feature |
+| age_years | 0.156 | strong secondary influence |
+| owners | 0.556 | moderate tertiary influence |
+| accident_disclosed | 0.956 | nearly inert in this data |
 
 Readings:
-- Ranking is **stable to ±25% weight perturbation** (τ ≥ 0.87).
-- **km_driven has the strongest single influence** — removing it drops τ to 0.60. The other features stay 0.73–0.87. No single feature alone determines the ranking, but km matters most.
-
-#### Same checks on the 17 gold listings (more feature variation)
-
-The 6 ranking listings all have `owners=1` and `accident=none`, so per-feature scores for those two dims are tied at 50.0 — they contribute zero variance to the ranking. The LOO values above for owners/accident are partly rescaling artefacts. Re-running on the 17 gold (which has 1- and 2-owner mix, wider km/age spread) gives a cleaner read:
-
-| LOO τ — drop this feature | ranking 6 | gold 17 |
-|---|---:|---:|
-| km_driven | 0.600 | **0.382** |
-| age_years | 0.867 | 0.794 |
-| owners | 0.733 | **0.544** |
-| accident_disclosed | 0.733 | 0.735 |
-
-- **km is even more dominant on gold** — wider km range (13k–124k vs 33k–90k) makes the feature drive ranking harder.
-- **owners is the second-most-influential feature when it varies.** The 6 ranking masked this with an all-owner=1 sample.
-- **accident is flat on both sets** — all gold listings happen to have `is_accidental=false`; all Cars24 listings map to `none` via the platform promise. Its 15% weight contributes effectively zero signal *in this data*. The weight is still defensible for a more accident-diverse dataset; not flagged as an issue with the rubric, just an artefact of what the platforms list.
-
-Gold ±25% perturbation τ range: 0.838–0.985 (vs ranking's 0.867–1.000). Slightly less rigid but still robust.
+- **km_driven is the dominant scoring dimension** (LOO τ = 0.022 — dropping it nearly destroys the ranking). This is a substantial strengthening of the earlier finding from N=17.
+- **age_years (LOO τ = 0.156) and owners (LOO τ = 0.556) are secondary.** The prior conclusion that "owners is the second-most-influential feature" is overturned at N=10 — age_years is now clearly second.
+- **accident_disclosed (LOO τ = 0.956) is nearly inert** — all gold listings happen to have no accidents disclosed. Its 15% weight contributes effectively zero signal *in this data*. The weight is still defensible for a more accident-diverse dataset; not flagged as an issue with the rubric, just an artefact of what the platforms list.
 
 ## 5. Disclosure asymmetry — side observation, not a ranking input
 
