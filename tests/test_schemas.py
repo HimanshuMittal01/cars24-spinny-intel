@@ -90,10 +90,5 @@ def test_trace_event_shape():
         input_hash="abc",
         output_hash="def",
         latency_ms=1234,
-        tokens_in=500,
-        tokens_out=200,
-        model="claude-sonnet-4-6",
-        prompt_version="v1.0",
-        cost_usd=0.0123,
     )
     assert t.node == "extract.cars24"

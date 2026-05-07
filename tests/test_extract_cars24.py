@@ -1,12 +1,10 @@
 from ci.extract.cars24 import extract_cars24
-from ci.llm import FakeLLMClient
 from ci.snapshot import load_snapshot
 
 
 def test_cars24_extractor_parses_real_fixture():
     snap = load_snapshot("cars24", "10041693110")
-    fake = FakeLLMClient(canned_tool_input={})  # unused; signature compatibility
-    raw = extract_cars24(snap, fake)
+    raw = extract_cars24(snap)
     assert raw.platform == "cars24"
     assert raw.listing_id == "10041693110"
     # Anchored values verified by direct inspection of fixture:
@@ -16,8 +14,6 @@ def test_cars24_extractor_parses_real_fixture():
     assert raw.fields["ownerNumber"] == 2
     assert raw.fields["fuelType"] == "Petrol"
     assert raw.fields["transmission"] == "Automatic"
-    # the LLM client should NOT have been called
-    assert len(fake.calls) == 0
 
 
 def test_cars24_extractor_raises_on_missing_anchor(tmp_path, monkeypatch):
@@ -28,7 +24,6 @@ def test_cars24_extractor_raises_on_missing_anchor(tmp_path, monkeypatch):
     monkeypatch.setattr("ci.snapshot.FIXTURES_DIR", tmp_path / "fixtures")
 
     snap = load_snapshot("cars24", "broken")
-    fake = FakeLLMClient(canned_tool_input={})
     import pytest
     with pytest.raises(ValueError, match="cars24"):
-        extract_cars24(snap, fake)
+        extract_cars24(snap)

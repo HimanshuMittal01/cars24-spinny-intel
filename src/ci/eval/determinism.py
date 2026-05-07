@@ -3,7 +3,6 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from ci.llm import LLMClient
 from ci.pipeline import run_pipeline
 
 
@@ -17,7 +16,6 @@ def determinism_check(
     *,
     platform: str,
     listing_id: str,
-    client: LLMClient,
     run_root: Path,
     reps: int,
 ) -> DeterminismResult:
@@ -26,7 +24,6 @@ def determinism_check(
         run_dir = run_root / f"determinism-{i}"
         rows = run_pipeline(
             ranking_listings=[(platform, listing_id)],
-            client=client,
             run_dir=run_dir,
         )
         payload = json.dumps([r.model_dump() for r in rows], sort_keys=True)

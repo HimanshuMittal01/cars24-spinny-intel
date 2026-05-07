@@ -6,7 +6,6 @@ from pathlib import Path
 
 from ci.extract.cars24 import extract_cars24
 from ci.extract.spinny import extract_spinny
-from ci.llm import LLMClient
 from ci.normalize import normalize
 from ci.rank import rank_listings
 from ci.schemas import NormalizedListing, RankRow, TraceEvent
@@ -39,11 +38,10 @@ def _trace(store: TraceStore, run_id: str, node: str, t0: float, inp, out) -> No
 def run_pipeline(
     *,
     ranking_listings: list[tuple[str, str]],
-    client: LLMClient,
     run_dir: Path,
     today_year: int | None = None,
 ) -> list[RankRow]:
-    """Run the full pipeline. Scoring is set-based (rank-based per spec §14)."""
+    """Run the full pipeline. Scoring is set-based, rank-based."""
     run_id = run_dir.name
     store = TraceStore(run_dir=run_dir)
     norms: list[NormalizedListing] = []
@@ -57,9 +55,9 @@ def run_pipeline(
 
         t0 = time.time()
         if platform == "cars24":
-            raw = extract_cars24(snap, client)
+            raw = extract_cars24(snap)
         elif platform == "spinny":
-            raw = extract_spinny(snap, client)
+            raw = extract_spinny(snap)
         else:
             raise ValueError(f"unsupported platform: {platform}")
         _trace(store, run_id, f"extract.{platform}", t0,

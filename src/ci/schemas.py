@@ -64,8 +64,3 @@ class TraceEvent(BaseModel):
     input_hash: str
     output_hash: str
     latency_ms: int
-    tokens_in: int = 0
-    tokens_out: int = 0
-    model: str = ""
-    prompt_version: str = ""
-    cost_usd: float = 0.0

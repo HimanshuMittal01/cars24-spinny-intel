@@ -6,11 +6,7 @@ EVAL_DIR = ROOT / "eval"
 RUNS_DIR = ROOT / "runs"
 DOCS_DIR = ROOT / "docs"
 
-MODEL_EXTRACTOR = "claude-sonnet-4-6"
-EXTRACTOR_TEMPERATURE = 0.0
-EXTRACTOR_MAX_TOKENS = 4096
-
-# --- score_common weight table (§4, revised per §13 / §14) ---
+# --- score_common weight table ---
 WEIGHTS = {
     "km_driven": 35,
     "age_years": 25,
@@ -22,12 +18,10 @@ WEIGHTS = {
 # Used by ci.score._comparable_value to compare accident_disclosed across listings.
 ACCIDENT_ORDER = {"none": 3, "minor": 2, "major": 1}
 
-# Anchored bands and per-dim imputation anchors were dropped in §14 in favour
-# of rank-based per-feature scoring. Magnitude lives in NormalizedListing's raw
-# fields and is available for any post-hoc analysis; the scorer no longer
-# encodes a "what is excellent" prior, only "best in this set is excellent".
+# Per-feature scoring uses rank-based ordering (best in the set = 100, worst
+# = 0, others linearly interpolated by rank); see src/ci/score.py.
 
-# --- disclosure-eligible field set (§4 Disclosure metric, revised per §13) ---
+# --- disclosure-eligible field set ---
 DISCLOSURE_FIELDS = [
     "accident_history_detail",
     "inspection_per_section_ratings",
@@ -47,5 +41,3 @@ DISCLOSURE_FIELDS = [
     "buy_back_pricing",
     "market_price_delta",
 ]
-
-PROMPT_VERSION = "v1.0"

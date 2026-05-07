@@ -2,15 +2,12 @@
 
 Strategy: parse Next.js streaming-SSR payloads (`self.__next_f.push([1,"..."])`)
 to find the per-listing `content` object that contains all structured fields.
-LLM is not used; the SDK client is accepted for API stability with the pipeline
-orchestrator but is unused here.
 """
 
 import json
 import re
 from typing import Any
 
-from ci.llm import LLMClient
 from ci.schemas import RawListing
 from ci.snapshot import Snapshot
 
@@ -79,13 +76,8 @@ def _find_listing_object(decoded: str) -> dict[str, Any]:
     return json.loads(blob)
 
 
-def extract_cars24(snapshot: Snapshot, client: LLMClient) -> RawListing:
-    """Extract structured fields from a Cars24 listing snapshot.
-
-    `client` is currently unused; it is accepted for signature parity with the
-    pipeline orchestrator (T13) and as a placeholder for future free-text
-    fallback.
-    """
+def extract_cars24(snapshot: Snapshot) -> RawListing:
+    """Extract structured fields from a Cars24 listing snapshot."""
     fields = _find_listing_object(_decode_pushes(snapshot.html))
     return RawListing(
         platform="cars24",

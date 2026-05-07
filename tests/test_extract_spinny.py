@@ -1,12 +1,10 @@
 from ci.extract.spinny import extract_spinny
-from ci.llm import FakeLLMClient
 from ci.snapshot import load_snapshot
 
 
 def test_spinny_extractor_parses_real_fixture():
     snap = load_snapshot("spinny", "28476005")
-    fake = FakeLLMClient(canned_tool_input={})  # unused; signature compatibility
-    raw = extract_spinny(snap, fake)
+    raw = extract_spinny(snap)
     assert raw.platform == "spinny"
     assert raw.listing_id == "28476005"
     # Anchored values verified by direct inspection of fixture:
@@ -20,8 +18,6 @@ def test_spinny_extractor_parses_real_fixture():
     assert raw.fields["procurement_category"] == "assured"
     assert raw.fields["is_assured"] is True
     assert raw.fields["inspection_report"]["report"]["summary"]["is_accidental"] is False
-    # the LLM client should NOT have been called
-    assert len(fake.calls) == 0
 
 
 def test_spinny_extractor_raises_on_missing_initial_state(tmp_path, monkeypatch):
@@ -32,7 +28,6 @@ def test_spinny_extractor_raises_on_missing_initial_state(tmp_path, monkeypatch)
     monkeypatch.setattr("ci.snapshot.FIXTURES_DIR", tmp_path / "fixtures")
 
     snap = load_snapshot("spinny", "broken")
-    fake = FakeLLMClient(canned_tool_input={})
     import pytest
     with pytest.raises(ValueError, match="spinny"):
-        extract_spinny(snap, fake)
+        extract_spinny(snap)

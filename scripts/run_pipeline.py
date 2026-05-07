@@ -1,21 +1,17 @@
 """Run the end-to-end pipeline on the 6 ranking listings.
 
-Reads ranking listing IDs from eval/ranking_listings.json (operator-provided).
+Reads ranking listing IDs from eval/ranking_listings.json.
 Writes trace + ranking output under runs/<timestamp>/.
 """
 import json
 import uuid
 from datetime import datetime, timezone
 
-from dotenv import load_dotenv
-
 from ci.config import EVAL_DIR, RUNS_DIR
-from ci.llm import AnthropicLLMClient
 from ci.pipeline import run_pipeline
 
 
 def main() -> None:
-    load_dotenv()
     listings_file = EVAL_DIR / "ranking_listings.json"
     listings = [
         (d["platform"], d["listing_id"])
@@ -29,10 +25,8 @@ def main() -> None:
     )
     run_dir = RUNS_DIR / run_id
 
-    client = AnthropicLLMClient()
     rows = run_pipeline(
         ranking_listings=listings,
-        client=client,
         run_dir=run_dir,
     )
     out_path = run_dir / "ranking.json"

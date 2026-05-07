@@ -12,7 +12,6 @@ from typing import Any
 
 import json5
 
-from ci.llm import LLMClient
 from ci.schemas import RawListing
 from ci.snapshot import Snapshot
 
@@ -103,12 +102,8 @@ def _navigate_to_product_detail(state: dict[str, Any]) -> dict[str, Any]:
         )
 
 
-def extract_spinny(snapshot: Snapshot, client: LLMClient) -> RawListing:
-    """Extract structured fields from a Spinny listing snapshot.
-
-    `client` is currently unused; accepted for signature parity with the
-    pipeline orchestrator.
-    """
+def extract_spinny(snapshot: Snapshot) -> RawListing:
+    """Extract structured fields from a Spinny listing snapshot."""
     state = _parse_initial_state(snapshot.html)
     fields = _navigate_to_product_detail(state)
     return RawListing(

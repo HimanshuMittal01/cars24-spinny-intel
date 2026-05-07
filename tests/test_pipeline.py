@@ -1,22 +1,18 @@
 import json
 
-from ci.llm import FakeLLMClient
 from ci.pipeline import run_pipeline
 
 
 def test_pipeline_runs_end_to_end_against_real_fixtures(tmp_path):
     """Use the real fixtures saved during the reality check.
 
-    This exercises both extractors against actual platform HTML.
+    Exercises both extractors against actual platform HTML.
     """
-    fake = FakeLLMClient(canned_tool_input={})  # extractors don't call it
-
     rows = run_pipeline(
         ranking_listings=[
             ("cars24", "10041693110"),
             ("spinny", "28476005"),
         ],
-        client=fake,
         run_dir=tmp_path / "runs" / "r1",
         today_year=2026,
     )
@@ -24,15 +20,11 @@ def test_pipeline_runs_end_to_end_against_real_fixtures(tmp_path):
     assert all(r.score_common > 0 for r in rows)
     # Sorted ascending by ratio
     assert rows[0].ratio <= rows[1].ratio
-    # LLM was not called
-    assert len(fake.calls) == 0
 
 
 def test_pipeline_writes_trace_per_node(tmp_path):
-    fake = FakeLLMClient(canned_tool_input={})
     run_pipeline(
         ranking_listings=[("cars24", "10041693110")],
-        client=fake,
         run_dir=tmp_path / "runs" / "r2",
         today_year=2026,
     )
