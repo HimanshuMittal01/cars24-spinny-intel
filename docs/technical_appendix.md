@@ -190,7 +190,43 @@ A listing scores 1 per field if any non-null value is exposed pre-auth.
 
 The ~13-field gap isn't even spread — Spinny exposes the *judgment-bearing* ones (inspection ratings, repair statements, tier, market-price delta), not just metadata. That's the part that maps to *positioning*, not just *quantity*.
 
-## 6. Tradeoffs journal
+## 6. With a market corpus, this would be a different problem
+
+The current pipeline is the small-N illustrative version. A serious version of the same product is not a hand-tuned rubric over 6 listings — it's a regression model over thousands.
+
+### The approach at scale
+
+1. **Collect a corpus** — 5,000+ listings of the target model (or several thousand each across many models), ideally with sale outcomes (final price, days-to-sale), but listing prices are workable as a proxy.
+2. **Fit a hedonic regression** — `price = f(features)` where `features` includes everything the platforms expose: km, age, owners, variant, fuel, transmission, color, RTO/region, inspection findings (LLM-extracted severity for free-text), accident severity, dealer location, time-on-market, etc.
+3. **Coefficients become weights, derived from market behavior, not priors.** The regression outputs the *market's revealed importance* of each feature.
+4. **Per-listing deal score** = `expected_price (model.predict) / listed_price`. Above 1 = below market expectation = good deal. Below 1 = priced above market expectation.
+
+### Why this is the right shape at scale
+
+- **Categorical specs handle cleanly.** Variant, fuel, color enter as one-hot dummies. Their effect on price is *measured*, not guessed. The "diesel adds ₹70k" question becomes a coefficient, not a hand-pick.
+- **Asymmetric data is OK.** Spinny's deeper inspection report becomes additional features in the regression for Spinny rows; Cars24 gets imputed values or platform-level dummies. The model learns each platform's predictive structure.
+- **Eliminates almost every prior we currently have.** No band cutoffs, no per-feature weights, no need to filter heterogeneity out of the comparison set. Filtering is replaced by *controlling for* via regression.
+- **Per-platform deal-score distributions over time** become the actual competitive intel signal — a shifted distribution week-over-week tells you each platform's pricing posture.
+
+### What this exercise demonstrates instead
+
+With N=6 (and N=15 gold) and no transactional corpus, fitting a regression is overfit on contact. The honest small-N path is **match-then-compare**: tightly filter to listings that share the qualitative specs (same trim band, same fuel, same transmission), then rank-score on the remaining quantitative dims. That's what the redo (current ranking sample notwithstanding) does.
+
+Both methods aim at the same thing — a price-to-condition signal that controls for spec heterogeneity. Match-then-compare controls by *exclusion*; hedonic regression controls by *modelling*. With more data, the second is strictly better.
+
+### What a real product would look like
+
+- Continuous ingestion of listings + outcomes from both platforms
+- Weekly-refreshed regression with confidence intervals on coefficients
+- Per-platform deal-score distributions plotted over time → the competitive intel signal
+- LLM-as-judge pipeline for free-text inspection narrative, scored per-finding and plugged in as severity features
+- Drift-detection eval — does the regression still fit, or has the market shifted?
+
+That's a different scope. This project is the small-N illustrative version that demonstrates the architecture, the eval discipline, and the methodology — not the production-scale signal.
+
+---
+
+## 7. Tradeoffs journal
 
 See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 
@@ -198,7 +234,7 @@ See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 2. **Gold-labeling on a deterministic pipeline.** E2/E3 against hand-labeled gold come out perfect by construction. Honest framing in the limitations section.
 3. **Anchored bands → rank-based scoring (spec §14).** Bands were defensible only via sensitivity analysis. Rank-based is defensible by construction ("is A's km better than B's km — yes"). Tradeoff: lost magnitude, gained groundedness.
 
-## 7. Limitations
+## 8. Limitations
 
 - **N=6 ranking.** Strategic conclusions are illustrative. The 4 additional listings were collected mid-band; ratio differences between rank 1 and 6 are informative but not statistically defensible.
 - **Rank-based scoring depends on the set composition.** Same listing in a different 6-set could rank differently. The composite is a relative-position score, not an absolute condition score.
@@ -209,7 +245,7 @@ See [`tradeoffs.md`](tradeoffs.md) for the full journal. Headlines:
 - **Gold annotated by one annotator** (the author). No inter-rater data.
 - **Snapshots are point-in-time.** Findings apply to vintage as recorded in `fixtures/<platform>/<id>/captured_at.txt`.
 
-## 8. Reproducibility
+## 9. Reproducibility
 
 ```
 uv run pytest                              # 55 tests

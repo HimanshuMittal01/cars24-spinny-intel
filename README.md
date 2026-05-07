@@ -2,6 +2,14 @@
 
 A multi-agent pipeline that extracts specs and condition signals from used-car listings on Cars24 and Spinny, then ranks them by price-to-condition. Scope: Hyundai Creta, used, Delhi-NCR, ₹7-13.5L. N=6 listings, 3 per platform.
 
+## Why this scope
+
+Ranking only means something between comparable cars. Make, trim, fuel, and transmission each carry their own market premiums — a diesel automatic SX(O) is structurally more expensive than a petrol manual EX, and that gap has nothing to do with car *condition*. Mixing them in the same comparison silently bakes those premiums into the price-to-condition ratio.
+
+The right scope for a small-N comparison is therefore a tight filter: same model, same region, same trim band, same fuel, same transmission. We then score on the remaining quantitative dimensions (km, age, owners, accident).
+
+The honest scale-up — hedonic regression on a 5,000+ listing corpus — would let us drop the matching constraint by *modelling* the price effect of each spec instead of filtering it out. See [`docs/technical_appendix.md` §6](docs/technical_appendix.md#6-with-a-market-corpus-this-would-be-a-different-problem) for the full approach.
+
 ## Ranking
 
 Lower ₹ per condition-point = more car for your money.
