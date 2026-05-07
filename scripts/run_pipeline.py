@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 
 from ci.config import EVAL_DIR, RUNS_DIR
 from ci.pipeline import run_pipeline
+from ci.report import render_chart
 
 
 def _load_active_listings() -> tuple[list[tuple[str, str]], set[str]]:
@@ -72,6 +73,10 @@ def main() -> None:
     out = run_dir / "ranking.json"
     out.write_text(json.dumps([r.model_dump() for r in rows], indent=2))
     print(f"wrote {out}")
+
+    chart_out = run_dir / "ranking_chart.png"
+    render_chart(rows, chart_out)
+    print(f"wrote {chart_out}")
 
 
 if __name__ == "__main__":

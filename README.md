@@ -8,24 +8,24 @@ Ranking only makes sense between comparable cars. *Competitive intel* asks "whic
 
 ## Ranking
 
-Sorted by composite_score descending. Lower ratio = more car for your money.
+Sorted by composite_score descending.
 
 **Composite formula:** `composite_score = α × rule_score + (1−α) × visual_score`, α = 0.7 (rule-leaning). Rule score is based on km, age, owners, and accident disclosure. Visual score comes from the vision agent's per-aspect condition assessments. After the vision-agent budget-handling fix (commit `214a43b`), cars24 listings produce real per-aspect findings; only `engine_bay` for one cars24 listing remains imputed because Cars24 doesn't photograph engine bays.
 
 5 of 6 listings now have full visual evidence; listing 10126364760 has engine_bay imputed (cars24 platform doesn't photograph engine bays).
 
-| rank | listing_id | platform | price (₹L) | rule_score | visual_score | composite_score | ratio (₹/pt) | imputed_aspects |
-|---:|---|---|---:|---:|---:|---:|---:|---|
-| 1 | 28476005 | spinny | 13.47 | 73.50 | 63.71 | 70.56 | 19,090 | — |
-| 2 | 10067090111 | cars24 | 10.80 | 62.50 | 55.71 | 60.46 | 17,863 | — |
-| 3 | 27839393 | spinny | 9.87 | 41.17 | 46.38 | 42.73 | 23,099 | — |
-| 4 | 28198885 | spinny | 7.47 | 37.67 | 43.05 | 39.28 | 19,017 | — |
-| 5 | 10096166769 | cars24 | 7.00 | 44.67 | 17.38 | 36.48 | 19,199 | — |
-| 6 | 10126364760 | cars24 | 5.09 | 34.17 | 37.00 | 35.02 | 14,526 | engine_bay |
+| rank | listing_id | platform | price (₹L) | rule_score | visual_score | composite_score | imputed_aspects |
+|---:|---|---|---:|---:|---:|---:|---|
+| 1 | 28476005 | spinny | 13.47 | 73.50 | 63.71 | 70.56 | — |
+| 2 | 10067090111 | cars24 | 10.80 | 62.50 | 55.71 | 60.46 | — |
+| 3 | 27839393 | spinny | 9.87 | 41.17 | 46.38 | 42.73 | — |
+| 4 | 28198885 | spinny | 7.47 | 37.67 | 43.05 | 39.28 | — |
+| 5 | 10096166769 | cars24 | 7.00 | 44.67 | 17.38 | 36.48 | — |
+| 6 | 10126364760 | cars24 | 5.09 | 34.17 | 37.00 | 35.02 | engine_bay |
 
-ratio = price / composite_score.
+The `composite_score` column is the primary ranking signal (higher = better condition relative to the set). For value-for-money intuition (lower price per condition point), see `runs/latest_ranking/ranking.json` `ratio` field — it's not shown here because sorting by composite makes ratio look unordered.
 
-![ranking](docs/figures/ranking.png)
+![Price vs composite score](docs/figures/ranking_chart.png)
 
 ## How condition is scored
 
