@@ -16,14 +16,16 @@ composite = α × rule + (1 − α) × visual,    α = 0.7
 
 *Note: α = 0.7 leans rule-heavy because the rule inputs are platform-disclosed hard facts; the visual signal is interpretive and earns a larger share only as eval coverage grows.*
 
-| rank | listing_id | platform | price (₹L) | rule | visual | composite |
-|---:|---|---|---:|---:|---:|---:|
-| 1 | 28476005 | spinny | 13.47 | 73.50 | 56.67 | 68.45 |
-| 2 | 10067090111 | cars24 | 10.80 | 62.50 | 48.00 | 58.15 |
-| 3 | 10096166769 | cars24 | 7.00 | 44.67 | 40.00 | 43.27 |
-| 4 | 27839393 | spinny | 9.87 | 41.17 | 48.00 | 43.22 |
-| 5 | 28198885 | spinny | 7.47 | 37.67 | 38.00 | 37.77 |
-| 6 | 10126364760 | cars24 | 5.09 | 34.17 | 22.00 | 30.52 |
+| rank | listing_id | platform | price (₹L) | rule | visual | composite | ₹/point |
+|---:|---|---|---:|---:|---:|---:|---:|
+| 1 | 28476005 | spinny | 13.47 | 73.50 | 56.67 | 68.45 | 19,679 |
+| 2 | 10067090111 | cars24 | 10.80 | 62.50 | 48.00 | 58.15 | 18,573 |
+| 3 | 10096166769 | cars24 | 7.00 | 44.67 | 40.00 | 43.27 | 16,186 |
+| 4 | 27839393 | spinny | 9.87 | 41.17 | 48.00 | 43.22 | 22,837 |
+| 5 | 28198885 | spinny | 7.47 | 37.67 | 38.00 | 37.77 | 19,778 |
+| 6 | 10126364760 | cars24 | 5.09 | 34.17 | 22.00 | 30.52 | 16,668 |
+
+*₹/point = price ÷ composite — value-for-money signal (lower = better deal). Not used for sorting; ranking is pure quality. Best value here: #3 (₹16,186/pt) and #6 (₹16,668/pt). Worst: #4 (₹22,837/pt).*
 
 
 ![ranking](docs/figures/ranking_chart.png)
