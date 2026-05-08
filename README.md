@@ -25,7 +25,7 @@ composite = α × rule + (1 − α) × visual,    α = 0.7
 | 5 | 28198885 | spinny | 7.47 | 37.67 | 38.00 | 37.77 | 19,778 |
 | 6 | 10126364760 | cars24 | 5.09 | 34.17 | 22.00 | 30.52 | 16,668 |
 
-*₹/point = price ÷ composite — value-for-money signal (lower = better deal). Not used for sorting; ranking is pure quality. Best value here: #3 (₹16,186/pt) and #6 (₹16,668/pt). Worst: #4 (₹22,837/pt).*
+*₹/point = price ÷ composite — value-for-money signal (lower = better deal). Not used for sorting; ranking is pure quality. **All three cars24 listings price below every spinny listing on this metric** (cars24 max 18,573 < spinny min 19,679) — spinny charges a premium per unit of measured condition across the set.*
 
 
 ![ranking](docs/figures/ranking_chart.png)
